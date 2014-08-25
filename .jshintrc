@@ -2,7 +2,9 @@
   "predef": {
     "document": true,
     "window": true,
-    "TrustAdminENV": true
+    "TrustAdminENV": true,
+    "moment": true,
+    "$": true
   },
   "browser" : true,
   "boss" : true,
