@@ -51,8 +51,6 @@ export default DS.Model.extend({
   notes:          DS.hasMany('note'),
   company:        DS.belongsTo('company'),
 
-  
-
   // System DTs
   legacyClientEmployementDate: attribute('string'),
   legacyClientTerminationDate: attribute('string'),
