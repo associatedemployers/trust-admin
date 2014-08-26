@@ -51,6 +51,16 @@ export default DS.Model.extend({
   notes:          DS.hasMany('note'),
   company:        DS.belongsTo('company'),
 
+  // Computed
+  fullName: function () {
+    var n = this.getProperties('firstName', 'lastName', 'middleInitial', 'suffix');
+
+    n.middleInitial = ( n.middleInitial ) ? n.middleInitial + '. ' : '';
+    n.suffix        = ( n.suffix ) ? ' ' + n.suffix : '';
+
+    return n.firstName + ' ' + n.middleInitial + n.lastName + n.suffix;
+  }.property('firstName', 'lastName', 'middleInitial', 'suffix'),
+
   // System DTs
   legacyClientEmployementDate: attribute('string'),
   legacyClientTerminationDate: attribute('string'),
