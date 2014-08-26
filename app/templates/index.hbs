@@ -1,0 +1,50 @@
+<ul class="quick-links">
+  <li>
+    {{#link-to 'companies'}}
+      <i class="fa fa-fw fa-4x fa-building link-icon"></i>
+      <h3>
+        Companies <i class="fa fa-angle-double-right"></i>
+        <span class="label label-danger count-label">{{globals.stats.Company}}</span>
+      </h3>
+    {{/link-to}}
+
+    <div class="slide-description">
+      <h4>Search &amp; Edit Companies</h4>
+      <p>
+        Enables information drilling on companies. Search/edit company information. Employees &amp; Medical Rates are listed here as well.
+      </p>
+    </div>
+  </li>
+  <li>
+    {{#link-to 'employees'}}
+      <i class="fa fa-fw fa-4x fa-users link-icon"></i>
+      <h3>
+        Employees <i class="fa fa-angle-double-right"></i>
+        <span class="label label-danger count-label">{{globals.stats.Employee}}</span>
+      </h3>
+    {{/link-to}}
+
+    <div class="slide-description">
+      <h4>Search &amp; Edit Employees</h4>
+      <p>
+        Enables information drilling on employees. Search/edit employee information.
+      </p>
+    </div>
+  </li>
+  <li>
+    {{#link-to 'employees'}}
+      <i class="fa fa-fw fa-4x fa-usd link-icon"></i>
+      <h3>
+        Medical Rates <i class="fa fa-angle-double-right"></i>
+        <span class="label label-danger count-label">{{globals.stats.MedicalRate}}</span>
+      </h3>
+    {{/link-to}}
+
+    <div class="slide-description">
+      <h4>Edit Medical Rates</h4>
+      <p>
+        Create, change, &amp; assign Medical Rates for companies.
+      </p>
+    </div>
+  </li>
+</ul>
