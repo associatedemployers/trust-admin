@@ -14,6 +14,25 @@ export default DS.RESTSerializer.extend(DS.EmbeddedRecordsMixin, {
       delete hash.__v;
       delete hash._id;
 
+      if( hash.name ) {
+        hash.firstName     = hash.name.first;
+        hash.middleInitial = hash.name.middleInitial;
+        hash.lastName      = hash.name.last;
+        hash.suffix        = hash.name.suffix;
+
+        delete hash.name;
+      }
+
+      if( hash.address ) {
+        hash.addressLine1 = hash.address.line1;
+        hash.addressLine2 = hash.address.line2;
+        hash.city         = hash.address.city;
+        hash.state        = hash.address.state;
+        hash.zipcode      = hash.address.zipcode;
+
+        delete hash.address;
+      }
+
       return hash;
     }
   },

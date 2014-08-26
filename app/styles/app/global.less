@@ -1,0 +1,25 @@
+/*
+	Global Styles
+*/
+
+* {
+  margin: 0;
+}
+
+body, html {
+  height: 100%;
+  background-color: @body-bg;
+}
+
+.hide-slide {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+
+  .transition(~"opacity ease-in-out 0.4s, max-height ease-in-out 0.25s");
+  
+  &.show {
+    opacity: 1;
+    max-height: 400px;
+  }
+}

@@ -1,0 +1,78 @@
+/*
+  Index Styles
+*/
+
+.index-view {
+  width: 100%;
+  margin: 0 auto;
+
+  ul.quick-links {
+    margin: 0 auto;
+    padding: 0;
+    padding: 20px;
+    list-style: none;
+    text-align: center;
+
+    li {
+      margin: 10px;
+      padding: 20px;
+      display: inline-block;
+      width: (100% / 3.3%);
+      vertical-align: top;
+      font-size: 120%;
+      border-radius: 15px;
+      overflow: hidden;
+
+      border: 2px solid fade(@brand-primary, 30%);
+
+      &:hover {
+
+        .slide-description {
+          padding-top: 20px;
+          opacity: 100;
+          max-height: 300px;
+          visibility: visible;
+        }
+      }
+
+      a {
+
+        i.link-icon {
+          width: 100%;
+        }
+
+        h3 {
+          position: relative;
+          display: inline-block;
+          z-index: 20;
+
+          span.label.count-label {
+            text-decoration: none;
+            position: absolute;
+            top: -38px;
+            right: 20%;
+            font-size: 50%;
+            z-index: 1;
+          }
+        }
+      }
+
+      .slide-description {
+        opacity: 0;
+        max-height: 0;
+        visibility: hidden;
+        color: lighten(@brand-default, 30%);
+
+        .transition-all();
+
+        h4 {
+          font-size: 100%;
+        }
+
+        p {
+          font-size: 60%;
+        }
+      }
+    }
+  }
+}
