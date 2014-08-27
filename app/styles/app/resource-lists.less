@@ -3,9 +3,70 @@
 */
 
 .resource-list-group {
-  padding: 0 20px;
+  margin: 0 20px;
+  position: relative;
 }
 
 .resource-view {
   margin: 0 !important;
+}
+
+.pagination-wrapper {
+  text-align: right;
+
+  padding-right: 20px;
+
+  &.center-wrapper {
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .pagination {
+    margin: 5px 0;
+  }
+}
+
+.items-per-page {
+  font-size: 80%;
+
+  span.help-label {
+    position: relative;
+    padding-right: 5px;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  span.items-per-page-option {
+    &:after {
+      content: ' | ';
+    }
+
+    &:last-child:after {
+      content: '';
+    }
+
+    a {
+      
+      &.selected {
+        color: @brand-warning;
+      }
+    }
+  }
+}
+
+.resource-loading-overlay {
+  opacity: 0;
+  max-height: 0;
+  .transition-all();
+
+  &.active {
+    opacity: 1;
+    max-height: 100px;
+  }
+
+  h2 {
+    margin: 0;
+  }
 }

@@ -5,7 +5,7 @@
     "jquery": "^1.11.1",
     "qunit": "~1.12.0",
     "ember-qunit": "~0.1.8",
-    "ember": "1.6.1",
+    "ember": "1.8.0-beta.1",
     "ember-resolver": "~0.1.7",
     "loader": "stefanpenner/loader.js#1.0.1",
     "ember-cli-shims": "stefanpenner/ember-cli-shims#0.0.2",
@@ -15,7 +15,9 @@
     "ember-data": "canary",
     "bootstrap": "~3.2.0",
     "moment": "~2.8.2",
-    "font-awesome": "~4.1.0"
+    "font-awesome": "~4.1.0",
+    "bootstrap.growl": "~2.0.1",
+    "animate.css": "~3.2.0"
   },
   "resolutions": {
     "ember-data": "canary"
