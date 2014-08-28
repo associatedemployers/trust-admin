@@ -61,8 +61,12 @@ export default DS.Model.extend({
     return n.firstName + ' ' + n.middleInitial + n.lastName + n.suffix;
   }.property('firstName', 'lastName', 'middleInitial', 'suffix'),
 
+  isActive: function () {
+    return moment(this.get('legacyClientTerminationDate'), "YYYY/MM/DD HH:mm:ss").isBefore( moment() );
+  }.property('legacyClientTerminationDate'),
+
   // System DTs
-  legacyClientEmployementDate: attribute('string'),
+  legacyClientEmploymentDate: attribute('string'),
   legacyClientTerminationDate: attribute('string'),
   legacyInitialDateSent:       attribute('string'),
   legacyChangeSent:            attribute('string'),

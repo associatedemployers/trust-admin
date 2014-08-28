@@ -1,2 +1,9 @@
+{{#link-to 'employee' content}}{{content.fullName}}{{/link-to}}
 
-{{content.fullName}}
+{{#if content.beneficiaries}}<a href="#" {{action "toggleProperty" "showBene"}}><span class="label label-primary">Has Beneficiaries</span></a>{{/if}}
+
+{{#if showBene}}
+  {{#each b in content.beneficiaries}}
+    {{b.id}}
+  {{/each}}
+{{/if}}

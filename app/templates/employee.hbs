@@ -1,0 +1,10 @@
+<h2>{{content.fullName}}</h2>
+
+{{#if content.company}}
+  <h3>
+    {{#if content.legacyClientTerminationDate}}
+      Terminated from {{content.company.name}} on {{format-moment content.legacyClientTerminationDate}}
+    {{else}}
+      Works for {{content.company.name}} since {{format-moment content.legacyClientEmploymentDate}}</h3>
+    {{/if}}
+{{/if}}
