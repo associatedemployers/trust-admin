@@ -20,12 +20,22 @@ export default Ember.Component.extend({
     Ember.assert('You must pass a page pages value to the pagination view.', ( t.pages !== undefined && t.page !== undefined ) );
 
     var p = ( t.page > ( t.maxButtons / 2 ) ) ? t.page - ( t.maxButtons / 2 ) : 1;
-
+    
+    if( isNaN(t.pages) || isNaN(p) ) {
+      return;
+    }
+    
     if( ( p + t.maxButtons ) > t.pages ) {
       p = ( t.pages - t.maxButtons ) + 1;
     }
 
-    for (var loop = 0; loop < t.maxButtons; loop++) {
+    if( p < 0 ) {
+      p = 1;
+    }
+
+    var topLoop = ( t.pages >= t.maxButtons ) ? t.maxButtons : t.pages;
+
+    for ( var loop = 0; loop < topLoop; loop++ ) {
       l.push({
         n: p,
         active: ( p === t.page )
@@ -39,7 +49,7 @@ export default Ember.Component.extend({
 
   shouldUpdateRenderList: function () {
     Ember.run.next(this, this._updateRenderList);
-  }.observes('page', 'items'),
+  }.observes('page', 'pages', 'maxButtons'),
 
   onFirstPage: function () {
     return this.get('page') <= 1;

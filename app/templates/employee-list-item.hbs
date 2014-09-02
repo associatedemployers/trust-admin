@@ -1,9 +1,9 @@
-{{#link-to 'employee' content}}{{content.fullName}}{{/link-to}}
+<span class="trigger-popover" {{bind-attr data-content=popoverContent}} {{bind-attr title=content.fullName}} data-toggle="popover" data-placement="right" data-trigger="hover">
+  {{#link-to 'employee' content}}{{content.fullName}}{{/link-to}}
+</span>
 
-{{#if content.beneficiaries}}<a href="#" {{action "toggleProperty" "showBene"}}><span class="label label-primary">Has Beneficiaries</span></a>{{/if}}
-
-{{#if showBene}}
-  {{#each b in content.beneficiaries}}
-    {{b.id}}
-  {{/each}}
-{{/if}}
+<div class="data-section text-right">
+  {{#if content.company}}
+    <span class="mute">{{content.company.name}}</span>
+  {{/if}}
+</div>

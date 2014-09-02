@@ -4,7 +4,6 @@ import GrowlMixin from './growl';
 export default Ember.Mixin.create(GrowlMixin, {
   /* Computed */
   pages: function () {
-    console.log(this.get('maxItems'));
     return Math.ceil( this.get('maxItems') / this.get('itemsPerPage') );
   }.property('maxItems', 'itemsPerPage'),
 
@@ -19,6 +18,10 @@ export default Ember.Mixin.create(GrowlMixin, {
     // Deal with min/max
     Ember.run.once(this, this._minMaxCheck);
   }.observes('page', 'pages'),
+
+  contentDidChange: function () {
+    this.set('maxItems', this.get('content.meta.totalRecords'));
+  }.observes('content'),
 
   shouldUpdateContent: function () {
     Ember.run.next(this, function () {
