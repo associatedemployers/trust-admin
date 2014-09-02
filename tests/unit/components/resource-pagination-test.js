@@ -1,18 +1,32 @@
 import { test, moduleForComponent } from 'ember-qunit';
+import Ember from 'ember';
 
-moduleForComponent('resource-pagination', 'ResourcePaginationComponent', {
-  // specify the other units that are required for this test
-  // needs: ['component:foo', 'helper:bar']
-});
+moduleForComponent('resource-pagination', 'ResourcePaginationComponent');
 
-test('it renders', function() {
+test('it renders', function () {
   expect(2);
 
-  // creates the component instance
-  var component = this.subject();
+  // Creates the component instance
+  var component = this.subject({
+    pages: 50,
+    page:  1,
+    maxButtons: 8
+  });
+
   equal(component.state, 'preRender');
 
-  // appends the component to the page
+  // Appends the component to the page
   this.append();
   equal(component.state, 'inDOM');
+
+  test('it creates a renderList array', function () {
+    expect(2);
+
+    Ember.run(function () {
+      var a = component.get('renderList');
+
+      ok( a, "renderList exists" );
+      ok( typeof a === 'object', "renderList is an array" );
+    });
+  });
 });

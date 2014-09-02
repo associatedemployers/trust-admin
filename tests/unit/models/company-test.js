@@ -1,8 +1,7 @@
 import { test, moduleForModel } from 'ember-qunit';
 
 moduleForModel('company', 'Company', {
-  // Specify the other units that are required for this test.
-  needs: []
+  needs: ['model:medical-rate', 'model:employee']
 });
 
 test('it exists', function() {
