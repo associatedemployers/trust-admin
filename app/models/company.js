@@ -47,9 +47,9 @@ export default DS.Model.extend({
   legacyNumberEmployees:   attribute('string'),
 
   // System
-  time_stamp: attribute('string', {
+  time_stamp: attribute('date', {
     defaultValue: function () {
-      return moment().format("YYYY/MM/DD HH:mm:ss");
+      return Date();
     }
   })
 });
