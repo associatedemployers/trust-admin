@@ -28,7 +28,7 @@ export default Ember.Route.extend({
         self.set('previousModal', el);
       };
 
-      if( previousModal && staticModal ) {
+      if( previousModal && forceAppend ) {
         return previousModal.one('hidden.bs.modal', function () {
           showTheModal();
         });

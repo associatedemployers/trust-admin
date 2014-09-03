@@ -4,8 +4,11 @@
   <div class="row resource-row">
     <div class="col-md-3">
       <h2>Filters</h2>
-      <h3>// Developer Filter</h3>
-      {{filter-option filters=filters}}
+
+      <hr />
+      <p class="text-center">
+        <a href="#" {{action "showModal" "advanced-query-modal" true}}><i class="fa fa-list-alt"></i> Advanced Report</a>
+      </p>
     </div>
     <div class="col-md-9">
       <div class="row">
@@ -58,6 +61,17 @@
     </div>
     <div class="modal-footer">
       <button type="submit" class="btn btn-primary btn-block" {{action "jumpToPage" manualPageSet}}>Jump</button>
+    </div>
+  </form>
+{{/bs-modal}}
+
+{{#bs-modal id="advanced-query-modal" modal-lg=true dismissible=true title='<h2><i class="fa fa-list-alt"></i> Advanced Report</h2>'}}
+  <form>
+    <div class="modal-body">
+      {{advanced-query-builder query=advancedQuery modelName=modelName resource=resource}}
+    </div>
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-primary btn-block" data-dismiss="modal" {{action "submitAdvancedQuery"}}>Get Report</button>
     </div>
   </form>
 {{/bs-modal}}

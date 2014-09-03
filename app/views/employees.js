@@ -6,8 +6,6 @@ export default Ember.View.extend({
       console.log('running');
       this.$('.trigger-popover').popover({
         html: true,
-        trigger: 'hover',
-        placement: 'right',
         container: 'body'
       });
     });

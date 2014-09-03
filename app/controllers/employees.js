@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import ResourcePaginatorMixin from '../mixins/resource-paginator';
+import Employee from '../models/employee';
 
 export default Ember.Controller.extend(ResourcePaginatorMixin, {
   queryParams: [ 'filters', 'sort', 'page', 'itemsPerPage' ],
@@ -12,5 +13,6 @@ export default Ember.Controller.extend(ResourcePaginatorMixin, {
 
   // Settings
   itemsPerPageOptions: [ 20, 40, 60, 80, 100 ],
+  resource: Employee,
   modelName: 'Employee'
 });
