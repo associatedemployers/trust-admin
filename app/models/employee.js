@@ -62,22 +62,22 @@ export default DS.Model.extend({
   }.property('firstName', 'lastName', 'middleInitial', 'suffix'),
 
   isActive: function () {
-    return moment(this.get('legacyClientTerminationDate'), "YYYY/MM/DD HH:mm:ss").isBefore( moment() );
+    return moment(this.get('legacyClientTerminationDate')).isBefore( moment() );
   }.property('legacyClientTerminationDate'),
 
   // System DTs
-  legacyClientEmploymentDate: attribute('string'),
-  legacyClientTerminationDate: attribute('string'),
-  legacyInitialDateSent:       attribute('string'),
-  legacyChangeSent:            attribute('string'),
-  legacyTerminationSent:       attribute('string'),
-  legacyTrapTermination:       attribute('string'),
-  legacyCobraStartDate:        attribute('string'),
-  legacyCobraTerminationDate:  attribute('string'),
+  legacyClientEmploymentDate:  attribute('date'),
+  legacyClientTerminationDate: attribute('date'),
+  legacyInitialDateSent:       attribute('date'),
+  legacyChangeSent:            attribute('date'),
+  legacyTerminationSent:       attribute('date'),
+  legacyTrapTermination:       attribute('date'),
+  legacyCobraStartDate:        attribute('date'),
+  legacyCobraTerminationDate:  attribute('date'),
 
-  time_stamp: attribute('string', {
+  time_stamp: attribute('date', {
     defaultValue: function () {
-      return moment().format("YYYY/MM/DD HH:mm:ss");
+      return Date();
     }
   })
 });
