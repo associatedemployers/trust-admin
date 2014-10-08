@@ -4,7 +4,9 @@
     "window": true,
     "TrustAdminENV": true,
     "moment": true,
-    "$": true
+    "$": true,
+    "NProgress": true,
+    "vis": true
   },
   "browser" : true,
   "boss" : true,
