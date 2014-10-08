@@ -8,7 +8,6 @@
 /node_modules
 /bower_components/*
 /vendor/*
-/app/styles/bs
 
 # misc
 /.sass-cache
