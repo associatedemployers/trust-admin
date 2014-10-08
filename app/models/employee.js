@@ -5,7 +5,6 @@ var attribute = DS.attr;
 export default DS.Model.extend({
   // Legacy
   legacyRecordNumber:                  attribute('string'),
-  legacyUniqueId:                      attribute('string'),
   legacyCobraTermChoice:               attribute('string'),
   legacyPreExistingCondition:          attribute('string'),
   legacyCreditableCoverage:            attribute('string'),
@@ -41,9 +40,6 @@ export default DS.Model.extend({
   ssn:           attribute('string'),
   gender:        attribute('string'),
   maritalStatus: attribute('string'),
-  dobYear:       attribute('number'),
-  dobMonth:      attribute('number'),
-  dobDay:        attribute('number'),
 
   // Relational
   contactMethods: DS.hasMany('contact-method'),
@@ -65,7 +61,8 @@ export default DS.Model.extend({
     return moment(this.get('legacyClientTerminationDate')).isBefore( moment() );
   }.property('legacyClientTerminationDate'),
 
-  // System DTs
+  // DTs
+  dateOfBirth:                 attribute('date'),
   legacyClientEmploymentDate:  attribute('date'),
   legacyClientTerminationDate: attribute('date'),
   legacyInitialDateSent:       attribute('date'),

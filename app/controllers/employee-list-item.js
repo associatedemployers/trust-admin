@@ -24,9 +24,9 @@ export default Ember.Controller.extend({
     html += '</p>';
 
     if( m.get('legacyClientTerminationDate') ) {
-      var timeago = moment( m.get('legacyClientTerminationDate'), 'YYYY/MM/DD HH:mm:ss' ).fromNow();
+      var timeago = moment( m.get('legacyClientTerminationDate') ).fromNow();
 
-      html += '<span class="text-danger">Terminated ' + timeago + ' on ' + m.get('legacyClientTerminationDate').split(' ')[0] + '</span>';
+      html += '<span class="text-danger">Terminated ' + timeago + ' on ' + moment(m.get('legacyClientTerminationDate')).format('MM/DD/YYYY') + '</span>';
     }
 
     return html;

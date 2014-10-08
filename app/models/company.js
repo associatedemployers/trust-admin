@@ -24,8 +24,6 @@ export default DS.Model.extend({
   legacyAemMemberId:       attribute('string'),
   legacyBrokerId:          attribute('string'),
   legacyRateTier:          attribute('string'),
-  legacyCompEffectDate:    attribute('string'),
-  legacyBrokerEffectDate:  attribute('string'),
   legacyWaitingPeriod:     attribute('string'),
   legacySelectCare:        attribute('string'),
   legacyMinimumHours:      attribute('string'),
@@ -45,6 +43,9 @@ export default DS.Model.extend({
   legacyEffectiveMonth:    attribute('string'),
   legacyPrimaryCo:         attribute('string'),
   legacyNumberEmployees:   attribute('string'),
+
+  legacyCompEffectDate:    attribute('date'),
+  legacyBrokerEffectDate:  attribute('date'),
 
   // System
   time_stamp: attribute('date', {

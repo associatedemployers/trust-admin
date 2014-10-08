@@ -1,10 +1,25 @@
-<h2>{{content.fullName}}</h2>
+<hgroup>
+  {{view "letter-resource-image" class="with-hgroup" width="80px" height="70px" text=letterImageText r=letterImageColor.r g=letterImageColor.g b=letterImageColor.b}}
 
-{{#if content.company}}
+  <h2>{{content.fullName}}</h2>
+
   <h3>
     {{#if content.legacyClientTerminationDate}}
-      Terminated from {{content.company.name}} on {{format-moment content.legacyClientTerminationDate}}
+      Terminated from 
+      {{#if content.company}}
+        {{#link-to 'company.index' content.company}}{{content.company.name}}{{/link-to}}
+      {{else}}
+        <i class="text-muted">company not found</i>
+      {{/if}}
+       on {{format-moment content.legacyClientTerminationDate}}
     {{else}}
-      Works for {{content.company.name}} since {{format-moment content.legacyClientEmploymentDate}}</h3>
+      {{#if content.legacyClientEmploymentDate}}
+        Works for {{#link-to 'company.index' content.company}}{{content.company.name}}{{/link-to}} since {{format-moment content.legacyClientEmploymentDate}}
+      {{else}}
+        No employment or termination date - {{content.company.name}}
+      {{/if}}
     {{/if}}
-{{/if}}
+  </h3>
+</hgroup>
+
+<hr />

@@ -3,6 +3,6 @@ import LoadableRouteMixin from '../mixins/loadable-route';
 
 export default Ember.Route.extend(LoadableRouteMixin, {
   model: function ( params ) {
-    return this.store.find('employee', { limit: params.itemsPerPage, page: params.page - 1 });
+    return this.store.find('company', params.id);
   }
 });

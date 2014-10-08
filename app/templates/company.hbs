@@ -1,0 +1,16 @@
+<hgroup>
+  <h2>{{content.name}}</h2>
+</hgroup>
+<hr />
+
+<div class="row">
+  <div class="col-md-8">
+    <div class="chart-group">
+      <h4>Employees over time</h4>
+      {{chart-employees-over-time employees=content.employees company=content height='500px'}}
+    </div>
+  </div>
+  <div class="col-md-4">
+    {{render "employees-pane" content.employees}}
+  </div>
+</div>

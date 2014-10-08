@@ -33,5 +33,4 @@ export default DS.RESTSerializer.extend({
       return hash;
     }
   }
-  // TODO: Writeup serializer
 });

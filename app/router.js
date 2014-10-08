@@ -11,6 +11,11 @@ Router.map(function() {
     this.route('edit');
   });
 
+  this.resource('company', { path: 'companies/:id' }, function () {
+    this.route('index', { path: '/' });
+    this.route('edit');
+  });
+
   this.resource('companies');
   
 });
