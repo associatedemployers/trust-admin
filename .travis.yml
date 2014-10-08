@@ -1,13 +1,16 @@
+---
 language: node_js
 
-node_js:
-- '0.10'
+sudo: false
 
-before_install:
-- npm install npm -g
+cache:
+  directories:
+    - node_modules
 
-before_script:
-- bower install
+install:
+  - npm install -g bower
+  - npm install
+  - bower install
 
-notifications:
-  slack: aehr:Onhz0k4eQcFbDbha4LgRTrnw
+script:
+  - npm test
