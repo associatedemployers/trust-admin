@@ -11,7 +11,7 @@
     </li>
     <div class="pull-right nav-tab-inline">
       <a href="#" {{action "toggleProperty" "sortasc"}}>
-        Hire date <i {{bind-attr class=":fa sortasc:fa-caret-down:fa-caret-up"}}></i>
+        {{#if showingActive}}Hire{{else}}Termination{{/if}} date <i {{bind-attr class=":fa sortasc:fa-caret-down:fa-caret-up"}}></i>
       </a>
     </div>
   </ul>
