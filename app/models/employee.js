@@ -45,7 +45,8 @@ export default DS.Model.extend({
   contactMethods: DS.hasMany('contact-method'),
   beneficiaries:  DS.hasMany('beneficiary'),
   notes:          DS.hasMany('note'),
-  company:        DS.belongsTo('company'),
+  historyEvents:  DS.hasMany('history-event', { async: true }),
+  company:        DS.belongsTo('company', { async: true }),
 
   // Computed
   fullName: function () {
