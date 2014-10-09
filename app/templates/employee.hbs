@@ -1,25 +1,91 @@
-<hgroup>
-  {{view "letter-resource-image" class="with-hgroup" width="80px" height="70px" text=letterImageText r=letterImageColor.r g=letterImageColor.g b=letterImageColor.b}}
+<div class="row">
+  <div class="col-md-8">
+    <hgroup>
+      {{view "letter-resource-image" class="with-hgroup" width="80px" height="70px" text=letterImageText r=letterImageColor.r g=letterImageColor.g b=letterImageColor.b}}
 
-  <h2>{{content.fullName}}</h2>
+      <h2>{{content.fullName}}</h2>
 
-  <h3>
-    {{#if content.legacyClientTerminationDate}}
-      Terminated from 
-      {{#if content.company}}
-        {{#link-to 'company.index' content.company}}{{content.company.name}}{{/link-to}}
-      {{else}}
-        <i class="text-muted">company not found</i>
-      {{/if}}
-       on {{format-moment content.legacyClientTerminationDate}}
-    {{else}}
-      {{#if content.legacyClientEmploymentDate}}
-        Works for {{#link-to 'company.index' content.company}}{{content.company.name}}{{/link-to}} since {{format-moment content.legacyClientEmploymentDate}}
-      {{else}}
-        No employment or termination date - {{content.company.name}}
-      {{/if}}
-    {{/if}}
-  </h3>
-</hgroup>
+      <h3>
+        {{#if content.legacyClientTerminationDate}}
+          Terminated from 
+          {{#if content.company}}
+            {{#link-to 'company.index' content.company}}{{content.company.name}}{{/link-to}}
+          {{else}}
+            <i class="text-muted">company not found</i>
+          {{/if}}
+           on {{format-moment content.legacyClientTerminationDate}}
+        {{else}}
+          {{#if content.legacyClientEmploymentDate}}
+            Works for {{#link-to 'company.index' content.company}}{{content.company.name}}{{/link-to}} since {{format-moment content.legacyClientEmploymentDate}}
+          {{else}}
+            No employment or termination date - {{content.company.name}}
+          {{/if}}
+        {{/if}}
+      </h3>
+    </hgroup>
+    <div>
+      {{#with content}}
+        <ul class="text-muted resource-info-list resource-quick-info">
+          <li><strong>Record ID (new):</strong> {{id}}</li>
+          <li><strong>EBMS #:</strong> {{ebmsNumber}}</li>
+          <li><strong>Legacy Record #:</strong> {{legacyRecordNumber}}</li>
+          <li><strong>Creation Date:</strong> {{format-moment time_stamp}} <i>({{time-ago time_stamp}})</i></li>
+        </ul>
+      {{/with}}
+    </div>
+  </div>
+  <div class="col-md-4">
+    {{! Dev Filler}}
+    <h3 style="padding: 40px 10px; text-align: center;">Good Stuff Here&trade;</h3>
+  </div>
+</div>
 
 <hr />
+
+<div class="row row-draw-sep resource-section">
+  <div class="col-md-4 draw-sep">
+
+    <ul class="resource-info-list">
+      <li>
+        <h4>Date of Birth</h4>
+        {{format-moment content.dateOfBirth}}
+      </li>
+      <li>
+        <h4>Marital Status</h4>
+        {{title-case content.maritalStatus}}
+      </li>
+      <li>
+        <h4>Social Security #</h4>
+        {{shorten-text content.ssn 20}} <button class="btn btn-danger btn-xs" {{action "decryptSSN"}}>Decrypt <i class="fa fa-unlock"></i></button>
+      </li>
+    </ul>
+
+    <p class="text-center">
+      <a href="#" {{action "toggleProperty" "showingSystemInformation"}}>
+        {{#if showingRecordInformation}}Hide{{else}}Show{{/if}} system information <i {{bind-attr class=":fa showingSystemInformation:fa-caret-up:fa-caret-down"}}></i>
+      </a>
+    </p>
+
+    <div {{bind-attr class=":hide-slide showingSystemInformation:show"}}>
+      <ul class="resource-info-list resource-system-info">
+        <li><strong>Time Stamp:</strong> {{format-moment content.time_stamp "YYYY/MM/DD HH:mm:ss:SS"}}</li>
+        <li><strong>Database ID:</strong> {{content.id}}</li>
+      </ul>
+    </div>
+
+  </div>
+  <div class="col-md-8 draw-sep">
+    {{! Dev Filler}}
+    <h1 style="padding: 150px 20px; text-align: center;">Good Stuff Here&trade;</h1>
+  </div>
+</div>
+
+<hr/>
+
+
+<div class="resource-section">
+  <h3 class="text-center">History Event Timeline</h3>
+  <button class="btn btn-success btn-lg btn-block btn-restrict-width btn-pad" {{bind-attr disabled=isLoadingHistoryEvents}} {{action "loadHistoryEvents"}}>
+    Load Timeline <i {{bind-attr class=":fa :fa-fw isLoadingHistoryEvents:fa-spinner:fa-cloud-download isLoadingHistoryEvents:fa-spin"}}></i>
+  </button>
+</div>

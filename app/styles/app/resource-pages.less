@@ -1,0 +1,38 @@
+/*
+  Resource Page Styles
+*/
+
+
+.resource-section {
+  padding: 10px;
+}
+
+.resource-info-list {
+  .reset-ul();
+}
+
+.resource-quick-info {
+    li {
+      display: inline-block;
+      font-size: 85%;
+
+      &:after {
+        content: ' | ';
+      }
+
+      &:last-child:after {
+        content: '';
+      }
+    }
+}
+
+.resource-system-info {
+  li {
+    font-size: 85%;
+  }
+}
+
+.reset-ul() {
+  list-style: none;
+  padding: 0;
+}

@@ -37,5 +37,15 @@ export default Ember.ObjectController.extend({
         n = m.getProperties('firstName', 'lastName');
 
     return n.firstName.charAt(0) + n.lastName.charAt(0);
-  }.property('content.firstName', 'content.lastName')
+  }.property('content.firstName', 'content.lastName'),
+
+  actions: {
+    toggleProperty: function ( prop ) {
+      this.toggleProperty( prop );
+    },
+
+    loadHistoryEvents: function () {
+      this.set('isLoadingHistoryEvents', true);
+    }
+  }
 });
