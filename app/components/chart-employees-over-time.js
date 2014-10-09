@@ -1,6 +1,8 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
+  classNames: [ 'chart-view' ],
+
   height: '400px',
   chartOptions: {
     drawPoints: {
@@ -12,23 +14,18 @@ export default Ember.Component.extend({
     }
   },
 
-  didInsertElement: function () {
-    this._super();
-    this._draw();
-  },
-
   dataset: function () {
     var company = this.get('company'),
         employees = this.get('employees');
 
     if( !company || !employees ) {
-      return;
+      return Ember.A();
     }
 
     var currentDate   = moment(),
         startDate     = moment( company.get('legacyCompEffectDate') ),
         monthsBetween = Math.abs( startDate.diff( currentDate, 'months' ) ),
-        dataSet       = [];
+        dataSet       = Ember.A();
 
     var loopDate = moment( startDate ).date( 1 );
 
@@ -50,7 +47,7 @@ export default Ember.Component.extend({
 
       employees.forEach( checkEmployee );
 
-      dataSet.push({
+      dataSet.addObject({
         x: loopDate.format('YYYY-MM-DD'),
         y: count
       });
@@ -58,32 +55,40 @@ export default Ember.Component.extend({
       loopDate.add(1, 'months');
     }
 
-    return new vis.DataSet( dataSet );
-  }.property('employees.@each', 'company').cacheable(),
-
-  needsRedraw: function () {
-    this._draw();
-  }.observes('dataset'),
+    return dataSet;
+  }.property('employees.@each.legacyClientEmploymentDate', 'company'),
 
   _draw: function () {
-    var chart      = this.get('chart'),
-        visDataSet = this.get('dataset');
+    Ember.run.next(this, function () {
+      var chart      = this.get('chart'),
+          visDataSet = new vis.DataSet( this.get('dataset') );
 
-    if( !visDataSet ) {
-      return;
+      if( !visDataSet ) {
+        return;
+      }
+
+      if( chart ) {
+        chart.setItems( visDataSet );
+      } else {
+        var options = this.get('chartOptions');
+        options.graphHeight = this.get('height');
+
+        chart = new vis.Graph2d( this.$()[0], visDataSet, options );
+
+        this.set('chart', chart);
+      }
+
+      chart.fit();
+    });
+  }.observes('dataset.@each').on('didInsertElement'),
+
+  actions: {
+    refocus: function () {
+      var chart = this.get('chart');
+
+      if( chart ) {
+        chart.fit();
+      }
     }
-
-    if( chart ) {
-      chart.setItems( visDataSet );
-    } else {
-      var options = this.get('chartOptions');
-      options.graphHeight = this.get('height');
-
-      chart = new vis.Graph2d( this.$()[0], visDataSet, options );
-
-      this.set('chart', chart);
-    }
-
-    chart.fit();
   }
 });
