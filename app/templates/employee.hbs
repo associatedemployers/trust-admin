@@ -56,7 +56,14 @@
       </li>
       <li>
         <h4>Social Security #</h4>
-        {{shorten-text content.ssn 20}} <button class="btn btn-danger btn-xs" {{action "decryptSSN"}}>Decrypt <i class="fa fa-unlock"></i></button>
+        {{#if decryptedSSN}}
+          {{formattedSSN}}&nbsp;<a href="#" title="Lock SSN" {{action "encryptSSN"}}><i class="fa fa-lock"></i></a>
+        {{else}}
+          {{shorten-text content.ssn 20}}&nbsp;<a href="#" title="Unlock SSN" {{action "decryptSSN"}}><i class="fa fa-unlock"></i></a>
+        {{/if}}
+        {{#if decryptingSSN}}
+          <i class="fa fa-spin fa-spinner"></i>
+        {{/if}}
       </li>
     </ul>
 
@@ -82,10 +89,13 @@
 
 <hr/>
 
-
 <div class="resource-section">
   <h3 class="text-center">History Event Timeline</h3>
-  <button class="btn btn-success btn-lg btn-block btn-restrict-width btn-pad" {{bind-attr disabled=isLoadingHistoryEvents}} {{action "loadHistoryEvents"}}>
-    Load Timeline <i {{bind-attr class=":fa :fa-fw isLoadingHistoryEvents:fa-spinner:fa-cloud-download isLoadingHistoryEvents:fa-spin"}}></i>
-  </button>
+  {{#if loadedHistoryEvents}}
+    {{render "history-timeline" content.historyEvents}}
+  {{else}}
+    <button class="btn btn-success btn-lg btn-block btn-restrict-width btn-pad" {{bind-attr disabled=isLoadingHistoryEvents}} {{action "loadHistoryEvents"}}>
+      Load Timeline <i {{bind-attr class=":fa :fa-fw isLoadingHistoryEvents:fa-spinner:fa-cloud-download isLoadingHistoryEvents:fa-spin"}}></i>
+    </button>
+  {{/if}}
 </div>
