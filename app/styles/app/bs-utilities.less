@@ -24,3 +24,26 @@
     border-left: 1px solid @gray-lighter;
   }
 }
+
+/* Tables */
+
+table.table {
+  &.text-center {
+    tr, th, td {
+      text-align: center; 
+      vertical-align: middle;
+    }
+  }
+
+  &.legend-text-right {
+    tbody tr th {
+      text-align: right;
+    }
+  }
+
+  tr {
+    &.disabled-strike {
+      text-decoration: line-through;
+    }
+  }
+}

@@ -4,7 +4,11 @@ export default DS.RESTSerializer.extend(DS.EmbeddedRecordsMixin, {
   attrs: {
     contactMethods: { embedded: 'always' },
     beneficiaries:  { embedded: 'always' },
-    notes:          { embedded: 'always' }
+    notes:          { embedded: 'always' },
+    medicalRates:   { embedded: 'always' },
+    dentalRates:    { embedded: 'always' },
+    visionRates:    { embedded: 'always' },
+    lifeRates:      { embedded: 'always' }
   },
 
   normalizeHash: {
@@ -31,6 +35,15 @@ export default DS.RESTSerializer.extend(DS.EmbeddedRecordsMixin, {
         hash.zipcode      = hash.address.zipcode;
 
         delete hash.address;
+      }
+
+      if( hash.plans ) {
+        hash.medicalRates = hash.plans.medical;
+        hash.dentalRates  = hash.plans.dental;
+        hash.visionRates  = hash.plans.vision;
+        hash.lifeRates    = hash.plans.life;
+
+        delete hash.plans;
       }
 
       return hash;

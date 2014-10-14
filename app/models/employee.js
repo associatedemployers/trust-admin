@@ -42,11 +42,18 @@ export default DS.Model.extend({
   maritalStatus: attribute('string'),
 
   // Relational
+  dependents:     DS.hasMany('dependent', { async: true }),
   contactMethods: DS.hasMany('contact-method'),
   beneficiaries:  DS.hasMany('beneficiary'),
   notes:          DS.hasMany('note'),
   historyEvents:  DS.hasMany('history-event', { async: true }),
   company:        DS.belongsTo('company', { async: true }),
+
+  // Relational Plans
+  medicalRates:   DS.hasMany('medical-rate'),
+  dentalRates:    DS.hasMany('dental-rate'),
+  visionRates:    DS.hasMany('vision-rate'),
+  lifeRates:      DS.hasMany('life-rate'),
 
   // Computed
   fullName: function () {
@@ -62,6 +69,10 @@ export default DS.Model.extend({
     return moment(this.get('legacyClientTerminationDate')).isBefore( moment() );
   }.property('legacyClientTerminationDate'),
 
+  isMarried: function () {
+    return this.get('maritalStatus') === 'married';
+  }.property('maritalStatus'),
+
   // DTs
   dateOfBirth:                 attribute('date'),
   legacyClientEmploymentDate:  attribute('date'),
@@ -75,7 +86,7 @@ export default DS.Model.extend({
 
   time_stamp: attribute('date', {
     defaultValue: function () {
-      return Date();
+      return new Date();
     }
   })
 });
