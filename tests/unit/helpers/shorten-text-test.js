@@ -4,8 +4,7 @@ import {
 
 module('ShortenTextHelper');
 
-// Replace this with your real tests.
-test('it works', function() {
-  var result = shortenText(42);
-  ok(result);
+test('shortens text', function () {
+  var result = shortenText('123456789', 5);
+  equal(result, '12...');
 });

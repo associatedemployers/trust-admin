@@ -5,7 +5,7 @@ import {
 module('TitleCaseHelper');
 
 // Replace this with your real tests.
-test('it works', function() {
-  var result = titleCase(42);
-  ok(result);
+test('it title cases', function() {
+  var result = titleCase('hello world');
+  equal(result, 'Hello World');
 });

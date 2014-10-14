@@ -5,7 +5,7 @@ import {
 module('TimeAgoHelper');
 
 // Replace this with your real tests.
-test('it works', function() {
-  var result = timeAgo(42);
-  ok(result);
+test('it displays timeago', function () {
+  var result = timeAgo( new Date() );
+  equal(result, 'a few seconds ago');
 });
