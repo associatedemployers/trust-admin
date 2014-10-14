@@ -82,8 +82,20 @@
 
   </div>
   <div class="col-md-8 draw-sep">
-    {{! Dev Filler}}
-    <h1 style="padding: 150px 20px; text-align: center;">Good Stuff Here&trade;</h1>
+    <ul class="nav nav-tabs" role="tablist">
+      {{#each tab in tabs}}
+        <li {{bind-attr class="tab.active:active"}}>
+          <a href="#" {{action "showTab" tab.index}}>{{tab.name}}</a>
+        </li>
+      {{/each}}
+    </ul>
+    <div class="tab-content limited-pane">
+      {{#each tab in tabs}}
+        {{#if tab.active}}
+          {{partial tab.partial}}
+        {{/if}}
+      {{/each}}
+    </div>
   </div>
 </div>
 

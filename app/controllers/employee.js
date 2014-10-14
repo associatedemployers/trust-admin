@@ -1,6 +1,31 @@
 import Ember from 'ember';
 
 export default Ember.ObjectController.extend({
+  queryParams: [ 'tab' ],
+  tab: 0,
+  tabs: [
+    {
+      index: 0,
+      name: 'Plans',
+      partial: 'employee-plan-tab'
+    },
+    {
+      index: 1,
+      name: 'Dependents',
+      partial: 'employee-dependents-tab'
+    }
+  ],
+
+  _tabChanged: function () {
+    var tabs     = this.get('tabs'),
+        tabIndex = this.get('tab');
+
+    this.set('tabs', tabs.map(function ( tab, index ) {
+      tab.active = ( index === tabIndex );
+      return tab;
+    }));
+  }.observes('tab').on('init'),
+
   letterImageColor: function () {
     var m    = this.get('content'),
         name = m.getProperties('firstName', 'lastName'),
@@ -49,6 +74,10 @@ export default Ember.ObjectController.extend({
   actions: {
     toggleProperty: function ( prop ) {
       this.toggleProperty( prop );
+    },
+
+    showTab: function ( index ) {
+      this.set('tab', index);
     },
 
     loadHistoryEvents: function () {
