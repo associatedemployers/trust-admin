@@ -3,7 +3,7 @@ import {
   test
 } from 'ember-qunit';
 
-moduleFor('view:finder', 'FinderView');
+moduleFor('view:search', 'SearchView');
 
 // Replace this with your real tests.
 test('it exists', function() {

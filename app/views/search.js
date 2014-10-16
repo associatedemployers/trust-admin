@@ -1,12 +1,12 @@
 import Ember from 'ember';
 
 export default Ember.View.extend({
-  classNames: [ 'finder' ],
+  classNames: [ 'search-view' ],
 
   typeaheadOptions: {
     hint: true,
     highlight: true,
-    minLength: 1
+    minLength: 3
   },
 
   _setupTypeahead: function () {
@@ -29,16 +29,20 @@ export default Ember.View.extend({
     });
   }.observes('controller.autocompleteData.@each'),
 
-  _search: function ( query, callback ) {
-    var matches = [],
-        substrRegex = new RegExp( query, 'i' );
+  _search: function ( query, callback ) { 
+    callback(this.filter(function ( o ) {
+      var json = JSON.stringify( o ),
+          matched = true;
 
-    this.forEach(function ( o ) {
-      if( substrRegex.test( JSON.stringify( o ) ) ) {
-        matches.push( o );
-      }
-    });
- 
-    callback( matches );
+      query.split(' ').forEach(function ( word ) {
+        var substrRegex = new RegExp( word, 'i' );
+
+        if( !substrRegex.test( json ) ) {
+          matched = false;
+        }
+      });
+
+      return matched;
+    }));
   }
 });

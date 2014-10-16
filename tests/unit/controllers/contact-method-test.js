@@ -3,7 +3,7 @@ import {
   test
 } from 'ember-qunit';
 
-moduleFor('controller:finder', 'FinderController', {
+moduleFor('controller:contact-method', 'ContactMethodController', {
   // Specify the other units that are required for this test.
   // needs: ['controller:foo']
 });

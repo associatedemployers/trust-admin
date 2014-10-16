@@ -1,7 +1,16 @@
 import Ember from 'ember';
 import GrowlMixin from '../mixins/growl';
 
-export default Ember.Controller.extend(GrowlMixin, {
+export default Ember.ArrayController.extend(GrowlMixin, {
+  queryParams: {
+    modelSelection: 'type',
+    query: 'query'
+  },
+
+  modelSelection: null,
+  query:          null,
+  limit: 100,
+
   modelSelectMap: {
     employee: {
       limit: 4000,
@@ -15,7 +24,7 @@ export default Ember.Controller.extend(GrowlMixin, {
       select: '_id name.company address.city address.state',
       hashMunge: function ( data ) {
         data.name = data.name.company;
-        data.location = data.address.city + data.address.state;
+        data.location = ( data.address ) ? data.address.city + data.address.state : null;
         return data;
       }
     }
@@ -34,6 +43,10 @@ export default Ember.Controller.extend(GrowlMixin, {
 
     return arr;
   }.property('modelSelectMap'),
+
+  disableInput: function () {
+    return ( this.get('isLoadingAutocomplete') || this.get('isSearching') );
+  }.property('isLoadingAutocomplete', 'isSearching'),
 
   shouldRefreshData: function () {
     if( this.get('modelSelection') ) {
@@ -79,5 +92,27 @@ export default Ember.Controller.extend(GrowlMixin, {
       console.error( err );
 
     });
+  },
+
+  actions: {
+    /*search: function () {
+      var self = this,
+          model = this.get('modelSelection'),
+          models = this.get('models'),
+          modelUrl = ( model ) ? Ember.Inflector.inflector.pluralize( model ) + '/' : '';
+
+      this.setProperties('isSearching', true);
+
+      var getData = {
+        models: ( model ) ? model : models,
+        limit: this.get('limit')
+      };
+
+      Ember.$.getJSON('/api/' + modelUrl + 'deep-search', getData, function ( results ) {
+
+      }, function ( err ) {
+        self.
+      });
+    }*/
   }
 });
