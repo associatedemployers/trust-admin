@@ -1,0 +1,13 @@
+<ul class="list-group">
+  {{#each contact in content.contactMethods itemController='contact-method'}}
+    <li class="list-group-item">
+      <i {{bind-attr class=":fa :fa-fw contact.isEmail:fa-at contact.isPhone:fa-phone"}}></i>
+      <a {{bind-attr href=contact.link}}>{{contact.decoratedValue}}</a>
+      {{#if contact.ext}} ext. {{contact.ext}}{{/if}}
+
+      <span class="pull-right text-muted">
+        {{title-case contact.type}}
+      </span>
+    </li>
+  {{/each}}
+</ul>

@@ -13,6 +13,21 @@ export default Ember.ObjectController.extend({
       index: 1,
       name: 'Dependents',
       partial: 'employee-dependents-tab'
+    },
+    {
+      index: 2,
+      name: 'Beneficiaries',
+      partial: 'employee-beneficiaries-tab'
+    },
+    {
+      index: 3,
+      name: 'Contact Methods',
+      partial: 'employee-contacts-tab'
+    },
+    {
+      index: 4,
+      name: 'Notes',
+      partial: 'employee-notes-tab'
     }
   ],
 
