@@ -1,5 +1,4 @@
-import DS from 'ember-data';
+// import DS from 'ember-data';
+import ApplicationSerializer from './application';
 
-export default DS.RESTSerializer.extend({
-  primaryKey: '_id'
-});
+export default ApplicationSerializer.extend({});

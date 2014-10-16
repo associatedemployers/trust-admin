@@ -19,7 +19,8 @@
     "bootstrap.growl": "~2.0.1",
     "animate.css": "~3.2.0",
     "nprogress": "~0.1.6",
-    "vis": "~3.5.0"
+    "vis": "~3.5.0",
+    "typeahead.js": "~0.10.5"
   },
   "resolutions": {
     "ember-data": "canary"

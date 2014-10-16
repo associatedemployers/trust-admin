@@ -1,6 +1,7 @@
 import DS from 'ember-data';
+import ApplicationSerializer from './application';
 
-export default DS.RESTSerializer.extend(DS.EmbeddedRecordsMixin, {
+export default ApplicationSerializer.extend(DS.EmbeddedRecordsMixin, {
   attrs: {
     contactMethods: { embedded: 'always' },
     beneficiaries:  { embedded: 'always' },
@@ -13,11 +14,6 @@ export default DS.RESTSerializer.extend(DS.EmbeddedRecordsMixin, {
 
   normalizeHash: {
     employee: function ( hash ) {
-      hash.id = hash._id;
-
-      delete hash.__v;
-      delete hash._id;
-
       if( hash.name ) {
         hash.firstName     = hash.name.first;
         hash.middleInitial = hash.name.middleInitial;
@@ -42,6 +38,15 @@ export default DS.RESTSerializer.extend(DS.EmbeddedRecordsMixin, {
         hash.dentalRates  = hash.plans.dental;
         hash.visionRates  = hash.plans.vision;
         hash.lifeRates    = hash.plans.life;
+
+        if( hash.planOptions ) {
+          hash.medicalPlanCovers = ( hash.planOptions.medical ) ? hash.planOptions.medical.covers : null;
+          hash.dentalPlanCovers  = ( hash.planOptions.dental )  ? hash.planOptions.dental.covers  : null;
+          hash.visionPlanCovers  = ( hash.planOptions.vision )  ? hash.planOptions.vision.covers  : null;
+          hash.lifePlanCovers    = ( hash.planOptions.life )    ? hash.planOptions.life.covers    : null;
+          
+          delete hash.planOptions;
+        }
 
         delete hash.plans;
       }

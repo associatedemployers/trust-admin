@@ -1,0 +1,5 @@
+{{view "select" content=models optionValuePath="content.v" optionLabelPath="content.l" value=modelSelection}}
+
+<input class="typeahead" type="text" placeholder="Search">
+
+<i {{bind-attr class=":hide-slide :fa :fa-spin :fa-spinner isLoadingData:show"}}></i>
