@@ -55,6 +55,11 @@ export default DS.Model.extend({
   visionRates:    DS.hasMany('vision-rate'),
   lifeRates:      DS.hasMany('life-rate'),
 
+  medicalPlanCovers: attribute('string'),
+  dentalPlanCovers:  attribute('string'),
+  visionPlanCovers:  attribute('string'),
+  lifePlanCovers:    attribute('string'),
+
   // Computed
   fullName: function () {
     var n = this.getProperties('firstName', 'lastName', 'middleInitial', 'suffix');
