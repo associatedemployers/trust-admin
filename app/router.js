@@ -10,6 +10,9 @@ Router.map(function() {
   this.resource('employee', { path: 'employees/:id' }, function () {
     this.route('index', { path: '/' });
     this.route('edit');
+
+    // Nested Resources
+    this.resource('dependent', { path: '/dependents/:dependentid' });
   });
 
   this.resource('company', { path: 'companies/:id' }, function () {
@@ -20,6 +23,7 @@ Router.map(function() {
   this.resource('companies');
   
   this.route('search');
+  
 });
 
 export default Router;
