@@ -1,0 +1,18 @@
+<ul class="list-group">
+  {{#each beneficiary in content.beneficiaries itemController='beneficiary-item'}}
+    <li class="list-group-item">
+      <span {{bind-attr class=":label beneficiary.isPrimary:label-primary beneficiary.isContingent:label-default"}}>{{title-case beneficiary.type}}</span>&nbsp;
+
+      {{beneficiary.name}} <small class="text-muted">({{title-case beneficiary.relation}})</small>
+
+      <span class="label label-danger pull-right">{{beneficiary.split}}% Split</span>
+    </li>
+  {{else}}
+    <div class="alert alert-info alert-dismissible alert-pad" role="alert">
+      <button type="button" class="close" data-dismiss="alert">
+        <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+      </button>
+      <i class="fa fa-fw fa-info-circle"></i> No Beneficiaries Found.
+    </div>
+  {{/each}}
+</ul>
