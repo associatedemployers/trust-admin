@@ -1,7 +1,7 @@
 import DS from 'ember-data';
 import RateModel from './rate';
 
-var attribute = DS.attr;
+// var attribute = DS.attr;
 
 export default RateModel.extend({
   ebmsNumber:    String,
@@ -16,5 +16,5 @@ export default RateModel.extend({
   legacyRateChangeEmployeeAndChildrenRate: String,
   legacyRateChangeFamilyRate:              String,
 
-  plan: DS.belongsTo('medical-plan')
+  plan: DS.belongsTo('medical-plan', { async: true })
 });
