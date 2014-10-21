@@ -6,10 +6,10 @@ export default ApplicationSerializer.extend(DS.EmbeddedRecordsMixin, {
     contactMethods: { embedded: 'always' },
     beneficiaries:  { embedded: 'always' },
     notes:          { embedded: 'always' },
-    medicalRates:   { embedded: 'always' },
-    dentalRates:    { embedded: 'always' },
-    visionRates:    { embedded: 'always' },
-    lifeRates:      { embedded: 'always' }
+    medicalRates:   { deserialize: 'records', serialize: 'ids' },
+    dentalRates:    { deserialize: 'records', serialize: 'ids' },
+    visionRates:    { deserialize: 'records', serialize: 'ids' },
+    lifeRates:      { deserialize: 'records', serialize: 'ids' }
   },
 
   normalizeHash: {
