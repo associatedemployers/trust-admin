@@ -3,18 +3,30 @@ import Ember from 'ember';
 /* Simple growl wrapper for fuss-free alerting */
 
 export default Ember.Mixin.create({
-  growlError: function ( msg ) {
+  growl: function ( type, title, msg, delay, icon ) {
+    console.log('growling it up', arguments);
+    icon = ( icon ) ? icon : ( type === 'danger' ) ? 'fa fa-times-circle' : ( type === 'warning' ) ? 'fa fa-exclamation-triangle' : ( type === 'info' ) ? 'fa fa-info-circle' : 'fa fa-envelope';
+    delay = delay || 4000;
+    title = ' <strong>' + title + '</strong><br />';
+
     $.growl(
     {
-      icon: 'fa fa-exclamation-triangle',
-      title: ' <strong>Uh Oh!</strong><br />',
-      message: msg
+      icon: icon,
+      title: title,
+      message: msg,
     }, {
-      type: 'danger',
-      delay: 0,
+      type: type,
+      delay: delay,
       placement: {
         align: 'center'
-      }
+      },
+      z_index: 1060
     });
+  },
+
+  // Aliases
+  growlError: function ( msg ) {
+    console.log('growl err');
+    this.growl( 'danger', 'Uh Oh!', msg, 0 );
   }
 });
