@@ -6,27 +6,27 @@ export default Ember.ObjectController.extend({
   tabs: [
     {
       index: 0,
-      name: 'Plans',
+      name: '<i class="fa fa-fw fa-user-md"></i> Plans',
       partial: 'employee-plan-tab'
     },
     {
       index: 1,
-      name: 'Dependents',
+      name: '<i class="fa fa-fw fa-users"></i> Dependents',
       partial: 'employee-dependents-tab'
     },
     {
       index: 2,
-      name: 'Beneficiaries',
+      name: '<i class="fa fa-fw fa-usd"></i> Beneficiaries',
       partial: 'employee-beneficiaries-tab'
     },
     {
       index: 3,
-      name: 'Contact Methods',
+      name: '<i class="fa fa-fw fa-phone"></i> Contact Methods',
       partial: 'employee-contacts-tab'
     },
     {
       index: 4,
-      name: 'Notes',
+      name: '<i class="fa fa-fw fa-file-text"></i> Notes',
       partial: 'employee-notes-tab'
     }
   ],
