@@ -56,7 +56,7 @@ export default ApplicationSerializer.extend(DS.EmbeddedRecordsMixin, {
   },
 
   serialize: function ( employee ) {
-    var json = employee.toJSON();
+    var json = this._super.apply(this, arguments);
 
     json.name = {
       first:         employee.get('firstName'),
