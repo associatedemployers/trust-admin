@@ -1,0 +1,19 @@
+<h1 class="text-center text-danger"><i class="fa fa-fw fa-exclamation-triangle"></i> Something bad happened.</h1>
+<hr />
+
+{{log content}}
+
+<p class="text-center">
+  <span class="text-muted">What we received: 
+    {{#if content.statusText}}
+      {{content.statusText}}
+    {{else}}
+      {{#if content.message}}
+        {{content.message}}
+      {{else}}
+        :( Nothing.
+      {{/if}}
+    {{/if}}
+  </span><br />
+  That's all we know.
+</p>

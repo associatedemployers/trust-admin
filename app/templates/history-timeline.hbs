@@ -1,0 +1,12 @@
+<div class="row history-timeline-row">
+  <div class="col-md-5 history-event-groups">
+    {{#each eventGroup in coalescedEvents}}
+      {{render "history-event-group" eventGroup}}
+    {{else}}
+      <h4 class="text-center text-warning"><i class="fa fa-info-circle"></i> No Events To Display</h4>
+    {{/each}}
+  </div>
+  <div class="col-md-7">
+    
+  </div>
+</div>

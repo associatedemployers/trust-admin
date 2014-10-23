@@ -1,13 +1,9 @@
-import DS from 'ember-data';
+// import DS from 'ember-data';
+import ApplicationSerializer from './application';
 
-export default DS.RESTSerializer.extend({
+export default ApplicationSerializer.extend({
   normalizeHash: {
     historyEvent: function ( hash ) {
-      hash.id = hash._id;
-
-      delete hash._id;
-      delete hash.__v;
-
       if( hash.documents ) {
         hash.updatedDocument  = hash.documents.updated;
         hash.previousDocument = hash.documents.previous;

@@ -8,8 +8,6 @@ export default Ember.ArrayController.extend(GrowlMixin, {
     return '<h4><i class="fa fa-file-text"></i> ' + midText + ' Note</h4>';
   }.property('existingNote'),
 
-
-
   actions: {
     newNote: function () {
       this.setProperties({

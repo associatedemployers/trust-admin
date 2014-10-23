@@ -102,12 +102,10 @@
 <hr/>
 
 <div class="resource-section">
-  <h3 class="text-center">History Event Timeline</h3>
+  <h2 class="text-center">History Event Timeline</h2>
   {{#if loadedHistoryEvents}}
     {{render "history-timeline" content.historyEvents}}
   {{else}}
-    <button class="btn btn-success btn-lg btn-block btn-restrict-width btn-pad" {{bind-attr disabled=isLoadingHistoryEvents}} {{action "loadHistoryEvents"}}>
-      Load Timeline <i {{bind-attr class=":fa :fa-fw isLoadingHistoryEvents:fa-spinner:fa-cloud-download isLoadingHistoryEvents:fa-spin"}}></i>
-    </button>
+    <h4 class="text-center text-warning">One moment while we load the events <i class="fa fa-spin fa-spinner fa-fw"></i></h4>
   {{/if}}
 </div>

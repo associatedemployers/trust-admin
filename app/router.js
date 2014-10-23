@@ -21,9 +21,8 @@ Router.map(function() {
   });
 
   this.resource('companies');
-  
+
   this.route('search');
-  
 });
 
 export default Router;

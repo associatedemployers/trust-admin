@@ -1,5 +1,6 @@
 import Ember from 'ember';
 
 export default Ember.View.extend({
-  classNames: [ 'history-timeline-view' ]
+  tagName: 'li',
+  classNames: [ 'history-event-item-view' ]
 });

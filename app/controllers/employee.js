@@ -1,8 +1,11 @@
 import Ember from 'ember';
+import GrowlMixin from '../mixins/growl';
 
-export default Ember.ObjectController.extend({
+export default Ember.ObjectController.extend(GrowlMixin, {
   queryParams: [ 'tab' ],
   tab: 0,
+  isLoadingHistoryEvents: true,
+
   tabs: [
     {
       index: 0,
@@ -30,6 +33,28 @@ export default Ember.ObjectController.extend({
       partial: 'employee-notes-tab'
     }
   ],
+
+  _getHistoryEvents: function () {
+    this.set('isLoadingHistoryEvents', true);
+
+    var employee = this.get('content'),
+        self     = this;
+
+    if( !employee ) {
+      return this.set('isLoadingHistoryEvents', false);
+    }
+
+    employee.get('historyEvents').then(function ( /* historyEvents */ ) {
+      self.setProperties({
+        isLoadingHistoryEvents: false,
+        loadedHistoryEvents: true
+      });
+    }).catch(function ( err ) {
+      self.growlError( 'HistoryEvent :: ' + err.statusText );
+      console.error( err );
+      self.set('isLoadingHistoryEvents', false);
+    });
+  }.observes('content'),
 
   _tabChanged: function () {
     var tabs     = this.get('tabs'),
@@ -79,11 +104,7 @@ export default Ember.ObjectController.extend({
   formattedSSN: function () {
     var ssn = this.get('decryptedSSN');
 
-    if( !ssn ) {
-      return;
-    }
-
-    return ssn.toString().replace(/(\d{3})(\d{2})(\d{4})/, '$1-$2-$3');
+    return ( ssn ) ? ssn.toString().replace(/(\d{3})(\d{2})(\d{4})/, '$1-$2-$3') : null;
   }.property('decryptedSSN'),
 
   actions: {
@@ -93,23 +114,6 @@ export default Ember.ObjectController.extend({
 
     showTab: function ( index ) {
       this.set('tab', index);
-    },
-
-    loadHistoryEvents: function () {
-      this.set('isLoadingHistoryEvents', true);
-
-      var employee = this.get('content'),
-          self     = this;
-
-      employee.get('historyEvents').then(function ( /* historyEvents */ ) {
-        self.setProperties({
-          isLoadingHistoryEvents: false,
-          loadedHistoryEvents: true
-        });
-      }, function ( err ) {
-        console.error( err );
-        self.set('isLoadingHistoryEvents');
-      });
     },
 
     decryptSSN: function () {

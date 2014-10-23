@@ -56,8 +56,9 @@ export default ApplicationSerializer.extend(DS.EmbeddedRecordsMixin, {
   },
 
   serialize: function ( employee ) {
+    console.log(employee.get('id'));
     var json = this._super.apply(this, arguments);
-
+    console.log(json);
     json.name = {
       first:         employee.get('firstName'),
       last:          employee.get('lastName'),
@@ -83,6 +84,11 @@ export default ApplicationSerializer.extend(DS.EmbeddedRecordsMixin, {
     delete json.city;
     delete json.state;
     delete json.zipcode;
+    console.log(json);
+    json._id = json.id;
+
+    delete json.id;
+    console.log(json);
 
     return json;
   }

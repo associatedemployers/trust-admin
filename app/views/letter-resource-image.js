@@ -6,6 +6,7 @@ export default Ember.View.extend({
   attributeBindings: [ 'width', 'height' ],
 
   didInsertElement: function () {
+    this._super();
     this._draw();
   },
 

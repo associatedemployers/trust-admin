@@ -16,5 +16,6 @@ export default DS.Model.extend({
   documentId: attribute('string'),
   updater:    attribute('string'),
 
+  eventDate:  attribute('date'),
   time_stamp: attribute('date')
 });

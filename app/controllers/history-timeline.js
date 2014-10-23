@@ -1,30 +1,41 @@
 import Ember from 'ember';
 
 export default Ember.ArrayController.extend({
-  init: function () {
-    console.log(this.get('content'));
-  },
-  dataset: function () {
+  // Coalesce events
+  coalescedEvents: function () {
     console.info('History Timeline :: Generating Dataset...');
-    var historyEvents = this.get('content');
 
-    if( !historyEvents || historyEvents.length < 1 ) {
+    var events = this.get('content');
+
+    if( !events ) {
       return Ember.A();
     }
 
-    var data = Ember.A();
+    var dataset = Ember.A();
 
-    historyEvents.forEach(function ( historyEvent, index ) {
-      console.log(historyEvent);
-      data.addObject({
-        id:      index + 1,
-        content: historyEvent.get('description'),
-        start:   new Date( historyEvent.get('time_stamp') )
+    console.log(events.map(function (item) { return item.get('eventDate'); }));
+
+    events.forEach(function ( ev ) {
+      var group = dataset.find(function ( datum ) {
+        return moment( datum.date ).startOf('day').isSame( moment( ev.get('eventDate') ).startOf('day') );
       });
+      console.log(ev);
+      var dateGroup = group || Ember.Object.create({
+        date: ev.get('eventDate'),
+        events: Ember.A()
+      });
+
+      console.log(dateGroup);
+
+      dateGroup.get('events').addObject( ev );
+
+      if( !group ) {
+        dataset.addObject( dateGroup );
+      }
     });
 
-    console.info('History Timeline :: Dataset is', data);
+    console.log(dataset.toArray());
 
-    return data;
+    return dataset;
   }.property('content.@each')
 });
