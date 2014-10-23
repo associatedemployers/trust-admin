@@ -20,6 +20,14 @@ Router.map(function() {
     this.route('edit');
   });
 
+  this.resource('users', function () {
+    this.route('new');
+  });
+  this.resource('user', { path: 'user/:id' }, function () {
+    this.route('index', { path: '/' });
+    this.route('edit', { path: '/edit' });
+  });
+
   this.resource('companies');
 
   this.route('search');
