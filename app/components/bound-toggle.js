@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  classNames: [ 'form-group', 'text-center' ],
+  classNames: [ 'form-group', 'text-center', 'toggle-view' ],
   theme: 'squish', // default theme
 
   inputId: function () {

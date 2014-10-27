@@ -1,10 +1,10 @@
 {{yield}}
 
 {{#if label}}
-  <h5>{{label}}</h5>
+  <h5>{{{label}}}</h5>
 {{/if}}
 
 {{input type="checkbox" id=inputId class=toggleClass checked=value}}
-<label class="toggle-btn" {{bind-attr for=inputId}}></label>
+<label {{bind-attr class=":toggle-btn sm:toggle-sm"}} {{bind-attr for=inputId}}></label>
 
 {{log this}}

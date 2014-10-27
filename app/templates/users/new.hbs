@@ -1,0 +1,91 @@
+<h1>
+  {{#link-to 'users.index' title="Back to users"}}<i class="fa fa-arrow-left">{{/link-to}}
+  <i class="fa fa-fw fa-user"></i> Create a new user
+</h1>
+<hr />
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="popout-panel">
+      <h3 {{bind-attr class=":popout-title informationIsComplete:text-success"}}>
+        <i {{bind-attr class=":fa :fa-fw informationIsComplete:fa-check:fa-archive"}}></i> Information
+      </h3>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            {{input type="text" class="form-control" value=content.firstName placeholder="First Name"}}
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            {{input type="text" class="form-control" value=content.lastName placeholder="Last Name"}}
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        {{input type="email" class="form-control" value=content.email placeholder="Email Address"}}
+      </div>
+
+    </div>
+
+  </div>
+  <div class="col-md-6">
+    <div class="popout-panel">
+      <h3 class="popout-title">
+        <i class="fa fa-fw fa-key"></i> Permissions
+        <small class="pull-right">
+          <a href="#" {{action "toggleProperty" "expandPermissions"}}>
+            {{#if expandPermissions}}
+              Hide
+            {{else}}
+              Show All
+            {{/if}}
+            Permissions
+          </a>
+        </small></h3>
+
+      <div {{bind-attr class=":row expandPermissions::contract"}}>
+        {{#each permissionGroup in content.permissions}}
+          <div class="col-xs-4">
+            <h5>
+              {{title-case permissionGroup.name}} <small class="text-muted">[{{title-case permissionGroup.type}}]</small>
+            <h5>
+
+            <small>
+              <ul class="permission-url">
+                {{#each url in permissionGroup.endpoints}}
+                  <li>{{url}}</li>
+                {{/each}}
+              </ul>
+            </small>
+          </div>
+          <div class="col-xs-8 text-right">
+          {{#each permission in permissionGroup.permissions}}
+            {{bound-toggle sm=true label=permission.name theme="squish" value=permission.value}}
+          {{else}}
+            No Permissions Available
+          {{/each}}
+          </div>
+          <div class="clearfix hidden-xs"></div>
+          <hr />
+        {{/each}}
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="popout-panel">
+  <h3 class="popout-title"><i class="fa fa-fw fa-gear"></i> Settings</h3>
+
+  <div class="toggle-controls text-center">
+    {{bound-toggle label="Super User" theme="squish" value=content.super}}
+    {{bound-toggle label="Subscribe to Emails" theme="squish" value=content.receiveEmails}}
+    {{bound-toggle label="<i>[FUTURE]</i> API Access" theme="squish" value=content.apiAccess}}
+  </div>
+</div>
+
+<hr />
+
+<button class="btn btn-lg btn-success btn-block" {{bind-attr disabled=disableSubmit}} {{action "saveUser"}}><i class="fa fa-fw fa-save"></i> Save and Create{{#if loading}} <i class="fa fa-fw fa-spin fa-spinner"></i>{{/if}}</button>

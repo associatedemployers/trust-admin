@@ -21,8 +21,10 @@ Router.map(function() {
   });
 
   this.resource('users', function () {
+    this.route('index', { path: '/' });
     this.route('new');
   });
+
   this.resource('user', { path: 'user/:id' }, function () {
     this.route('index', { path: '/' });
     this.route('edit', { path: '/edit' });
