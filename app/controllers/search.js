@@ -1,7 +1,12 @@
 import Ember from 'ember';
 import GrowlMixin from '../mixins/growl';
+import { searchNormalizationMap } from '../utils/globals';
 
 export default Ember.ArrayController.extend(GrowlMixin, {
+  noQuery: Ember.computed.not('query'),
+  isNotStale: Ember.computed.not('isStale'),
+  disableInput: Ember.computed.or('isLoadingAutocomplete', 'isSearching', 'noQuery', 'isNotStale'),
+
   queryParams: {
     modelSelection: 'type',
     query: 'query'
@@ -9,7 +14,8 @@ export default Ember.ArrayController.extend(GrowlMixin, {
 
   modelSelection: null,
   query:          null,
-  limit: 100,
+  limit:          100,
+  isStale:        true,
 
   modelSelectMap: {
     employee: {
@@ -30,6 +36,16 @@ export default Ember.ArrayController.extend(GrowlMixin, {
     }
   },
 
+  init: function () {
+    this._super.apply(this, arguments);
+
+    Ember.run.scheduleOnce('afterRender', this, function () {
+      if( this.get('query') ) {
+        this.send('search');
+      }
+    });
+  },
+
   models: function () {
     var map = this.get('modelSelectMap'),
         arr = [];
@@ -44,9 +60,9 @@ export default Ember.ArrayController.extend(GrowlMixin, {
     return arr;
   }.property('modelSelectMap'),
 
-  disableInput: function () {
-    return ( this.get('isLoadingAutocomplete') || this.get('isSearching') );
-  }.property('isLoadingAutocomplete', 'isSearching'),
+  setStale: function () {
+    this.set('isStale', true);
+  }.observes('modelSelection', 'query'),
 
   shouldRefreshData: function () {
     if( this.get('modelSelection') ) {
@@ -57,7 +73,7 @@ export default Ember.ArrayController.extend(GrowlMixin, {
 
   _refreshAutocompleteData: function () {
     var self = this;
-    console.debug('Finder :: Loading data...');
+
     this.set('isLoadingData', true);
 
     var modelSelection = this.get('modelSelection'),
@@ -95,24 +111,39 @@ export default Ember.ArrayController.extend(GrowlMixin, {
   },
 
   actions: {
-    /*search: function () {
-      var self = this,
-          model = this.get('modelSelection'),
-          models = this.get('models'),
-          modelUrl = ( model ) ? Ember.Inflector.inflector.pluralize( model ) + '/' : '';
+    search: function () {
+      var self   = this,
+          model  = this.get('modelSelection'),
+          models = this.get('models');
 
-      this.setProperties('isSearching', true);
+      this.set('isSearching', true);
 
-      var getData = {
-        models: ( model ) ? model : models,
-        limit: this.get('limit')
+      var query = {
+        models:    ( model ) ? [ model ] : models.map(function ( m ) { return m.v; }),
+        limit:     this.get('limit'),
+        query:     this.get('query'),
+        normalize: searchNormalizationMap
       };
 
-      Ember.$.getJSON('/api/' + modelUrl + 'deep-search', getData, function ( results ) {
+      console.log(query);
 
-      }, function ( err ) {
-        self.
+      var startTime = moment();
+
+      Ember.RSVP.Promise.resolve(Ember.$.getJSON('/api/search', query))
+      .then(function ( results ) {
+        self.setProperties({
+          content:    results,
+          isStale:    false,
+          resultTime: (moment().diff(startTime) / 1000).toFixed(3)
+        });
+      })
+      .catch(function ( err ) {
+        self.growlError( err );
+        console.error( err );
+      })
+      .finally(function () {
+        self.set('isSearching', false);
       });
-    }*/
+    }
   }
 });

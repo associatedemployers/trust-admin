@@ -47,7 +47,12 @@
 
       <ul class="list-group resource-list-group">
         {{#each user in content itemController="user-list-item"}}
-          <li class="list-group-item">{{#link-to 'user' user}}{{user.fullName}}{{/link-to}}</li>
+          <li class="list-group-item">
+            {{#link-to 'user' user}}{{user.fullName}}{{/link-to}}
+            <small class="text-muted pull-right">
+              Created {{time-ago user.time_stamp}}
+            </small>
+          </li>
         {{else}}
           <h2 class="text-center"><i class="fa fa-exclamation-triangle"></i> No users found.</h2>
         {{/each}}

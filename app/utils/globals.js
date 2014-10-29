@@ -63,4 +63,20 @@ var permissions = [
   }
 ];
 
-export { permissions };
+var searchNormalizationMap = {
+  employee: {
+    id: '_id',
+    time_stamp: 'time_stamp',
+    title: [ 'name.first', 'name.middleInitial', 'name.last', 'name.suffix' ]
+  },
+  company: {
+    id: '_id',
+    time_stamp: 'time_stamp',
+    title: 'name.company'
+  }
+};
+
+export {
+  permissions,
+  searchNormalizationMap
+};
