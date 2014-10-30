@@ -46,8 +46,12 @@
       </span>
     </li>
   {{else}}
-    {{#unless isStale}}
-      <h2>No Results Found</h2>
-    {{/unless}}
+    {{#if isSearching}}
+      <h1 class="text-center">Searching... <i class="fa fa-spin fa-spinner"></i></h1>
+    {{else}}
+      {{#unless isStale}}
+        <h2>No Results Found</h2>
+      {{/unless}}
+    {{/if}}
   {{/each}}
 </ul>

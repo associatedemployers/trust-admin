@@ -13,7 +13,7 @@ export default Ember.ArrayController.extend(GrowlMixin, {
   },
 
   modelSelection: null,
-  query:          null,
+  query:          '',
   limit:          100,
   isStale:        true,
 
