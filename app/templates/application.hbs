@@ -1,5 +1,11 @@
-{{render "navigation"}}
+<div class="application-wrapper">
+  <div class="nav-wrapper">
+    {{render "navigation"}}
+  </div>
 
-<div class="view-wrapper">
-  {{outlet}}
+  <div class="view-wrapper">
+    {{outlet}}
+  </div>
 </div>
+
+{{render "footer"}}

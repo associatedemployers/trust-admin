@@ -103,10 +103,8 @@ export default Ember.ArrayController.extend(GrowlMixin, {
       });
 
     }, function ( err ) {
-
       self.growlError( err );
       console.error( err );
-
     });
   },
 

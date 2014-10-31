@@ -1,5 +1,5 @@
 import Ember from 'ember';
 
 export default Ember.View.extend({
-  classNames: [ 'index-view' ]
+  classNames: [ 'index-view', 'splash-screen' ]
 });

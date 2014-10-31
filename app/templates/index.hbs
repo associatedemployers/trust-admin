@@ -1,50 +1,71 @@
-<ul class="quick-links">
-  <li>
-    {{#link-to 'companies'}}
-      <i class="fa fa-fw fa-4x fa-building link-icon"></i>
-      <h3>
-        Companies <i class="fa fa-angle-double-right"></i>
-        <span class="label label-danger count-label">{{globals.stats.Company}}</span>
-      </h3>
-    {{/link-to}}
+<div class="popout-panel popout-panel-min user-info">
+  <h4>Signed in as <strong>James</strong>... <i class="pull-right">2 Users Online</i></h4>
+</div>
 
-    <div class="slide-description">
-      <h4>Search &amp; Edit Companies</h4>
-      <p>
-        Enables information drilling on companies. Search/edit company information. Employees &amp; Medical Rates are listed here as well.
-      </p>
-    </div>
-  </li>
-  <li>
-    {{#link-to 'employees'}}
-      <i class="fa fa-fw fa-4x fa-users link-icon"></i>
-      <h3>
-        Employees <i class="fa fa-angle-double-right"></i>
-        <span class="label label-danger count-label">{{globals.stats.Employee}}</span>
-      </h3>
-    {{/link-to}}
+<div class="popout-panel popout-panel-min">
+  <h2>Quick links</h2>
+  <hr />
 
-    <div class="slide-description">
-      <h4>Search &amp; Edit Employees</h4>
-      <p>
-        Enables information drilling on employees. Search/edit employee information.
-      </p>
-    </div>
-  </li>
-  <li>
-    {{#link-to 'employees'}}
-      <i class="fa fa-fw fa-4x fa-usd link-icon"></i>
-      <h3>
-        Medical Rates <i class="fa fa-angle-double-right"></i>
-        <span class="label label-danger count-label">{{globals.stats.MedicalRate}}</span>
-      </h3>
-    {{/link-to}}
+  <div class="row">
+    <div class="col-md-4">
+      <div class="link-section">
+        {{#link-to 'companies'}}
+          <i class="fa fa-fw fa-4x fa-building link-icon"></i>
+          <h3>
+            Companies <i class="fa fa-angle-double-right"></i>
+            <span class="label label-danger count-label">{{globals.stats.Company}}</span>
+          </h3>
+        {{/link-to}}
 
-    <div class="slide-description">
-      <h4>Edit Medical Rates</h4>
-      <p>
-        Create, change, &amp; assign Medical Rates for companies.
-      </p>
+        <div class="slide-description">
+          <h4>Search &amp; Edit Companies</h4>
+          <p>
+            Enables information drilling on companies. Search/edit company information. Employees &amp; Medical Rates are listed here as well.
+          </p>
+        </div>
+      </div>
     </div>
-  </li>
-</ul>
+    <div class="col-md-4">
+      <div class="link-section">
+        {{#link-to 'employees'}}
+          <i class="fa fa-fw fa-4x fa-users link-icon"></i>
+          <h3>
+            Employees <i class="fa fa-angle-double-right"></i>
+            <span class="label label-danger count-label">{{globals.stats.Employee}}</span>
+          </h3>
+        {{/link-to}}
+
+        <div class="slide-description">
+          <h4>Search &amp; Edit Employees</h4>
+          <p>
+            Enables information drilling on employees. Search/edit employee information.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="link-section">
+        {{#link-to 'employees'}}
+          <i class="fa fa-fw fa-4x fa-usd link-icon"></i>
+          <h3>
+            Medical Rates <i class="fa fa-angle-double-right"></i>
+            <span class="label label-danger count-label">{{globals.stats.MedicalRate}}</span>
+          </h3>
+        {{/link-to}}
+
+        <div class="slide-description">
+          <h4>Edit Medical Rates</h4>
+          <p>
+            Create, change, &amp; assign Medical Rates for companies.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="text-center">
+  <div class="popout-panel popout-panel-inline">
+    <i class="fa fa-flask"></i> <i>Looks new, huh?</i> <a href="#" {{action "enterTourMode"}}>Get a tour</a>
+  </div>
+</div>

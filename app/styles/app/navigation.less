@@ -1,0 +1,54 @@
+/*
+  Navigation Styles
+*/
+
+.nav-wrapper {
+  height: 50px;
+}
+
+.navbar.navbar-default {
+  .transition(~"all ease-in-out .35s");
+  .box-shadow(~"0 6px 8px rgba(0, 0, 0, 0.25)");
+
+  &.navbar-fixed-top {
+    .opacity(0.5);
+
+    &:hover {
+      .opacity(1);
+    }
+  }
+}
+
+.footer-view {
+  min-height: 80px;
+  padding: 20px 8% 10px 8%;
+  background-color: @gray-dark;
+  color: white;
+
+  .box-shadow(~"0 5px 15px rgba(0, 0, 0, 0.6) inset");
+
+  h1, h2, h3, h4, h5, h6 {
+    margin: 4px 0;
+  }
+
+  hr {
+    margin: 8px 0;
+    border-top: 1px solid fade(white, 20%);
+  }
+
+  a {
+    font-size: 90%;
+    color: lighten(@brand-default, 55%);
+
+    &:hover {
+      color: lighten(@brand-default, 25%);
+    }
+  }
+
+  .copyright {
+    text-align: center;
+    font-size: 80%;
+    color: @gray-light;
+  }
+
+}

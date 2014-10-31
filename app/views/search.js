@@ -44,5 +44,19 @@ export default Ember.View.extend({
 
       return matched;
     }));
-  }
+  },
+
+  checkShouldTriggerHelp: function () {
+    Ember.run.scheduleOnce('afterRender', this, function () {
+      if( this.get('controller.query') && this.get('controller.isStale') && !this.get('triggeredHelp') ) {
+        this.set('triggeredHelp', true);
+        this.$().find('.help-trigger').tooltip({
+          placement: 'bottom',
+          trigger: 'manual'
+        }).tooltip('show');
+      } else if( !this.get('controller.isStale') ) {
+        this.$().find('.help-trigger').tooltip('hide');
+      }
+    });
+  }.observes('controller.query', 'controller.isStale'),
 });

@@ -11,9 +11,26 @@ body, html {
   background-color: @body-bg;
 }
 
+.application-view {
+  height: 100%;
+}
+
 .view-wrapper {
-  width: 96%;
-  margin: 0 auto 40px auto;
+  position: relative;
+  min-height: 100%;
+  padding: 10px 2% 20px 2%;
+}
+
+.application-wrapper {
+  position: relative;
+  min-height: 100%;
+  margin-bottom: -120px;
+
+  &:after {
+    content: "";
+    display: block;
+    height: 120px
+  }
 }
 
 .hide-slide {
@@ -32,4 +49,18 @@ body, html {
 .limited-pane {
   max-height: 500px;
   overflow: auto;
+}
+
+#nprogress .bar {
+  background: white;
+}
+
+a {
+  color: lighten(@brand-default, 15%);
+  .transition(~"all ease-in-out 0.2s");
+
+  &:hover, &:focus {
+    color: lighten(@brand-default, 55%);
+    text-decoration: none;
+  }
 }
