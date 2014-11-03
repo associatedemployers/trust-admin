@@ -46,6 +46,7 @@ export default DS.Model.extend({
   contactMethods: DS.hasMany('contact-method'),
   beneficiaries:  DS.hasMany('beneficiary'),
   notes:          DS.hasMany('note'),
+  files:          DS.hasMany('file', { async: true }),
   historyEvents:  DS.hasMany('history-event', { async: true }),
   company:        DS.belongsTo('company', { async: true }),
 

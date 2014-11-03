@@ -33,6 +33,10 @@ export default Ember.Component.extend({
       var emp  = ( employee.get('legacyClientEmploymentDate') )  ? moment( employee.get('legacyClientEmploymentDate') )  : null,
           term = ( employee.get('legacyClientTerminationDate') ) ? moment( employee.get('legacyClientTerminationDate') ) : null;
 
+      if( !employee || employee.get('waived') === true ) {
+        return;
+      }
+
       if( emp && emp.isBefore( loopDate ) ) {
         if( !term || term.isAfter( loopDate ) ) {
           count++;

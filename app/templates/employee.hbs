@@ -102,6 +102,13 @@
 <hr/>
 
 <div class="resource-section">
+  <h2 class="text-center">Files</h2>
+  {{render "file-handler" files}}
+</div>
+
+<hr />
+
+<div class="resource-section">
   <h2 class="text-center">History Event Timeline</h2>
   {{#if loadedHistoryEvents}}
     {{render "history-timeline" content.historyEvents}}
