@@ -6,7 +6,7 @@ var Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-  this.resource('employees');
+  this.route('employees');
   this.resource('employee', { path: 'employees/:id' }, function () {
     this.route('index', { path: '/' });
     this.route('edit');
@@ -15,6 +15,7 @@ Router.map(function() {
     this.resource('dependent', { path: '/dependents/:dependentid' });
   });
 
+  this.route('companies');
   this.resource('company', { path: 'companies/:id' }, function () {
     this.route('index', { path: '/' });
     this.route('edit');
@@ -30,7 +31,13 @@ Router.map(function() {
     this.route('edit', { path: '/edit' });
   });
 
-  this.resource('companies');
+
+
+  this.route('medical-rates');
+  this.resource('medical-rate', { path: 'medical-rate/:id' }, function () {
+    this.route('index', { path: '/' });
+    this.route('edit');
+  });
 
   this.route('search');
 });

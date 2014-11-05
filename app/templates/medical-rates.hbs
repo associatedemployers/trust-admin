@@ -1,0 +1,65 @@
+<div class="resource-view">
+  <h1><i class="fa fa-fw fa-users"></i> Medical Rates</h1>
+  <hr />
+  <div class="row resource-row">
+    <div class="col-md-3">
+      <h2>Filters</h2>
+
+      <hr />
+      <p class="text-center">
+      </p>
+    </div>
+    <div class="col-md-9">
+      <div class="row">
+        <div class="col-md-6">
+          <div {{bind-attr class=":resource-loading-overlay isLoading:active"}}>
+            <h2><i class="fa fa-fw fa-spin fa-spinner"></i> Loading Resources...</h2>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="pagination-wrapper">
+            <a href="#" class="jump-to-page" {{action "showModal" "jump-to-page-modal"}}>Jump To Page</a>
+            {{resource-pagination sm=true page=page pages=pages maxButtons=8}}
+            <div class="items-per-page">
+              {{#if maxItems}}
+                <span class="page-out-of">
+                  <i class="fa fa-fw fa-paperclip"></i><i>{{maxItems}} items found.</i> Page {{page}} of {{pages}}
+                </span>
+              {{/if}}
+              <span class="help-label">Items per page: </span>
+              {{#each option in itemsPerPageOptions}}
+                {{items-per-page-option itemsPerPage=itemsPerPage option=option}}
+              {{/each}}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="list-group resource-list-group">
+        {{#each medicalRate in content}}
+          {{render "medical-rate-list-item" medicalRate}}
+        {{else}}
+          <h2 class="text-center"><i class="fa fa-exclamation-triangle"></i> No medical rates found.</h2>
+        {{/each}}
+      </div>
+
+      <div class="pagination-wrapper">
+        {{resource-pagination sm=true page=page pages=pages maxButtons=8}}
+      </div>
+    </div>
+  </div>
+
+</div>
+
+{{#bs-modal id="jump-to-page-modal" modal-sm=true dismissible=true title='<h2>Jump To Page</h2>'}}
+  <form>
+    <div class="modal-body">
+      <div class="form-group">
+        {{input type="number" class="form-control" value=manualPageSet placeholder="Page #"}}
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-primary btn-block" {{action "jumpToPage" manualPageSet}}>Jump</button>
+    </div>
+  </form>
+{{/bs-modal}}

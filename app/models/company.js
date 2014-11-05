@@ -16,7 +16,7 @@ export default DS.Model.extend({
   zipcode:      attribute('string'),
 
   // Relational
-  medicalRates: DS.hasMany('medical-rate', { async: true }),
+  medicalRates: DS.hasMany('medical-rate', { async: true, inverse: 'company' }),
   employees:    DS.hasMany('employee', { async: true }),
 
   // Legacy Fields and Flags

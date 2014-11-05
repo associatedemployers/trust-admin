@@ -1,0 +1,9 @@
+{{#link-to 'medical-rate' content}}
+  {{content.planNumber}} <small>{{content.plan.name}}</small>
+{{/link-to}}
+
+<span class="label label-success">{{content.coInsurance}}</span>
+
+{{#link-to 'company' content.company class="pull-right text-muted"}}
+  {{content.company.name}}
+{{/link-to}}
