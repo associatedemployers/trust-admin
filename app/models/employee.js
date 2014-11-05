@@ -24,6 +24,7 @@ export default DS.Model.extend({
   legacyXVolVisionWaivedDependentName: attribute('string'),
 
   ebmsNumber:          attribute('string'),
+  memberId:            attribute('string'),
   ebmsTerminationCode: attribute('string'),
   waived:              attribute('boolean'),
 

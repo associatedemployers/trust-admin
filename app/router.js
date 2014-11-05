@@ -10,9 +10,6 @@ Router.map(function() {
   this.resource('employee', { path: 'employees/:id' }, function () {
     this.route('index', { path: '/' });
     this.route('edit');
-
-    // Nested Resources
-    this.resource('dependent', { path: '/dependents/:dependentid' });
   });
 
   this.route('companies');
@@ -31,8 +28,6 @@ Router.map(function() {
     this.route('edit', { path: '/edit' });
   });
 
-
-
   this.route('medical-rates');
   this.resource('medical-rate', { path: 'medical-rate/:id' }, function () {
     this.route('index', { path: '/' });
@@ -40,6 +35,12 @@ Router.map(function() {
   });
 
   this.route('search');
+
+  // Nested Resources
+  this.resource('employee.dependent', { path: 'employees/:employeeid/dependents/:dependentid' }, function () {
+    this.route('index', { path: '/' });
+    this.route('edit');
+  });
 });
 
 export default Router;

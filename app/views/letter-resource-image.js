@@ -10,6 +10,10 @@ export default Ember.View.extend({
     this._draw();
   },
 
+  contentDidChange: function () {
+    this._draw();
+  }.observes('r', 'g', 'b', 'text'),
+
   _draw: function () {
     var canvas  = this.$()[ 0 ],
         context = canvas.getContext('2d'),

@@ -19,5 +19,14 @@ export default DS.Model.extend({
     defaultValue: function () {
       return new Date();
     }
-  })
+  }),
+
+  // Computed
+
+  link: function () {
+    var plain = this.toJSON(),
+        id    = ( plain.employee ) ? plain.employee : ( plain.company ) ? plain.company : null;
+
+    return '/api/file/' + id + '-' + this.get('id') + '.' + plain.extension;
+  }.property('extension', 'employee', 'company')
 });

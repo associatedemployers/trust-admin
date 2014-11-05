@@ -1,41 +1,62 @@
 <div class="row">
-  <div class="col-md-6">
-    <ul class="list-group">
-      {{#each file in content itemController='file'}}
-        {{log file}}
-        <li class="list-group-item">
-          <a href="#" {{action "selectFile" file}}>
-            {{#if file.name}}
-              {{file.name}}
-            {{else}}
-              Unnamed File
-            {{/if}}
-          </a>
+  <div {{bind-attr class="selectedFile:col-md-6:col-md-12"}}>
+    <div class="scrolling-list">
+      <div class="list-heading">
+        <h4>
+          <span class="label label-success">{{numberOfFiles}}</span> Files 
+          <small class="text-muted"><i class="fa fa-info-circle"></i> Click a file name for more information</small>
+        </h4>
+        <div class="list-controls">
+          <a href="#" {{action "toggleProperty" "sortAscending"}}>Time Created ( {{#if sortAscending}}Newest{{else}}Oldest{{/if}} <i {{bind-attr class=":fa sortAscending:fa-caret-down:fa-caret-up"}}></i> )</a>
+        </div>
+      </div>
+      <div class="list-container">
+        <ul class="list-group">
+          {{#each file in arrangedContent itemController='file'}}
+            {{log file}}
+            <li class="list-group-item">
+              <div class="row">
+                <div class="col-md-6">
+                  <a href="#" {{action "selectFile" file}}>
+                    {{~#if file.name}}
+                      {{file.name}}
+                    {{else}}
+                      Unnamed File
+                    {{~/if}}.{{file.extension}}
+                  </a>
 
-          {{#each file.labels}}
-            <span class="label label-default">{{title-case this}}</span>
+                  {{#each file.labels}}
+                    <span class="label label-default">{{title-case this}}</span>
+                  {{/each}}
+                </div>
+                <div class="col-md-6 text-right">
+                  <small>{{time-ago file.time_stamp}} at {{format-moment file.time_stamp "hh:mm:ssa"}}</small>
+                  <a {{bind-attr href=file.link}} target="_blank"><i class="fa fa-fw fa-external-link"></i></a>
+                </div>
+              </div>
+            </li>
+          {{else}}
+            <h4>No Files</h4>
           {{/each}}
-
-          <span class="pull-right">
-            <a {{bind-attr href=file.link}} target="_blank"><i class="fa fa-fw fa-sign-out"></i></a>
-          </span>
-        </li>
-      {{else}}
-        <h4>No Files</h4>
-      {{/each}}
-    </ul>
+        </ul>
+      </div>
+    </div>
   </div>
-  <div class="col-md-6">
+  <div {{bind-attr class="selectedFile:col-md-6:hidden"}}>
     {{#if selectedFile}}
       <h3>
-        {{#if selectedFile.name}}
+        {{~#if selectedFile.name}}
           {{selectedFile.name}}
         {{else}}
           Unnamed File
-        {{/if}}
-        {{#each selectedFile.labels}}
-          <span class="label label-default">{{title-case this}}</span>
-        {{/each}}
+        {{~/if}}.{{selectedFile.extension}}
+        <a {{bind-attr href=selectedFile.link}} target="_blank"><i class="fa fa-fw fa-external-link"></i></a>
+        <br />
+        <small>
+          {{#each selectedFile.labels}}
+            <span class="label label-default">{{title-case this}}</span>
+          {{/each}}
+        </small>
       </h3>
       <hr />
 
@@ -94,9 +115,6 @@
           </ul>
         </div>
       </div>
-
-    {{else}}
-      <h3 class="text-center"><i class="fa fa-fw fa-arrow-left"></i> Select a file by clicking a filename...</h3>
     {{/if}}
   </div>
 </div>

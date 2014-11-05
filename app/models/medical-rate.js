@@ -35,7 +35,6 @@ export default RateModel.extend({
   }),
 
   // Computed
-
   coInsuranceSplit: function () {
     var a = this.get('coInsurance').split('/');
 

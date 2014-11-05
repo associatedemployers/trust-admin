@@ -1,7 +1,7 @@
 <ul class="list-group">
   {{#each dependent in content.dependents itemController='dependent-item'}}
     <li class="list-group-item">
-      {{#link-to 'dependent' dependent.id}}{{dependent.fullName}}{{/link-to}}
+      {{#link-to 'employee.dependent' content.id dependent.id}}{{dependent.fullName}}{{/link-to}}
 
       <span class="pull-right text-muted">
         {{dependent.contextualRelationship}}

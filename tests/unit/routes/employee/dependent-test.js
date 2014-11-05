@@ -3,7 +3,7 @@ import {
   test
 } from 'ember-qunit';
 
-moduleFor('route:dependent', 'DependentRoute', {
+moduleFor('route:employee/dependents', 'EmployeeDependentsRoute', {
   // Specify the other units that are required for this test.
   // needs: ['controller:foo']
 });
