@@ -1,14 +1,14 @@
 <div class="row popout-panel">
   <div class="col-md-8">
     <hgroup>
-      {{view "letter-resource-image" class="with-hgroup" width="80px" height="70px" text=letterImageText r=letterImageColor.r g=letterImageColor.g b=letterImageColor.b}}
+      {{view "letter-resource-image" class="with-hgroup" width="80px" height="65px" text=letterImageText r=letterImageColor.r g=letterImageColor.g b=letterImageColor.b}}
       <h2>
         {{content.fullName}}
       </h2>
 
-      <p class="text-muted">
+      <h4 class="text-muted">
         {{content.relationship}} of {{#link-to 'employee' content.employee.id}}{{content.employee.fullName}}{{/link-to}}
-      </p>
+      </h4>
 
     <div>
       {{#with content}}

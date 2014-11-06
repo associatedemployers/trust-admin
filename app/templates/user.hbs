@@ -1,1 +1,37 @@
+<div class="row popout-panel">
+  <div class="col-md-8">
+    <hgroup>
+      <h2>
+        {{content.fullName}}<br />
+        <small><a href="mailto:{{unbound content.email}}">{{content.email}}</a></small>
+      </h4>
+
+    <div>
+      {{#with content}}
+        <ul class="text-muted resource-info-list resource-quick-info">
+          <li><strong>ID:</strong> {{id}}</li>
+          <li><strong>Creation Date:</strong> {{format-moment time_stamp}} <i>({{time-ago time_stamp}})</i></li>
+        </ul>
+      {{/with}}
+    </div>
+
+    </hgroup>
+  </div>
+  <div class="col-md-4 resource-controls">
+    <button class="btn btn-success">
+      <i class="fa fa-fw fa-pencil"></i>
+    </button>
+
+    <div class="dropdown">
+      <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+        <i class="fa fa-fw fa-gear"></i> <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu dropdown-menu-right" role="menu">
+        <li><a href="#" {{action "deleteUser"}}><i class="fa fa-fw fa-trash-o"></i> Delete</a></li>
+        <li><a href="#">Some other action</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
 {{outlet}}

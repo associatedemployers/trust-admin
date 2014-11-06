@@ -4,9 +4,10 @@ import Ember from 'ember';
 
 export default Ember.Mixin.create({
   growl: function ( type, title, msg, delay, icon ) {
-    console.log('growling it up', arguments);
-    icon = ( icon ) ? icon : ( type === 'danger' ) ? 'fa fa-times-circle' : ( type === 'warning' ) ? 'fa fa-exclamation-triangle' : ( type === 'info' ) ? 'fa fa-info-circle' : 'fa fa-envelope';
-    delay = delay || 4000;
+    console.debug('growling it up', arguments);
+
+    icon  = ( icon ) ? icon : ( type === 'danger' ) ? 'fa fa-times-circle' : ( type === 'warning' ) ? 'fa fa-exclamation-triangle' : ( type === 'info' ) ? 'fa fa-info-circle' : 'fa fa-envelope';
+    delay = ( delay === undefined ) ? 4000 : delay;
     title = ' <strong>' + title + '</strong><br />';
 
     $.growl(

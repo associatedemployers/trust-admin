@@ -30,16 +30,19 @@ export default Ember.ObjectController.extend(GrowlMixin, {
       var user = this.get('content'),
           self = this;
 
-      user.save(function ( record ) {
+      console.log('saving');
+
+      user.save().then(function ( record ) {
         self.setProperties({
           loading: false
         });
 
         self.transitionToRoute('user', record.id);
+        self.growl( 'success', 'Created User', 'Successfully created user: ' + record.get('firstName'), 2500, 'fa fa-check');
       }, function ( err ) {
+        var msg = ( err.responseText ) ? err.responseText : err.statusText;
         self.set('loading', false);
-
-        self.growlError( err );
+        self.growlError( msg );
         console.error( err );
       });
     }

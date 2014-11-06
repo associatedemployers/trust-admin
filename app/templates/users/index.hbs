@@ -49,6 +49,11 @@
         {{#each user in content itemController="user-list-item"}}
           <li class="list-group-item">
             {{#link-to 'user' user}}{{user.fullName}}{{/link-to}}
+
+            {{#if user.super}}
+              <span class="label label-info">Super User</span>
+            {{/if}}
+
             <small class="text-muted pull-right">
               Created {{time-ago user.time_stamp}}
             </small>
