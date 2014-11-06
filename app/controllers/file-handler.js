@@ -16,6 +16,10 @@ export default Ember.ArrayController.extend(Ember.SortableMixin, {
 
     selectFile: function ( file ) {
       this.set('selectedFile', file);
+    },
+
+    deselectFile: function () {
+      this.set('selectedFile', null);
     }
   }
 });

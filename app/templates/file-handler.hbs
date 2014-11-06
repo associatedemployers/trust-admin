@@ -50,7 +50,11 @@
         {{else}}
           Unnamed File
         {{~/if}}.{{selectedFile.extension}}
+
         <a {{bind-attr href=selectedFile.link}} target="_blank"><i class="fa fa-fw fa-external-link"></i></a>
+
+        <a href="#" class="pull-right" {{action "deselectFile"}}><i class="fa fa-fw fa-times"></i></a>
+
         <br />
         <small>
           {{#each selectedFile.labels}}
