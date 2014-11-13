@@ -1,3 +1,4 @@
+// TODO: Move permissions to server side
 var permissions = [
   {
     name: 'users',
