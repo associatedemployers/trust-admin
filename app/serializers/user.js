@@ -23,8 +23,16 @@ export default ApplicationSerializer.extend({
       last:  employee.get('lastName')
     };
 
+    json.login = {
+      email:    employee.get('email'),
+      password: employee.get('password')
+    };
+
     delete json.firstName;
     delete json.lastName;
+
+    delete json.email;
+    delete json.password;
 
     json._id = json.id;
 
