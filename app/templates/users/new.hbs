@@ -47,7 +47,7 @@
         </small></h3>
 
       <div {{bind-attr class=":row expandPermissions::contract"}}>
-        {{#each permissionGroup in content.permissions}}
+        {{#each permissionGroup in assignablePermissions}}
           <div class="col-xs-4">
             <h5>
               {{title-case permissionGroup.name}} <small class="text-muted">[{{title-case permissionGroup.type}}]</small>
@@ -62,8 +62,8 @@
             </small>
           </div>
           <div class="col-xs-8 text-right">
-          {{#each permission in permissionGroup.permissions}}
-            {{bound-toggle sm=true label=permission.name theme="squish" value=permission.value}}
+          {{#each permission in permissionGroup.permissions itemController="permissionOption"}}
+            {{bound-toggle sm=true label=permission.name theme="squish" value=permission.on}}
           {{else}}
             No Permissions Available
           {{/each}}

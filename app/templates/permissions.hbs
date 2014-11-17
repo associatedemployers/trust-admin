@@ -1,0 +1,78 @@
+<div class="resource-view">
+  <div class="row">
+    <div class="col-md-6">
+      <h1><i class="fa fa-fw fa-minus-circle"></i> Permissions</h1>
+    </div>
+    <div class="col-md-6 resource-controls with-heading">
+      <button {{bind-attr class=":btn :btn-success showNewForm:active"}} {{action "toggleProperty" "showNewForm"}}>
+        <i class="fa fa-fw fa-plus"></i> Add...
+      </button>
+    </div>
+  </div>
+  <hr />
+  <div class="row resource-row">
+    <div {{bind-attr class="showNewForm:col-md-4:hidden"}}>
+      <form class="popout-panel" {{action "savePermission" on="submit"}}>
+        <h3 class="text-center">Add/edit permission group</h3>
+        <hr />
+
+        <div class="form-group">
+          {{input type="text" class="form-control" value=permission.name placeholder="Permission Namespace"}}
+        </div>
+        <div class="form-group">
+          {{view "select" class="form-control" content=httpTypes value=permission.type prompt="--Select a Permission Type--"}}
+        </div>
+
+        <label>Endpoints</label>
+        <div class="form-group">
+          {{input type="text" class="form-control" value=endpoint placeholder="ex. /employees"}}
+        </div>
+        <div class="form-group">
+          <button type="button" class="btn btn-warning btn-block" {{action "addEndpoint"}}>Add</button>
+        </div>
+        <ul>
+          {{#each endpoint in permission.endpoints}}
+            <li>{{endpoint}}</li>
+          {{/each}}
+        </ul>
+
+        <label>Permission Options</label>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              {{view "select" class="form-control" content=httpVerbs value=permissionOption.type prompt="--Verb--"}}
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              {{input type="text" class="form-control" value=permissionOption.name placeholder="Name (ex. Read)"}}
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <button type="button" class="btn btn-warning btn-block" {{action "addPermissionOption"}}>Add</button>
+        </div>
+        <ul>
+          {{#each permissionOption in permission.permissions}}
+            <li>{{title-case permissionOption.type}} - {{title-case permissionOption.name}}</li>
+          {{/each}}
+        </ul>
+        <hr />
+        <div class="form-group">
+          <button type="submit" class="btn btn-success btn-block" {{bind-attr disabled=isSaving}}>Save Permission {{#if isSaving}}<i class="fa fa-spin fa-spinner"></i>{{/if}}</button>
+        </div>
+      </form>
+    </div>
+    <div {{bind-attr class="showNewForm:col-md-8:col-md-12"}}>
+      <div class="list-group">
+        {{#each permission in content}}
+          <div class="list-group-item">
+            <span class="label label-info">{{title-case permission.type}}</span> {{permission.name}}
+          </div>
+        {{else}}
+          <h3 class="text-center text-danger"><i class="fa fa-fw fa-exclamation-triangle"></i> No permissions found! (This is a bad thing in our production environment)</h3>
+        {{/each}}
+      </div>
+    </div>
+  </div>
+</div>
