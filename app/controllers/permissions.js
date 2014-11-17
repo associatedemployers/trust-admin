@@ -39,6 +39,12 @@ export default Ember.ArrayController.extend(Growl, {
       this.set('endpoint', null);
     },
 
+    removeEndpoint: function ( endpoint ) {
+      var endpoints = this.get('permission.endpoints');
+
+      endpoints.removeObject( endpoint );
+    },
+
     addPermissionOption: function () {
       var permissions = this.get('permission.permissions'),
           input       = this.get('permissionOption');
@@ -58,6 +64,12 @@ export default Ember.ArrayController.extend(Growl, {
       this.set('permissionOption', Ember.Object.create());
     },
 
+    removePermissionOption: function ( permissionOption ) {
+      var permissions = this.get('permission.permissions');
+
+      permissions.removeObject( permissionOption );
+    },
+
     savePermission: function () {
       this.set('isSaving', true);
 
@@ -70,8 +82,9 @@ export default Ember.ArrayController.extend(Growl, {
       }
 
       permissionGroup.save().then(function (/* record */) {
-        self.growl( 'success', 'Saved', 'Successfully saved permission', 1500, 'fa fa-check');
-        self.set({
+        self.growl('success', 'Saved', 'Successfully saved permission', 1500, 'fa fa-check');
+
+        self.setProperties({
           isSaving: false,
           showNewForm: false
         });

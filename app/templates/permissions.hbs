@@ -32,7 +32,7 @@
         </div>
         <ul>
           {{#each endpoint in permission.endpoints}}
-            <li>{{endpoint}}</li>
+            <li><a href="#" {{action "removeEndpoint" endpoint}}><i class="fa fa-fw fa-times-circle"></i></a> {{endpoint}}</li>
           {{/each}}
         </ul>
 
@@ -54,7 +54,7 @@
         </div>
         <ul>
           {{#each permissionOption in permission.permissions}}
-            <li>{{title-case permissionOption.type}} - {{title-case permissionOption.name}}</li>
+            <li><a href="#" {{action "removePermissionOption" permissionOption}}><i class="fa fa-fw fa-times-circle"></i></a> {{title-case permissionOption.type}} - {{title-case permissionOption.name}}</li>
           {{/each}}
         </ul>
         <hr />
