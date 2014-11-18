@@ -13,17 +13,40 @@ export default Ember.ArrayController.extend(Growl, {
     delete: 'Delete'
   },
 
-  showedNewForm: function () {
-    if( this.get('showNewForm') === true ) {
-      this.set('permission', this.store.createRecord('permission-group'));
-    } else {
-      this.get('permission').deleteRecord();
-    }
-  }.observes('showNewForm'),
+  _handleError: function ( err ) {
+    var msg = ( err.responseText ) ? err.responseText : err.statusText;
+    this.growlError( msg );
+    console.error( err );
+  },
 
   actions: {
     toggleProperty: function ( prop ) {
       this.toggleProperty( prop );
+    },
+
+    openForm: function ( prefill ) {
+      var permission = prefill || this.store.createRecord('permission-group');
+
+      this.setProperties({
+        permission:     permission,
+        existingRecord: !!prefill,
+        showForm:       true
+      });
+    },
+
+    closeForm: function () {
+      var permission = this.get('permission');
+
+      if( !this.get('existingRecord') ) {
+        permission.deleteRecord();
+      } else {
+        permission.rollback();
+      }
+
+      this.setProperties({
+        permission: null,
+        showForm:   false
+      });
     },
 
     addEndpoint: function () {
@@ -86,14 +109,22 @@ export default Ember.ArrayController.extend(Growl, {
 
         self.setProperties({
           isSaving: false,
-          showNewForm: false
+          showForm: false
         });
       }).catch(function ( err ) {
-        var msg = ( err.responseText ) ? err.responseText : err.statusText;
         self.set('isSaving', false);
-        self.growlError( msg );
-        console.error( err );
+        self._handleError( err );
       });
+    },
+
+    deletePermission: function ( permission ) {
+      Ember.assert('You must specify a permission to the deletePermission action', permission);
+
+      var self = this;
+
+      permission.destroyRecord().then(function () {
+        self.growl('danger', 'Deleted', 'Successfully deleted permission', 1500, 'fa fa-check');
+      }).catch(this._handleError.bind( this ));
     }
   }
 });

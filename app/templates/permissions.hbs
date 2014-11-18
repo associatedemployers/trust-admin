@@ -4,15 +4,18 @@
       <h1><i class="fa fa-fw fa-minus-circle"></i> Permissions</h1>
     </div>
     <div class="col-md-6 resource-controls with-heading">
-      <button {{bind-attr class=":btn :btn-success showNewForm:active"}} {{action "toggleProperty" "showNewForm"}}>
+      <button {{bind-attr class=":btn :btn-success showForm:active" disabled=showForm}} {{action "openForm"}}>
         <i class="fa fa-fw fa-plus"></i> Add...
       </button>
     </div>
   </div>
   <hr />
   <div class="row resource-row">
-    <div {{bind-attr class="showNewForm:col-md-4:hidden"}}>
+    <div {{bind-attr class="showForm:col-md-4:hidden"}}>
       <form class="popout-panel" {{action "savePermission" on="submit"}}>
+        <span class="close">
+          <a href="#" {{action "closeForm"}}><i class="fa fa-fw fa-times"></i></a>
+        </span>
         <h3 class="text-center">Add/edit permission group</h3>
         <hr />
 
@@ -63,11 +66,15 @@
         </div>
       </form>
     </div>
-    <div {{bind-attr class="showNewForm:col-md-8:col-md-12"}}>
+    <div {{bind-attr class="showForm:col-md-8:col-md-12"}}>
       <div class="list-group">
         {{#each permission in content}}
           <div class="list-group-item">
             <span class="label label-info">{{title-case permission.type}}</span> {{permission.name}}
+            <span class="pull-right">
+              <a href="#" {{action "openForm" permission}}><i class="fa fa-fw fa-pencil-square-o"></i></a>
+              <a href="#" {{action "deletePermission" permission}}><i class="fa fa-fw fa-trash-o"></i></a>
+            </span>
           </div>
         {{else}}
           <h3 class="text-center text-danger"><i class="fa fa-fw fa-exclamation-triangle"></i> No permissions found! (This is a bad thing in our production environment)</h3>
