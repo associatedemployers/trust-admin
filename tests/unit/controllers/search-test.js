@@ -9,7 +9,6 @@ moduleFor('controller:search', 'SearchController', {
 });
 
 // Replace this with your real tests.
-test('it exists', function() {
-  var controller = this.subject();
-  ok(controller);
+test('placeholder', function() {
+  expect(0);
 });

@@ -4,8 +4,8 @@ import {
 
 module('PluralizeTextHelper');
 
-// Replace this with your real tests.
-test('it works', function() {
-  var result = pluralizeText(42);
-  ok(result);
+test('it pluralizes text', function() {
+  var result = pluralizeText('test');
+
+  equal(result, 'tests');
 });
