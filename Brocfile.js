@@ -4,6 +4,9 @@ var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 var app = new EmberApp();
 
+/* Ember Data Adapter */
+app.import('bower_components/ember-localstorage-adapter/localstorage_adapter.js');
+
 /* Vendor CSS */
 app.import('bower_components/font-awesome/css/font-awesome.css'); // Font Awesome Icons
 app.import('bower_components/animate.css/animate.css');           // Animate.css

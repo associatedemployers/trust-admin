@@ -41,7 +41,10 @@ Router.map(function() {
     this.route('index', { path: '/' });
     this.route('edit');
   });
+
   this.route('permissions');
+
+  this.route('login');
 });
 
 export default Router;
