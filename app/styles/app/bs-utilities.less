@@ -61,8 +61,24 @@ table.table {
 
 /* Forms */
 
-textarea.form-control {
-  resize: vertical;
+.form-control, .form-group {
+  textarea& {
+    resize: vertical;
+  }
+
+  &.valid {
+    .form-control, &.form-control {
+      border-color: @brand-success !important;
+    }
+  }
+
+  &.hasError {
+    .form-control, &.form-control {
+      border-color: @brand-danger !important;
+      color: @brand-danger;
+      background-color: lighten(@brand-danger, 40%);
+    }
+  }
 }
 
 /* Labels */

@@ -46,7 +46,7 @@ export default Ember.Object.extend({
 
     Ember.assert('Session#login must have data object to pass to api#login', typeof data === 'object');
 
-    Ember.$.post('/api/login', data).then(function ( res ) {
+    Ember.$.post('/api/user/login', data).then(function ( res ) {
       var session = self.store.createRecord('session', {
         token:   res.token,
         expires: res.expiration,

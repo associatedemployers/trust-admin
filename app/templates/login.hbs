@@ -1,1 +1,31 @@
-{{outlet}}
+<div class="resource-view">
+  {{#if savedTransition}}
+    <h2 class="text-center text-danger">Whoops, it looks like you need to log in.</h2>
+    <hr />
+  {{/if}}
+  <form class="popout-panel login-panel" {{action "login" on="submit"}}>
+    <h2 class="text-center">Login</h2>
+    <hr />
+    <div {{bind-attr class=":form-group validEmail:valid loginError:hasError"}}>
+      {{input type="email" class="form-control input-lg" value=email placeholder="Email Address"}}
+    </div>
+
+    <div {{bind-attr class=":form-group validPassword:valid loginError:hasError"}}>
+      {{input type="password" class="form-control input-lg" value=password placeholder="Password"}}
+    </div>
+
+    {{#if loginError}}
+      <p class="text-center text-danger">{{{loginError}}}</p>
+    {{/if}}
+
+    <div class="form-group">
+      <button type="submit" class="btn btn-success btn-block btn-lg" {{bind-attr disabled=notAllowSubmit}}>
+        Login{{#if loggingIn}} <i class="fa fa-fw fa-spin fa-spinner"></i>{{/if}}
+      </button>
+    </div>
+
+    <ul class="login-links">
+      <li><a href="#">Forgot your password?</a></li>
+    </ul>
+  </form>
+</div>

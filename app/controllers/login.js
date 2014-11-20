@@ -3,18 +3,37 @@ import { emailRegexp } from '../utils/regex-validators';
 
 export default Ember.Controller.extend({
   notAllowSubmit: Ember.computed.not('allowSubmit'),
+  notLoggingIn:   Ember.computed.not('loggingIn'),
+  allowSubmit:    Ember.computed.and('validEmail', 'validPassword', 'notLoggingIn'),
 
-  allowSubmit: function () {
-    return ( emailRegexp.test(this.get('email')) && this.get('password') && this.get('password').length > 2 && !this.get('session.loggingIn') );
-  }.property('email', 'password', 'session.loggingIn'),
+  validEmail: function () {
+    var email = this.get('email');
 
-  parsedLoginError: function () {
+    return email && emailRegexp.test( email );
+  }.property('email'),
+
+  validPassword: function () {
+    var password = this.get('password');
+
+    return password && password.length > 2;
+  }.property('password'),
+
+  // Controls error reset
+  receivedInput: function () {
+    if( this.get('loginError') ) {
+      this.set('loginError', null);
+    }
+  }.observes('email', 'password'),
+
+  shouldParseLoginError: function () {
     var e = this.get('session.loginError');
-    if(!e) {
+
+    if( !e ) {
       return null;
     }
-    return (typeof e === 'string') ? e : (e.status === 404) ? "No user found with that email. Please try again." : (e.status === 401) ? "Wrong password for that user. Please try again." : "Problem communicating with server, please try again. <br /><span class='text-muted'>" + e.responseText + "</span>";
-  }.property('session.loginError'),
+
+    this.set('loginError', ( typeof e === 'string' ) ? e : ( e.status === 401 ) ? 'Wrong password or no user with that email. Please try again.' : 'Problem communicating with server, please try again. <br /><span class="text-muted">' + e.responseText + '</span>');
+  }.observes('session.loginError'),
 
   authenticationChanged: function () {
     if( !this.session.get('authenticated') || !this.session.get('didSetHeaders') ) {

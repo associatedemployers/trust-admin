@@ -1,0 +1,34 @@
+/*
+  Login Styles
+*/
+
+.login-view {
+  background: linear-gradient(#E8FEFF, transparent),
+              linear-gradient(180deg, #FFF, transparent);
+}
+
+ul.login-links {
+  list-style: none;
+  margin: 0;
+  padding: 2px 4px;
+  text-align: right;
+
+  li {
+    a {
+      color: @brand-danger;
+
+      &:hover {
+        color: lighten(@brand-danger, 20%);
+      }
+    }
+  }
+}
+
+.login-panel {
+  width: 50%;
+  margin: 50px auto !important;
+
+  @media all and (max-width: @screen-md) {
+    width: 75%;
+  }
+}
