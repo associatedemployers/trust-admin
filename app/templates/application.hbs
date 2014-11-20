@@ -3,7 +3,7 @@
     {{render "navigation"}}
   </div>
 
-  <div class="view-wrapper">
+  <div {{bind-attr class=":view-wrapper viewClass"}}>
     {{outlet}}
   </div>
 </div>
