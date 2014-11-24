@@ -20,14 +20,16 @@ export default Ember.Object.extend({
   logout: function () {
     var self = this;
 
-    this.store.find('session', this.get('content.id')).then(function ( session ) {
-      session.destroyRecord();
+    if( this.get('content.id') ) {
+      this.store.find('session', this.get('content.id')).then(function ( session ) {
+        session.destroyRecord();
 
-      self.setProperties({
-        authenticated: false,
-        content: null
+        self.setProperties({
+          authenticated: false,
+          content: null
+        });
       });
-    });
+    }
 
     Ember.$.ajaxSetup({
       headers: {

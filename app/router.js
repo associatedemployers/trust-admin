@@ -45,6 +45,7 @@ Router.map(function() {
   this.route('permissions');
 
   this.route('login');
+  this.route('loading');
 });
 
 export default Router;

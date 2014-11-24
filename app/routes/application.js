@@ -4,7 +4,24 @@ export default Ember.Route.extend({
 
   // Define Global Action Handlers
   actions: {
-    showModal: function (id, staticModal, forceAppend) {
+    error: function ( err, transition ) {
+      console.error( err );
+
+      if( err.status === 401 ) {
+        this.controllerFor('login').setProperties({
+          savedTransition: transition,
+          expiredSession:  !!this.session.get('authenticated')
+        });
+
+        this.session.logout();
+
+        this.transitionTo('login');
+      } else {
+        this.transitionTo('error', err);
+      }
+    },
+
+    showModal: function ( id, staticModal, forceAppend ) {
       // Assign the modal element to a variable
       var el            = $("#" + id),
           self          = this,
@@ -37,7 +54,7 @@ export default Ember.Route.extend({
       showTheModal();
     },
 
-    hideModal: function (id) {
+    hideModal: function ( id ) {
       var self = this;
 
       $('#' + id).modal('hide').one('hidden.bs.modal', function () {

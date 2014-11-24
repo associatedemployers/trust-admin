@@ -2,16 +2,12 @@
   Login Styles
 */
 
-.login-view {
-  background: linear-gradient(#E8FEFF, transparent),
-              linear-gradient(180deg, #FFF, transparent);
-}
-
 ul.login-links {
   list-style: none;
   margin: 0;
   padding: 2px 4px;
   text-align: right;
+  font-size: 80%;
 
   li {
     a {
@@ -24,11 +20,45 @@ ul.login-links {
   }
 }
 
-.login-panel {
+.login-container {
+  position: relative;
   width: 50%;
-  margin: 50px auto !important;
+  margin: 0 auto;
+  transform-style: preserve-3d;
+  .backface-visibility(hidden);
 
-  @media all and (max-width: @screen-md) {
-    width: 75%;
+  .login-panel, .login-panel-back {
+    position: absolute;
+    margin: 50px auto !important;
+    height: 375px;
+    .backface-visibility(hidden);
+    .trbl();
+
+    @media all and (max-width: @screen-md) {
+      width: 75%;
+    }
+  }
+
+  .login-panel {
+    background-color: white;
+    z-index: 2;
+    .rotateY(0deg);
+  }
+
+  .login-panel-back {
+    background-color: @brand-danger;
+    .rotateY(180deg);
+
+    &:before {
+      .fa();
+      font-size: 1200%;
+      color: white;
+      content: '\f071';
+      position: absolute;
+      top: 26%;
+      right: 0;
+      left: 0;
+      text-align: center;
+    }
   }
 }

@@ -14,6 +14,7 @@ app.import('bower_components/nprogress/nprogress.css');           // NProgess CS
 app.import('bower_components/vis/dist/vis.css');                  // vis CSS
 
 /* Vendor JS */
+app.import('bower_components/velocity/velocity.js');                  // Velocity.js
 app.import('bower_components/bootstrap/dist/js/bootstrap.min.js');    // Bootstrap JS
 app.import('bower_components/moment/moment.js');                      // Moment.js
 app.import('bower_components/bootstrap.growl/bootstrap-growl.js');    // Bootstrap Growl Notifications JS
