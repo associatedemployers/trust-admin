@@ -29,8 +29,8 @@ export default Ember.View.extend({
     });
   }.observes('controller.autocompleteData.@each'),
 
-  _search: function ( query, callback ) { 
-    callback(this.filter(function ( o ) {
+  _search: function ( query, callback ) {
+    var data = ( this ) ? this.filter(function ( o ) {
       var json = JSON.stringify( o ),
           matched = true;
 
@@ -43,7 +43,9 @@ export default Ember.View.extend({
       });
 
       return matched;
-    }));
+    }) : [];
+
+    callback( data );
   },
 
   checkShouldTriggerHelp: function () {

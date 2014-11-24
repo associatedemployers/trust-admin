@@ -3,14 +3,16 @@
 */
 import Session from '../modules/session';
 
-export var initialize = function( container ) {
-  console.debug('Init :: Injecting modules');
+export var initialize = function( container, app ) {
+  console.debug('Init :: Registering modules');
+  app.deferReadiness();
   container.register('modules:session', Session.extend(), { singleton: true });
+  app.advanceReadiness();
 };
 
 export default {
   name: 'register-modules',
-  after: 'store',
+  after: 'inject-store-to-modules',
 
   initialize: initialize
 };

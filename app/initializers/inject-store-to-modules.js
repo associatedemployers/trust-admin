@@ -1,11 +1,11 @@
-export var initialize = function ( container ) {
+export var initialize = function ( container, app ) {
   console.debug('Init :: Injecting store');
-  container.typeInjection('session', 'store', 'store:main');
+  app.inject('modules:session', 'store', 'store:main');
 };
 
 export default {
   name: 'inject-store-to-modules',
-  after: 'register-modules',
+  after: 'store',
 
   initialize: initialize
 };

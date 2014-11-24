@@ -2,7 +2,6 @@ import Ember from 'ember';
 
 export default Ember.View.extend({
   didGetLoginError: function () {
-    console.log('err');
     if( !this.get('controller.loginError') ) {
       return;
     }

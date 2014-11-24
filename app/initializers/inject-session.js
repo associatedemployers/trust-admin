@@ -30,7 +30,7 @@ export var initialize = function ( container, application ) {
 
 export default {
   name: 'inject-session',
-  after: 'inject-store-to-modules',
+  after: 'register-modules',
 
   initialize: initialize
 };
