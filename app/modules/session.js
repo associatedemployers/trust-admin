@@ -62,6 +62,8 @@ export default Ember.Object.extend({
         authenticated: true,
         loggingIn: false
       });
+
+      self.get('currentUser');
     }, function (res) {
       self.setProperties({
         authenticated: false,

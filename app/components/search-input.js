@@ -25,7 +25,7 @@ export default Ember.TextField.extend({
 
       this.set('$ttEl', this.$().typeahead(typeaheadOptions, typeaheadConfig));
     });
-  }.observes('controller.searchContent.@each'),
+  }.observes('controller.searchContent.@each').on('didInsertElement'),
 
   _search: function ( query, callback ) {
     var substrRegex = new RegExp( query, 'i' ),

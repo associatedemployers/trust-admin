@@ -4,6 +4,6 @@
 
 <div class="data-section text-right">
   {{#if content.company}}
-    <span class="mute">{{content.company.name}}</span>
+    {{#link-to "company" content.company class="mute"}}{{content.company.name}}{{/link-to}}
   {{/if}}
 </div>

@@ -1,9 +1,23 @@
 import Ember from 'ember';
 
 export default Ember.Mixin.create({
-  serializeFilters: {},
+  queryParams: [ 'filtersApplied' ],
+  filtersApplied: false,
 
-  applyFilters: function () {
+  init: function () {
+    this._super.apply( this, arguments );
+
+    console.log(window.location.search);
+
+    Ember.run.scheduleOnce('afterRender', this, function () {
+      if( window.location.search.indexOf('serializeFilters') > -1 || this.get('filtersApplied') ) {
+        this._applyFilters();
+      }
+    });
+  },
+
+  _applyFilters: function () {
+    console.log('applying');
     var f                  = {},
         filterMap          = this.get('filterMap'),
         valueNormalization = this.get('filterValueNormalization'),
@@ -19,8 +33,10 @@ export default Ember.Mixin.create({
             valueForKey = serializeFilters[ key ],
             value       = ( valueNormalization && typeof valueNormalization[ key ] === 'function' ) ? valueNormalization[ key ]( valueForKey ) : valueForKey;
 
-        if( value === undefined || value === '' ) {
-          return;
+        console.log('got', value, 'for', key);
+
+        if( Ember.empty( value ) ) {
+          break;
         }
 
         f[ nkey ] = value;
@@ -35,7 +51,7 @@ export default Ember.Mixin.create({
 
   actions: {
     applyFilters: function () {
-      this.applyFilters();
+      this._applyFilters();
     },
 
     removeFilters: function () {
@@ -46,7 +62,13 @@ export default Ember.Mixin.create({
     },
 
     resetFilters: function () {
-      this.set('serializeFilters', this.get('filterDefaults'));
+      var filtersApplied = this.get('filtersApplied');
+      this.set('serializeFilters', $.extend({}, this.get('filterDefaults')));
+
+      // Preserve filtersApplied UI state
+      if( filtersApplied ) {
+        this._applyFilters();
+      }
     }
   }
 });

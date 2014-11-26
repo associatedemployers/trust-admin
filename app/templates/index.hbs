@@ -1,5 +1,5 @@
 <div class="popout-panel popout-panel-min user-info">
-  <h4>Signed in as <strong>James</strong>... <i class="pull-right">2 Users Online</i></h4>
+  <h4>Signed in as <strong>{{session.currentUser.firstName}}</strong>... <i class="pull-right">X Users Online</i></h4>
 </div>
 
 <div class="popout-panel popout-panel-min">
@@ -66,6 +66,6 @@
 
 <div class="text-center">
   <div class="popout-panel popout-panel-inline">
-    <i class="fa fa-flask"></i> <i>Looks new, huh?</i> <a href="#" {{action "enterTourMode"}}>Get a tour</a>
+    <i class="fa fa-flask"></i> <i>Look new?</i> <a href="#" {{action "enterTourMode"}}>Get a tour</a>
   </div>
 </div>
