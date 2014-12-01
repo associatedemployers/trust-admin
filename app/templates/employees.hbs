@@ -22,11 +22,7 @@
 
       <small class="pull-right"><a href="#" {{action "resetFilters"}}>Reset</a></small>
 
-      <h4><i class="fa fa-fw fa-user"></i> Meta</h4>
-      <div class="form-group">
-        {{bound-toggle sm=true label="Terminated" theme="squish" value=serializeFilters.terminated}}
-      </div>
-
+      {{! Location Filters}}
       <h4><i class="fa fa-fw fa-map-marker"></i> Location</h4>
       <div class="form-group">
         {{search-input class="form-control" searchContent=cities value=serializeFilters.city placeholder="Any City"}}
@@ -35,7 +31,24 @@
         {{view "select" class="form-control" content=states optionValuePath="content.v" optionLabelPath="content.l" value=serializeFilters.state prompt="Any State"}}
       </div>
 
-      
+      {{! Meta Filters}}
+      <h4>
+        <i class="fa fa-fw fa-user"></i> Meta <a href="#" {{action "toggleProperty" "applyingMeta"}}><i {{bind-attr class=":fa applyingMeta:fa-angle-up:fa-angle-down"}}></i></a>
+      </h4>
+      <div {{bind-attr class=":form-group :hide-slide :text-center applyingMeta:show"}}>
+        {{bound-toggle sm=true label="Terminated" theme="squish" value=serializeFilters.terminated}}
+      </div>
+
+      {{! Plan Filters}}
+      <h4>
+        <i class="fa fa-fw fa-folder-open"></i> Plans <a href="#" {{action "toggleProperty" "applyingPlans"}}><i {{bind-attr class=":fa applyingPlans:fa-angle-up:fa-angle-down"}}></i></a>
+      </h4>
+      <div {{bind-attr class=":form-group :hide-slide :text-center applyingPlans:show"}}>
+        {{bound-toggle sm=true label="Medical" theme="squish" value=serializeFilters.hasMedical}}
+        {{bound-toggle sm=true label="Dental" theme="squish" value=serializeFilters.hasDental}}
+        {{bound-toggle sm=true label="Vision" theme="squish" value=serializeFilters.hasVision}}
+        {{bound-toggle sm=true label="Life" theme="squish" value=serializeFilters.hasLife}}
+      </div>
 
     </div>
     <div class="col-md-9">

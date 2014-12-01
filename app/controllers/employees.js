@@ -6,30 +6,69 @@ import Employee from '../models/employee';
 var filters = {
     terminated: false,
     city: '',
-    state: null
+    state: null,
+    hasMedical: true,
+    hasDental: true,
+    hasVision: true,
+    hasLife: true
+};
+
+var hasFirstArrayPlans = function ( value ) {
+  if( !this.get('applyingPlans') ) {
+    return;
+  }
+
+  return ( value === true || value === 'true' ) ? 'exists' : ( value === false || value === 'false' ) ? 'nexists' : undefined;
 };
 
 export default Ember.ArrayController.extend(ResourcePaginatorMixin, ResourceFiltersMixin, {
   needs: [ 'application' ],
   states: Ember.computed.alias('controllers.application.states'),
-  queryParams: [ 'sort', 'page', 'itemsPerPage', 'serializeFilters.terminated', 'serializeFilters.city', 'serializeFilters.state' ],
+  queryParams: [
+    'sort',
+    'page',
+    'itemsPerPage',
+    'serializeFilters.terminated',
+    'serializeFilters.city',
+    'serializeFilters.state',
+    'serializeFilters.hasMedical',
+    'serializeFilters.hasDental',
+    'serializeFilters.hasVision',
+    'serializeFilters.hasLife',
+    'applyingMeta',
+    'applyingPlans'
+  ],
 
   filterMap: {
     city: 'address.city',
     state: 'address.state',
-    terminated: 'legacyClientTerminationDate'
+    terminated: 'legacyClientTerminationDate',
+    hasMedical: 'plans.medical.1',
+    hasDental: 'plans.dental.1',
+    hasVision: 'plans.vision.1',
+    hasLife: 'plans.life.1'
   },
 
   filterValueNormalization: {
     terminated: function ( value ) {
+      if( !this.get('applyingMeta') ) {
+        return;
+      }
+
       return ( value === true || value === 'true' ) ? 'exists' : ( value === false || value === 'false' ) ? 'nexists' : undefined;
-    }
+    },
+    hasMedical: hasFirstArrayPlans,
+    hasDental:  hasFirstArrayPlans,
+    hasVision:  hasFirstArrayPlans,
+    hasLife:    hasFirstArrayPlans
   },
 
   filters: {},
   // Filter Defaults
   serializeFilters: $.extend({}, filters),
   filterDefaults:   $.extend({}, filters),
+  applyingMeta:     false,
+  applyingPlans:    false,
 
   // Defaults
   sort:         'ASC',
@@ -43,7 +82,17 @@ export default Ember.ArrayController.extend(ResourcePaginatorMixin, ResourceFilt
 
   _receivedFilterInput: function () {
     this.set('filtersApplied', false);
-  }.observes('serializeFilters.city', 'serializeFilters.state', 'serializeFilters.terminated'),
+  }.observes(
+    'serializeFilters.city',
+    'serializeFilters.state',
+    'serializeFilters.terminated',
+    'serializeFilters.hasMedical',
+    'serializeFilters.hasDental',
+    'serializeFilters.hasVision',
+    'serializeFilters.hasLife',
+    'applyingMeta',
+    'applyingPlans'
+  ),
 
   cities: function () {
     var self = this;
@@ -54,5 +103,11 @@ export default Ember.ArrayController.extend(ResourcePaginatorMixin, ResourceFilt
     }).then(function ( res ) {
       self.set('cities', res);
     });
-  }.property()
+  }.property(),
+
+  actions: {
+    toggleProperty: function ( prop ) {
+      this.toggleProperty( prop );
+    }
+  }
 });

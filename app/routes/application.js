@@ -7,10 +7,18 @@ export default Ember.Route.extend({
     error: function ( err, transition ) {
       console.error( err );
 
+      var session       = this.session,
+          authenticated = session.get('authenticated'),
+          isExpired     = ( authenticated ) ? moment( session.get('content.expires') ).isBefore( moment() ) : undefined;
+
       if( err.status === 401 ) {
+        if( authenticated && !isExpired ) {
+          return this.transitionTo('error', err);
+        }
+
         this.controllerFor('login').setProperties({
           savedTransition: transition,
-          expiredSession:  !!this.session.get('authenticated')
+          expiredSession:  isExpired
         });
 
         this.session.logout();

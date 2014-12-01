@@ -9,7 +9,7 @@ export var initialize = function ( container, application ) {
 
   store.find('session').then(function ( sessions ) {
     sessions.forEach(function ( session ) {
-      if( moment( session.get('expires'), "YYYY/MM/DD HH:mm:ss" ).isAfter( moment() ) ) {
+      if( moment( session.get('expires') ).isAfter( moment() ) ) {
         existingSession = session;
       } else {
         session.destroyRecord();
