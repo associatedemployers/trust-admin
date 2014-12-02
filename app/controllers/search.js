@@ -3,8 +3,8 @@ import GrowlMixin from '../mixins/growl';
 import { searchNormalizationMap } from '../utils/globals';
 
 export default Ember.ArrayController.extend(GrowlMixin, {
-  noQuery: Ember.computed.not('query'),
-  isNotStale: Ember.computed.not('isStale'),
+  noQuery:      Ember.computed.not('query'),
+  isNotStale:   Ember.computed.not('isStale'),
   disableInput: Ember.computed.or('isLoadingAutocomplete', 'isSearching', 'noQuery', 'isNotStale'),
 
   queryParams: {
@@ -33,6 +33,9 @@ export default Ember.ArrayController.extend(GrowlMixin, {
         data.location = ( data.address ) ? data.address.city + data.address.state : null;
         return data;
       }
+    },
+    medicalRate: {
+      autocomplete: false
     }
   },
 
@@ -87,9 +90,16 @@ export default Ember.ArrayController.extend(GrowlMixin, {
       query.limit = modelMap.limit;
     }
 
+    if( modelMap.autocomplete === false ) {
+      return this.setProperties({
+        isLoadingData: false,
+        autocompleteData: null
+      });
+    }
+
     Ember.$.getJSON('/api/' + Ember.Inflector.inflector.pluralize( modelSelection ), query).then(function ( data ) {
       if( !data || !data[ modelSelection ] ) {
-        self.growlError('Finder is unable to load data.');
+        self.growlError('Search is unable to load data.');
         return self.set('isLoadingData', false);
       }
 

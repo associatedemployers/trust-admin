@@ -74,6 +74,11 @@ var searchNormalizationMap = {
     id: '_id',
     time_stamp: 'time_stamp',
     title: 'name.company'
+  },
+  medicalRate: {
+    id: '_id',
+    time_stamp: 'time_stamp',
+    title: [ 'planNumber', 'ebmsNumber', 'coInsurance', 'name' ]
   }
 };
 
