@@ -8,7 +8,7 @@ export default Ember.Controller.extend({
   viewClass: function () {
     var routeName = this.get('currentRouteName');
 
-    return ( routeName ) ? routeName + '-view' : 'no-view';
+    return ( routeName ) ? routeName.replace(/\./g, '-') + '-view' : 'no-view';
   }.property('currentRouteName'),
 
   calcStyle: function () {

@@ -41,7 +41,7 @@
     <ul class="nav nav-tabs" role="tablist">
       {{#each tab in tabs}}
         <li {{bind-attr class="tab.active:active"}}>
-          <a href="#" {{action "showTab" tab.index}}>{{{tab.name}}}</a>
+          <a href="#" {{action "showTab" tab.order}}>{{{tab.name}}}</a>
         </li>
       {{/each}}
     </ul>

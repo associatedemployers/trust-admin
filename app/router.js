@@ -15,7 +15,9 @@ Router.map(function() {
   this.route('companies');
   this.resource('company', { path: 'companies/:id' }, function () {
     this.route('index', { path: '/' });
-    this.route('edit');
+    this.route('edit');  
+    this.route('employees');
+    this.route('metrics');
   });
 
   this.resource('users', function () {

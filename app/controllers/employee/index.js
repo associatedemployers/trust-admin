@@ -1,34 +1,33 @@
 import Ember from 'ember';
-import GrowlMixin from '../../mixins/growl';
+import GrowlMixin from 'trust-admin/mixins/growl';
+import TabsMixin from 'trust-admin/mixins/tabs';
 
-export default Ember.ObjectController.extend(GrowlMixin, {
-  queryParams: [ 'tab' ],
-  tab: 0,
+export default Ember.ObjectController.extend(GrowlMixin, TabsMixin, {
   isLoadingHistoryEvents: true,
 
   tabs: [
     {
-      index: 0,
+      order: 0,
       name: '<i class="fa fa-fw fa-user-md"></i> Plans',
       partial: 'employee-plan-tab'
     },
     {
-      index: 1,
+      order: 1,
       name: '<i class="fa fa-fw fa-users"></i> Dependents',
       partial: 'employee-dependents-tab'
     },
     {
-      index: 2,
+      order: 2,
       name: '<i class="fa fa-fw fa-usd"></i> Beneficiaries',
       partial: 'employee-beneficiaries-tab'
     },
     {
-      index: 3,
+      order: 3,
       name: '<i class="fa fa-fw fa-phone"></i> Contact Methods',
       partial: 'employee-contacts-tab'
     },
     {
-      index: 4,
+      order: 4,
       name: '<i class="fa fa-fw fa-file-text"></i> Notes',
       partial: 'employee-notes-tab'
     }
@@ -56,16 +55,6 @@ export default Ember.ObjectController.extend(GrowlMixin, {
     });
   }.observes('content'),
 
-  _tabChanged: function () {
-    var tabs     = this.get('tabs'),
-        tabIndex = this.get('tab');
-
-    this.set('tabs', tabs.map(function ( tab, index ) {
-      tab.active = ( index === tabIndex );
-      return tab;
-    }));
-  }.observes('tab').on('init'),
-
   formattedSSN: function () {
     var ssn = this.get('decryptedSSN');
 
@@ -75,10 +64,6 @@ export default Ember.ObjectController.extend(GrowlMixin, {
   actions: {
     toggleProperty: function ( prop ) {
       this.toggleProperty( prop );
-    },
-
-    showTab: function ( index ) {
-      this.set('tab', index);
     },
 
     decryptSSN: function () {
