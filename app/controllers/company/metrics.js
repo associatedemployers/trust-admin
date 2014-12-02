@@ -2,23 +2,21 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
   hasSelectedMetric: false,
-  metricTypes: [
-    {
-      name: 'Employees Over Time'
-    },
-    {
-      name: 'Employees With Medical'
-    },
-    {
-      name: 'Employees With Life'
-    },
-    {
-      name: 'Employees With Dental'
-    },
-    {
-      name: 'Employees With Vision'
-    }
+  metrics: [
+    'Employees Over Time',
+    'Employees With Medical',
+    'Employees With Life',
+    'Employees With Dental',
+    'Employees With Vision'
   ],
+
+  metricTypes: function () {
+    return this.get('metrics').map(function ( metric ) {
+      return {
+        name: metric
+      };
+    });
+  }.property('metrics'),
 
   actions: {
     showMetric: function ( metricName ) {
