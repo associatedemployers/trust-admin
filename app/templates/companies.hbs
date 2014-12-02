@@ -1,0 +1,77 @@
+<div class="resource-view">
+  <h1><i class="fa fa-fw fa-building-o"></i> Companies</h1>
+  <hr />
+  <div class="row resource-row">
+    <div class="col-md-3 popout-panel">
+      <h3>
+        Filters
+        <span class="pull-right">
+          {{#if filtersApplied}}
+            <button class="btn btn-warning" {{action "removeFilters"}}>
+              Remove Filters
+            </button>
+          {{else}}
+            <button class="btn btn-success" {{action "applyFilters"}}>
+              Apply Filters
+            </button>
+          {{/if}}
+        </span>
+      </h3>
+
+      <hr />
+
+      <small class="pull-right"><a href="#" {{action "resetFilters"}}>Reset</a></small>
+    </div>
+    <div class="col-md-9">
+      <div class="row">
+        <div class="col-md-6">
+          <div {{bind-attr class=":resource-loading-overlay isLoading:active"}}>
+            <h2><i class="fa fa-fw fa-spin fa-spinner"></i> Loading Resources...</h2>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="pagination-wrapper">
+            <a href="#" class="jump-to-page" {{action "showModal" "jump-to-page-modal"}}>Jump To Page</a>
+            {{resource-pagination sm=true page=page pages=pages maxButtons=8}}
+            <div class="items-per-page">
+              {{#if maxItems}}
+                <span class="page-out-of">
+                  <i class="fa fa-fw fa-paperclip"></i><i>{{maxItems}} companies found.</i> Page {{page}} of {{pages}}
+                </span>
+              {{/if}}
+              <span class="help-label">Items per page: </span>
+              {{#each option in itemsPerPageOptions}}
+                {{items-per-page-option itemsPerPage=itemsPerPage option=option}}
+              {{/each}}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="list-group resource-list-group">
+        {{#each company in content}}
+          {{render "company-list-item" company}}
+        {{else}}
+          <h2 class="text-center"><i class="fa fa-exclamation-triangle"></i> No companies found.</h2>
+        {{/each}}
+      </div>
+
+      <div class="pagination-wrapper">
+        {{resource-pagination sm=true page=page pages=pages maxButtons=8}}
+      </div>
+    </div>
+  </div>
+</div>
+
+{{#bs-modal id="jump-to-page-modal" modal-sm=true dismissible=true title='<h2>Jump To Page</h2>'}}
+  <form>
+    <div class="modal-body">
+      <div class="form-group">
+        {{input type="number" class="form-control" value=manualPageSet placeholder="Page #"}}
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-primary btn-block" {{action "jumpToPage" manualPageSet}}>Jump</button>
+    </div>
+  </form>
+{{/bs-modal}}

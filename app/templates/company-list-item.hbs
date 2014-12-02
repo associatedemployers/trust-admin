@@ -1,0 +1,9 @@
+{{#link-to 'company' content}}{{content.name}}{{/link-to}}
+{{log content}}
+<div class="data-section text-right">
+  {{#if content.state}}
+    <i class="fa fa-fw fa-map"></i> {{#if content.city}}{{content.city}}, {{/if}}{{content.state}}
+  {{else}}
+    <small class="text-danger">N/A</small>
+  {{/if}}
+</div>
