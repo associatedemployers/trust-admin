@@ -21,12 +21,13 @@ export default Ember.Component.extend({
         ]);
 
     var activeEmployees = employees.filter(function ( employee ) {
-      return ( employee.get('legacyClientTerminationDate') || employee.get('waived') );
+      return !( employee.get('legacyClientTerminationDate') || employee.get('waived') );
     });
 
     planTypes.forEach(function ( planType ) {
       var on = activeEmployees.filter(function ( employee ) {
-        return employee._data[ planType.toLowerCase() + 'Rates' ].length > 0;
+        var plans = employee._data[ planType.toLowerCase() + 'Rates' ];
+        return ( !plans ) ? false : plans.length > 0;
       }).length;
 
       dataSet[ 0 ].pushObject( on );
