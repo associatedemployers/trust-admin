@@ -16,7 +16,9 @@
         {{chart-employees-over-time employees=content.employees company=content height='500px'}}
       </div>
     {{/if}}
+
+    {{#if showingPlanParticipation}}
+      {{chart-employee-plan-participation employees=content.employees height=500}}
+    {{/if}}
   </div>
-
-
 </div>

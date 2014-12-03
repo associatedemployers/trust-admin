@@ -4,10 +4,7 @@ export default Ember.Controller.extend({
   hasSelectedMetric: false,
   metrics: [
     'Employees Over Time',
-    'Employees With Medical',
-    'Employees With Life',
-    'Employees With Dental',
-    'Employees With Vision'
+    'Plan Participation'
   ],
 
   metricTypes: function () {

@@ -22,7 +22,8 @@
     "vis": "~3.5.0",
     "typeahead.js": "~0.10.5",
     "ember-localstorage-adapter": "~0.5.0",
-    "velocity": "~1.1.0"
+    "velocity": "~1.1.0",
+    "c3js-chart": "~0.4.7"
   },
   "resolutions": {
     "ember-data": "~1.0.0-beta.7"
