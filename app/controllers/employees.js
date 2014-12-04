@@ -4,13 +4,13 @@ import ResourceFiltersMixin from '../mixins/resource-filters';
 import Employee from '../models/employee';
 
 var filters = {
-    terminated: false,
-    city: '',
-    state: null,
-    hasMedical: true,
-    hasDental: true,
-    hasVision: true,
-    hasLife: true
+  terminated: false,
+  city: '',
+  state: null,
+  hasMedical: true,
+  hasDental: true,
+  hasVision: true,
+  hasLife: true
 };
 
 var hasFirstArrayPlans = function ( value ) {
@@ -40,13 +40,13 @@ export default Ember.ArrayController.extend(ResourcePaginatorMixin, ResourceFilt
   ],
 
   filterMap: {
-    city: 'address.city',
-    state: 'address.state',
+    city:       'address.city',
+    state:      'address.state',
     terminated: 'legacyClientTerminationDate',
     hasMedical: 'plans.medical.1',
-    hasDental: 'plans.dental.1',
-    hasVision: 'plans.vision.1',
-    hasLife: 'plans.life.1'
+    hasDental:  'plans.dental.1',
+    hasVision:  'plans.vision.1',
+    hasLife:    'plans.life.1'
   },
 
   filterValueNormalization: {
@@ -63,7 +63,6 @@ export default Ember.ArrayController.extend(ResourcePaginatorMixin, ResourceFilt
     hasLife:    hasFirstArrayPlans
   },
 
-  filters: {},
   // Filter Defaults
   serializeFilters: $.extend({}, filters),
   filterDefaults:   $.extend({}, filters),
