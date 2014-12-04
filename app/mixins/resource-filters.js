@@ -3,6 +3,7 @@ import Ember from 'ember';
 export default Ember.Mixin.create({
   queryParams: [ 'filtersApplied' ],
   filtersApplied: false,
+  filters: {},
 
   init: function () {
     this._super.apply( this, arguments );
@@ -34,6 +35,11 @@ export default Ember.Mixin.create({
 
         if( Ember.empty( value ) ) {
           continue;
+        }
+
+        if( typeof value === 'object' && value.newKey ) {
+          nkey  = value.newKey;
+          value = value.value;
         }
 
         f[ nkey ] = value;
