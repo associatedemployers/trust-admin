@@ -1,10 +1,8 @@
 import Ember from 'ember';
 import GrowlMixin from 'trust-admin/mixins/growl';
+import NavTabsMixin from 'trust-admin/mixins/nav-tabs';
 
-export default Ember.ObjectController.extend(GrowlMixin, {
-  needs: [ 'application' ],
-  currentPath: Ember.computed.alias('controllers.application.currentPath'),
-
+export default Ember.ObjectController.extend(GrowlMixin, NavTabsMixin, {
   tabs: [
     {
       icon: 'fa-newspaper-o',
@@ -21,16 +19,5 @@ export default Ember.ObjectController.extend(GrowlMixin, {
       name: 'Metrics',
       link: 'company.metrics'
     }
-  ],
-
-  _pathChanged: function () {
-    var tabs        = this.get('tabs'),
-        currentPath = this.get('currentPath');
-
-    this.set('tabs', tabs.map(function ( tab ) {
-      tab.active = ( currentPath === tab.link );
-
-      return tab;
-    }));
-  }.observes('currentPath')
+  ]
 });
