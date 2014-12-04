@@ -33,7 +33,7 @@
 
       {{! Meta Filters}}
       <h4>
-        <i class="fa fa-fw fa-user"></i> Meta <a href="#" {{action "toggleProperty" "applyingMeta"}}><i {{bind-attr class=":fa applyingMeta:fa-angle-up:fa-angle-down"}}></i></a>
+        <a href="#" {{action "toggleProperty" "applyingMeta"}}><i class="fa fa-fw fa-user"></i> Meta <i {{bind-attr class=":fa applyingMeta:fa-angle-up:fa-angle-down"}}></i></a>
       </h4>
       <div {{bind-attr class=":form-group :hide-slide :text-center applyingMeta:show"}}>
         {{bound-toggle sm=true label="Terminated" theme="squish" value=serializeFilters.terminated}}
@@ -41,7 +41,7 @@
 
       {{! Plan Filters}}
       <h4>
-        <i class="fa fa-fw fa-folder-open"></i> Plans <a href="#" {{action "toggleProperty" "applyingPlans"}}><i {{bind-attr class=":fa applyingPlans:fa-angle-up:fa-angle-down"}}></i></a>
+        <a href="#" {{action "toggleProperty" "applyingPlans"}}><i class="fa fa-fw fa-folder-open"></i> Plans <i {{bind-attr class=":fa applyingPlans:fa-angle-up:fa-angle-down"}}></i></a>
       </h4>
       <div {{bind-attr class=":form-group :hide-slide :text-center applyingPlans:show"}}>
         {{bound-toggle sm=true label="Medical" theme="squish" value=serializeFilters.hasMedical}}

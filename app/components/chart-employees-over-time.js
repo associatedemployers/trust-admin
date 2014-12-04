@@ -3,14 +3,10 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   classNames: [ 'chart-view' ],
 
-  height: '400px',
+  height: '400',
   chartOptions: {
-    drawPoints: {
-      size: 2,
-      style: 'circle'
-    },
-    catmullRom: {
-      parametrization: 'centripetal'
+    zoom: {
+      enabled: true
     }
   },
 
@@ -25,7 +21,12 @@ export default Ember.Component.extend({
     var currentDate   = moment(),
         startDate     = moment( company.get('legacyCompEffectDate') ),
         monthsBetween = Math.abs( startDate.diff( currentDate, 'months' ) ),
-        dataSet       = Ember.A();
+        timePad       = ( monthsBetween > 100 ) ? 100 : monthsBetween,
+        dataSet       = Ember.A([
+          [ 'x' ],
+          [ 'Participating Employees' ],
+          [ 'Terminated Employees' ]
+        ]);
 
     var loopDate = moment( startDate ).date( 1 );
 
@@ -33,30 +34,38 @@ export default Ember.Component.extend({
       var emp  = ( employee.get('legacyClientEmploymentDate') )  ? moment( employee.get('legacyClientEmploymentDate') )  : null,
           term = ( employee.get('legacyClientTerminationDate') ) ? moment( employee.get('legacyClientTerminationDate') ) : null;
 
+      if( term && term.isBefore( loopDate ) ) {
+        return terminatedCount++;
+      }
+
       if( !employee || employee.get('waived') === true ) {
         return;
       }
 
       if( emp && emp.isBefore( loopDate ) ) {
         if( !term || term.isAfter( loopDate ) ) {
-          count++;
+          activeCount++;
         }
       } else if ( !emp && term && term.isAfter( loopDate ) ) {
-        count++;
+        activeCount++;
       }
     };
 
-    for ( var i = 0; i < monthsBetween; i++ ) {
-      var count = 0;
+    for ( var i = 0; i < timePad; i++ ) {
+      var activeCount     = 0,
+          terminatedCount = 0;
+
+      if( loopDate.isAfter(currentDate) ) {
+        break;
+      }
 
       employees.forEach( checkEmployee );
 
-      dataSet.addObject({
-        x: loopDate.format('YYYY-MM-DD'),
-        y: count
-      });
+      dataSet[ 0 ].pushObject( loopDate.format('YYYY-MM-DD') );
+      dataSet[ 1 ].pushObject( activeCount );
+      dataSet[ 2 ].pushObject( terminatedCount );
 
-      loopDate.add(1, 'months');
+      loopDate.add(Math.ceil( monthsBetween / timePad ), 'months');
     }
 
     return dataSet;
@@ -64,25 +73,34 @@ export default Ember.Component.extend({
 
   _draw: function () {
     Ember.run.next(this, function () {
-      var chart      = this.get('chart'),
-          visDataSet = new vis.DataSet( this.get('dataset') );
+      var chart = this.get('chart'),
+          data  = {
+            x: 'x',
+            columns: this.get('dataset'),
+            labels: false
+          };
 
-      if( !visDataSet ) {
-        return;
-      }
-
-      if( chart ) {
-        chart.setItems( visDataSet );
+      if( !chart ) {
+        chart = window.c3.generate($.extend({
+          bindto: '#employees-over-time-chart',
+          data: data,
+          axis: {
+            x: {
+              type: 'timeseries',
+              tick: {
+                format: '%Y-%m-%d'
+              }
+            }
+          },
+          size: {
+            height: this.get('height')
+          }
+        }, this.get('chartOptions')));
       } else {
-        var options = this.get('chartOptions');
-        options.graphHeight = this.get('height');
-
-        chart = new vis.Graph2d( this.$()[0], visDataSet, options );
-
-        this.set('chart', chart);
+        chart.load( data );
       }
 
-      chart.fit();
+      this.set('chart', chart);
     });
   }.observes('dataset.@each').on('didInsertElement'),
 
@@ -91,7 +109,7 @@ export default Ember.Component.extend({
       var chart = this.get('chart');
 
       if( chart ) {
-        chart.fit();
+        chart.unzoom();
       }
     }
   }

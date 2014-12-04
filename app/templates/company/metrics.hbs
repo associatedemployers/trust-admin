@@ -13,7 +13,7 @@
   <div {{bind-attr class="hasSelectedMetric:col-md-9:hidden"}}>
     {{#if showingEmployeesOverTime}}
       <div class="chart-group">
-        {{chart-employees-over-time employees=content.employees company=content height='400px'}}
+        {{chart-employees-over-time employees=content.employees company=content height=400}}
       </div>
     {{/if}}
 
