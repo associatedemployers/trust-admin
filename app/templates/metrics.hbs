@@ -1,0 +1,15 @@
+<hgroup class="resource-header">
+  <h2>Metrics</h2>
+</hgroup>
+
+<ul class="nav nav-tabs company-tabs" role="tablist">
+  {{#each tab in tabs}}
+    <li {{bind-attr class="tab.active:active"}}>
+      {{~#link-to tab.link role="tab" data-toggle="tab"}}
+        {{#if tab.icon}}<i {{bind-attr class=":fa :fa-fw tab.icon"}}></i>{{/if}} {{tab.name}}
+      {{~/link-to}}
+    </li>
+  {{/each}}
+</ul>
+
+{{outlet}}

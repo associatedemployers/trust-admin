@@ -37,6 +37,10 @@ Router.map(function() {
   });
 
   this.route('search');
+  this.resource('metrics', {}, function () {
+    this.route('index', { path: '/' });
+    this.route('charts');
+  });
 
   // Nested Resources
   this.resource('employee.dependent', { path: 'employees/:employeeid/dependents/:dependentid' }, function () {

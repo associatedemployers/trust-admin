@@ -5,12 +5,12 @@ import Employee from '../models/employee';
 
 var filters = {
   terminated: false,
-  city: '',
-  state: null,
+  city:       '',
+  state:      null,
   hasMedical: true,
-  hasDental: true,
-  hasVision: true,
-  hasLife: true
+  hasDental:  true,
+  hasVision:  true,
+  hasLife:    true
 };
 
 var hasFirstArrayPlans = function ( value ) {

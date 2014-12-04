@@ -4,8 +4,8 @@ import ResourceFiltersMixin from 'trust-admin/mixins/resource-filters';
 import Company from 'trust-admin/models/company';
 
 var filters = {
-  city: '',
-  state: null,
+  city:         '',
+  state:        null,
   minEmployees: null,
   maxEmployees: null
 };
@@ -24,7 +24,7 @@ export default Ember.ArrayController.extend(ResourcePaginatorMixin, ResourceFilt
   ],
 
   filterMap: {
-    city: 'address.city',
+    city:  'address.city',
     state: 'address.state'
   },
 
