@@ -1,1 +1,26 @@
-{{outlet}}
+<div class="row">
+  <div {{bind-attr class="hasSelectedMetric:col-md-3:col-md-12"}}>
+    <ul class="nav nav-pills nav-stacked">
+      {{#each metric in metricTypes}}
+        <li role="presentation" {{bind-attr class="metric.active:active"}}>
+          <a href="#" {{action "showMetric" metric.name}}>{{metric.name}}</a>
+        </li>
+      {{else}}
+        No Metrics Available...
+      {{/each}}
+    </ul>
+  </div>
+  <div {{bind-attr class="hasSelectedMetric:col-md-9:hidden"}}>
+    {{#if showingEmployeesOverTime}}
+      <div class="chart-group">
+        {{chart-overall-employees height=400}}
+      </div>
+    {{/if}}
+
+    {{#if showingPlanParticipation}}
+      <div class="chart-group">
+        {{chart-overall-companies height=400}}
+      </div>
+    {{/if}}
+  </div>
+</div>

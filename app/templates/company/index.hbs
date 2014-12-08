@@ -1,8 +1,29 @@
 <div class="row">
-  <div class="col-md-8">
+  <div class="col-md-9">
     Stuff here in the summary
   </div>
-  <div class="col-md-4">
-    other stuff
+  <div class="col-md-3">
+    <h2>Stats</h2>
+    <hr />
+    <h4>Employees:</h4>
+    <p>
+      <div>Historical: <span class="pull-right">{{silent-count content "employees"}}</span></div>
+
+      {{#if loadedEmployeeHardStats}}
+        <div>Active: <span class="pull-right">{{activeEmployees}}</span></div>
+        <div>Terminated: <span class="pull-right">{{terminatedEmployees}}</span></div>
+        <div>Active &amp; Participating: <span class="pull-right">{{activeParticipatingEmployees}}</span></div>
+        <div>Active &amp; Waived: <span class="pull-right">{{activeWaivedEmployees}}</span></div>
+      {{else}}
+        <a href="#" {{action "loadEmployeeHardStats"}}>Load Employee Hard Stats <i {{bind-attr class=":fa :fa-fw loadingEmployeeHardStats:fa-spin loadingEmployeeHardStats:fa-spinner:fa-cloud-download"}}></i></a>
+      {{/if}}
+    </p>
+
+    <h2>Locations</h2>
+    <hr />
+    {{log content.locations}}
+    {{#each location in content.locations}}
+      {{location.address.line1}}
+    {{/each}}
   </div>
 </div>
