@@ -1,7 +1,22 @@
 import Ember from 'ember';
 
 export default Ember.ObjectController.extend({
+  queryParams: [ 'selectedCoverageType' ],
   levels: [ 'employee', 'employeeAndSpouse', 'employeeAndChildren', 'employeeAndFamily' ],
+  selectedCoverageType: null,
+
+  linkToCoverage: function () {
+    var coverageType = this.get('selectedCoverageType');
+
+    return ( coverageType ) ? coverageType + '-rate' : null;
+  }.property('selectedCoverageType'),
+
+  selectedCoverages: function () {
+    var coverageType = this.get('selectedCoverageType'),
+        employee     = this.get('content');
+
+    return ( coverageType && employee ) ? employee.get(coverageType + 'Rates') : null;
+  }.property('selectedCoverageType'),
 
   coverage: function () {
     var employee       = this.get('content'),
@@ -9,7 +24,6 @@ export default Ember.ObjectController.extend({
         coverages      = employee.getProperties('medicalRates', 'dentalRates', 'visionRates', 'lifeRates'),
         rta            = Ember.A(),
         levels         = this.get('levels');
-
 
     var mapLevel = function ( level ) {
       o[ level ] = coverageLevels[ sKey + 'PlanCovers' ] === level;
@@ -34,5 +48,15 @@ export default Ember.ObjectController.extend({
     }
 
     return rta;
-  }.property('content')
+  }.property('content'),
+
+  actions: {
+    selectCoverage: function ( type ) {
+      this.set('selectedCoverageType', type);
+    },
+
+    deselectCoverage: function () {
+      this.set('selectedCoverageType', null);
+    }
+  }
 });
