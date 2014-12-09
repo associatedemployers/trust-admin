@@ -21,9 +21,10 @@
 
     <h2>Locations</h2>
     <hr />
-    {{log content.locations}}
-    {{#each location in content.locations}}
-      {{location.address.line1}}
-    {{/each}}
+    <ul>
+      {{#each location in content.locations}}
+        <li>{{location.addressLine1}}</li>
+      {{/each}}
+    </ul>
   </div>
 </div>
