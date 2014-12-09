@@ -9,10 +9,10 @@ export default Ember.ArrayController.extend(ResourcePaginatorMixin, {
   filters:      {},
   sort:         'ASC',
   page:         1,
-  itemsPerPage: 50,
+  itemsPerPage: 10,
 
   // Settings
-  itemsPerPageOptions: [ 50, 80, 100 ],
+  itemsPerPageOptions: [ 10, 20, 40 ],
   resource: MedicalRate,
   modelName: 'MedicalRate'
 });
