@@ -12,7 +12,7 @@ export default Ember.Component.extend({
 
   _getDataset: function () {
     return new Ember.RSVP.Promise(function ( resolve ) {  
-      Ember.$.getJSON('/api/employees', { waived: false, select: '-_id legacyClientEmploymentDate legacyClientTerminationDate waived', sort: { legacyClientTerminationDate: -1 } }).then(function ( data ) {
+      Ember.$.getJSON('/api/employees', { waived: false, select: '-_id legacyClientEmploymentDate legacyClientTerminationDate waived', sort: { legacyClientTerminationDate: 1 } }).then(function ( data ) {
         var employees = Ember.A( data.employee );
 
         if( !employees || employees.length < 1 ) {
@@ -30,33 +30,30 @@ export default Ember.Component.extend({
 
         var loopDate = moment( startDate ).date( 1 );
 
-        var checkEmployee = function ( employee ) {
-          var emp  = ( employee.legacyClientEmploymentDate )  ? moment( employee.legacyClientEmploymentDate )  : null,
-              term = ( employee.legacyClientTerminationDate ) ? moment( employee.legacyClientTerminationDate ) : null;
-
-          if( emp && emp.isBefore( loopDate ) ) {
-            if( !term || term.isAfter( loopDate ) ) {
-              activeCount++;
-            }
-          } else if ( !emp && term && term.isAfter( loopDate ) ) {
-            activeCount++;
-          }
-        };
-
         for ( var i = 0; i < timePad; i++ ) {
-          var activeCount = 0;
-
-          if( loopDate.isAfter(currentDate) ) {
-            break;
-          }
-
-          employees.forEach( checkEmployee );
-
           dataSet[ 0 ].pushObject( loopDate.format('YYYY-MM-DD') );
-          dataSet[ 1 ].pushObject( activeCount );
 
           loopDate.add(Math.ceil( monthsBetween / timePad ), 'months');
         }
+
+        dataSet[ 0 ].pushObject( currentDate.date( 1 ).format('YYYY-MM-DD') );
+
+        var reduceEmployees = function ( count, employee ) {
+          var emp  = ( employee.legacyClientEmploymentDate )  ? moment( employee.legacyClientEmploymentDate )  : null,
+              term = ( employee.legacyClientTerminationDate ) ? moment( employee.legacyClientTerminationDate ) : null;
+
+          return ( ( ( emp && emp.isBefore( loopDate ) ) && ( !term || term.isAfter( loopDate ) ) ) || ( !emp && term && term.isAfter( loopDate ) ) ) ? count + 1 : count;
+        };
+
+        dataSet[0].slice(1, dataSet[0].length).forEach(function ( date ) {
+          if( moment(date, 'YYYY-MM-DD').isAfter(currentDate) ) {
+            return;
+          }
+
+          loopDate = date;
+
+          dataSet[ 1 ].pushObject( employees.reduce( reduceEmployees, 0 ) );
+        });
 
         resolve(dataSet);
       });

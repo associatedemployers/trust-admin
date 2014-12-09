@@ -1,1 +1,5 @@
-{{yield}}
+{{#if isLoadingChart}}<i class="fa fa-spin fa-spinner"></i>{{/if}}
+<div class="chart-controls">
+  <a href="#" {{action "refocus"}}><i class="fa fa-arrows-alt"></i></a>
+  <div id="companies-over-time-chart"></div>
+</div>
