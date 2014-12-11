@@ -47,7 +47,7 @@
         </small></h3>
 
       <div {{bind-attr class=":row expandPermissions::contract"}}>
-        {{#each permissionGroup in assignablePermissions}}
+        {{#each permissionGroup in assignablePermissions itemController="permissionGroup"}}
           <div class="col-xs-4">
             <h5>
               {{title-case permissionGroup.name}} <small class="text-muted">[{{title-case permissionGroup.type}}]</small>
@@ -88,4 +88,17 @@
 
 <hr />
 
-<button class="btn btn-lg btn-success btn-block" {{bind-attr disabled=disableSubmit}} {{action "saveUser"}}><i class="fa fa-fw fa-save"></i> Save and Create{{#if loading}} <i class="fa fa-fw fa-spin fa-spinner"></i>{{/if}}</button>
+<button class="btn btn-lg btn-success btn-block" {{bind-attr disabled=disableSubmit}} {{action "saveUser"}}>
+  <i class="fa fa-fw fa-save"></i>
+
+  {{#if loading}}
+    {{~#if loadingStatus}}
+      {{loadingStatus}}
+    {{~else}}
+      Saving
+    {{~/if}}...
+  {{else}}
+    Save and Create
+  {{/if}}
+  {{#if loading}}<i class="fa fa-fw fa-spin fa-spinner"></i>{{/if}}
+</button>

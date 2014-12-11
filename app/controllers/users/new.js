@@ -7,6 +7,7 @@ export default Ember.ObjectController.extend(GrowlMixin, {
   informationIsComplete:    Ember.computed.and('content.firstName', 'content.lastName', 'content.email'),
 
   assignablePermissions: Ember.A(),
+  assignedPermissions:   Ember.A(),
 
   setPermissionGroups: function () {
     var self = this;
@@ -23,25 +24,48 @@ export default Ember.ObjectController.extend(GrowlMixin, {
 
     saveUser: function () {
       this.set('loading', true);
+      var assignables = this.get('assignablePermissions');
 
       var user = this.get('content'),
           self = this;
 
-      console.log('saving');
-
-      user.save().then(function ( record ) {
-        self.setProperties({
-          loading: false
-        });
-
-        self.transitionToRoute('user', record.id);
-        self.growl( 'success', 'Created User', 'Successfully created user: ' + record.get('firstName'), 2500, 'fa fa-check');
-      }, function ( err ) {
-        var msg = ( err.responseText ) ? err.responseText : err.statusText;
+      var allErrors = function ( res ) {
+        var msg = ( res.responseText ) ? res.responseText : res.statusText;
         self.set('loading', false);
         self.growlError( msg );
-        console.error( err );
-      });
+        console.error( res );
+      };
+
+      this.set('loadingStatus', 'Creating user');
+
+      user.save().then(function ( userRecord ) {
+        self.set('loadingStatus', 'Creating permissions');
+
+        Ember.RSVP.all(assignables.filter(function ( group ) {
+          return group.get('permissions').filterBy('on', true).length > 0;
+        }).map(function ( group ) {
+          return Ember.RSVP.all(group.get('permissions').filterBy('on', true).map(function ( permissionOption ) {
+            return self.store.createRecord('user-permission', {
+              user:  userRecord,
+              group: group,
+              name:  permissionOption.name,
+              type:  permissionOption.type
+            }).save();
+          }));
+        })).then(function ( userPermissionGroups ) {
+          userPermissionGroups.forEach(function ( permissionsInGroup ) {
+            userRecord.get('permissions').pushObjects(permissionsInGroup);
+          });
+
+          self.set('loadingStatus', 'Saving user');
+
+          return userRecord.save();
+        }).then(function ( completeRecord ) {
+            self.set('loading', false);
+            self.transitionToRoute('user', completeRecord.id);
+            self.growl( 'success', 'Created User', 'Successfully created user: ' + completeRecord.get('firstName'), 2500, 'fa fa-check');
+        }).catch(allErrors);
+      }).catch(allErrors);
     }
   }
 });
