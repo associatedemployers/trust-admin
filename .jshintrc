@@ -7,7 +7,7 @@
     "moment": true,
     "$": true,
     "NProgress": true,
-    "vis": true
+    "Handlebars": true
   },
   "browser" : true,
   "boss" : true,

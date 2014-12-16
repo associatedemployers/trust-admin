@@ -31,6 +31,12 @@
         {{view "select" class="form-control" content=states optionValuePath="content.v" optionLabelPath="content.l" value=serializeFilters.state prompt="Any State"}}
       </div>
 
+      {{! Relational Filters}}
+      <h4><i class="fa fa-fw fa-link"></i> Relational</h4>
+      <div class="form-group">
+        {{resource-id-selector class="form-control" value=serializeFilters.company resource="Company" valueKey="name.company" placeholder="Company id"}}
+      </div>
+
       {{! Meta Filters}}
       <h4>
         <a href="#" {{action "toggleProperty" "applyingMeta"}}><i class="fa fa-fw fa-user"></i> Meta <i {{bind-attr class=":fa applyingMeta:fa-angle-up:fa-angle-down"}}></i></a>

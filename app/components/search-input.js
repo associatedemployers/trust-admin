@@ -7,14 +7,21 @@ export default Ember.TextField.extend({
     minLength: 2
   },
 
+  prefixData: true,
+  searchObject: false,
+
   _setupTypeahead: function () {
-    var fn = this._search.bind( this.get('searchContent') ),
+    var fn = this._search.bind({ controller: this, content: this.get('searchContent') }),
         typeaheadConfig = {
           name:       this.get('name')       || 'undefined',
           displayKey: this.get('displayKey') || 'value',
           source:     fn
         },
         typeaheadOptions = this.get('typeaheadOptions');
+
+    if( this.get('ttTemplates') ) {
+      typeaheadConfig.templates = this.get('ttTemplates');
+    }
 
     Ember.run.scheduleOnce('afterRender', this, function () {
       var $ttEl = this.get('$ttEl');
@@ -25,26 +32,32 @@ export default Ember.TextField.extend({
 
       this.set('$ttEl', this.$().typeahead(typeaheadOptions, typeaheadConfig));
     });
-  }.observes('controller.searchContent.@each').on('didInsertElement'),
+  }.observes('searchContent').on('didInsertElement'),
 
   _search: function ( query, callback ) {
-    var substrRegex = new RegExp( query, 'i' ),
-        displayKey  = this.get('displayKey');
+    var substrRegex  = new RegExp( query, 'i' ),
+        displayKey   = this.controller.get('displayKey'),
+        prefixData   = this.controller.get('prefixData'),
+        searchObject = this.controller.get('searchObject');
 
-    var data = ( this ) ? this.filter(function ( s ) {
-      var subject = ( displayKey ) ? s[ displayKey ] : s;
+    var data = ( this.content ) ? this.content.filter(function ( s ) {
+      var subject = ( searchObject ) ? JSON.stringify(s) : ( displayKey ) ? s[ displayKey ] : s;
 
       return substrRegex.test( subject );
     }).map(function ( datum ) {
-      var o = {};
+      if( prefixData ) {
+        var o = {};
 
-      if( displayKey ) {
-        o[ displayKey ] = datum;
+        if( displayKey ) {
+          o[ displayKey ] = datum;
+        } else {
+          o.value = datum;
+        }
+
+        return o;
       } else {
-        o.value = datum;
+        return datum;  
       }
-
-      return o;
     }) : [];
 
     callback( data );

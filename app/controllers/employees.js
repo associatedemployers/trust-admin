@@ -10,7 +10,8 @@ var filters = {
   hasMedical: true,
   hasDental:  true,
   hasVision:  true,
-  hasLife:    true
+  hasLife:    true,
+  company:    ''
 };
 
 var hasFirstArrayPlans = function ( value ) {
@@ -35,6 +36,7 @@ export default Ember.ArrayController.extend(ResourcePaginatorMixin, ResourceFilt
     'serializeFilters.hasDental',
     'serializeFilters.hasVision',
     'serializeFilters.hasLife',
+    'serializeFilters.company',
     'applyingMeta',
     'applyingPlans'
   ],
@@ -43,10 +45,10 @@ export default Ember.ArrayController.extend(ResourcePaginatorMixin, ResourceFilt
     city:       'address.city',
     state:      'address.state',
     terminated: 'legacyClientTerminationDate',
-    hasMedical: 'plans.medical.1',
-    hasDental:  'plans.dental.1',
-    hasVision:  'plans.vision.1',
-    hasLife:    'plans.life.1'
+    hasMedical: 'plans.medical.0',
+    hasDental:  'plans.dental.0',
+    hasVision:  'plans.vision.0',
+    hasLife:    'plans.life.0'
   },
 
   filterValueNormalization: {
@@ -89,6 +91,7 @@ export default Ember.ArrayController.extend(ResourcePaginatorMixin, ResourceFilt
     'serializeFilters.hasDental',
     'serializeFilters.hasVision',
     'serializeFilters.hasLife',
+    'serializeFilters.company',
     'applyingMeta',
     'applyingPlans'
   ),
