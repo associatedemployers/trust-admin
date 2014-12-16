@@ -1,0 +1,33 @@
+<ul class="resource-info-list">
+  <li>
+    <h4>Date of Birth</h4>
+    {{format-moment content.dateOfBirth}}
+  </li>
+  <li>
+    <h4>Marital Status</h4>
+    {{title-case content.maritalStatus}}
+  </li>
+  <li>
+    <h4>Social Security #</h4>
+    {{#if decryptedSSN}}
+      {{formattedSSN}}&nbsp;<a href="#" title="Lock SSN" {{action "encryptSSN"}}><i class="fa fa-lock"></i></a>
+    {{else}}
+      {{shorten-text content.ssn 20}}&nbsp;<a href="#" title="Unlock SSN" {{action "decryptSSN"}}><i class="fa fa-unlock"></i></a>
+    {{/if}}
+    {{#if decryptingSSN}}
+      <i class="fa fa-spin fa-spinner"></i>
+    {{/if}}
+  </li>
+</ul>
+<p class="text-center">
+  <a href="#" {{action "toggleProperty" "showingSystemInformation"}}>
+    {{#if showingRecordInformation}}Hide{{else}}Show{{/if}} system information <i {{bind-attr class=":fa showingSystemInformation:fa-caret-up:fa-caret-down"}}></i>
+  </a>
+</p>
+
+<div {{bind-attr class=":hide-slide showingSystemInformation:show"}}>
+  <ul class="resource-info-list resource-system-info">
+    <li><strong>Time Stamp:</strong> {{format-moment content.time_stamp "YYYY/MM/DD HH:mm:ss:SS"}}</li>
+    <li><strong>Database ID:</strong> {{content.id}}</li>
+  </ul>
+</div>

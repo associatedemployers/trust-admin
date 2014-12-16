@@ -4,6 +4,8 @@ import TabsMixin from 'trust-admin/mixins/tabs';
 
 export default Ember.ObjectController.extend(GrowlMixin, TabsMixin, {
   isLoadingHistoryEvents: true,
+  queryParams: [ 'infoTab' ],
+  infoTab: 0,
 
   tabs: [
     {
@@ -32,6 +34,29 @@ export default Ember.ObjectController.extend(GrowlMixin, TabsMixin, {
       partial: 'employee-notes-tab'
     }
   ],
+
+  infoTabs: [
+    {
+      order: 0,
+      name: '<i class="fa fa-fw fa-paperclip"></i> Overview',
+      partial: 'employee-overview-info-tab'
+    },
+    {
+      order: 1,
+      name: '<i class="fa fa-fw fa-map-marker"></i> Location',
+      partial: 'employee-location-info-tab'
+    }
+  ],
+
+  _infoTabChanged: function () {
+    var tabs     = this.get('infoTabs'),
+        tabIndex = this.get('infoTab');
+
+    this.set('infoTabs', tabs.map(function ( tab, index ) {
+      tab.active = ( index === tabIndex );
+      return tab;
+    }));
+  }.observes('infoTab').on('init'),
 
   _getHistoryEvents: function () {
     this.set('isLoadingHistoryEvents', true);
@@ -64,6 +89,10 @@ export default Ember.ObjectController.extend(GrowlMixin, TabsMixin, {
   actions: {
     toggleProperty: function ( prop ) {
       this.toggleProperty( prop );
+    },
+
+    showInfoTab: function ( index ) {
+      this.set('infoTab', index);
     },
 
     decryptSSN: function () {

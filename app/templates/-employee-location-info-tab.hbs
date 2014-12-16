@@ -1,0 +1,6 @@
+{{#if content.hasAddress}}
+  {{google-map location=content.addressFormatted height="250"}}
+  <small class="text-muted text-center">{{title-case content.addressFormatted}}</small>
+{{else}}
+  <i class="fa fa-fw fa-exclamation-triangle"></i> No Address Listed for {{content.fullName}}.
+{{/if}}

@@ -80,6 +80,23 @@ export default DS.Model.extend({
     return this.get('maritalStatus') === 'married';
   }.property('maritalStatus'),
 
+  hasAddress: function () {
+    return this.get('addressLine1') && this.get('city') && this.get('state');
+  }.property('addressLine1', 'city', 'state'),
+
+  addressFormatted: function () {
+    var data = this.getProperties('addressLine1', 'addressLine2', 'city', 'state', 'zipcode', 'hasAddress');
+
+    if( !data.hasAddress ) {
+      return '';
+    }
+
+    data.addressLine2 = ( data.addressLine2 ) ? data.addressLine2 + ' ' : '';
+    data.zipcode      = ( data.zipcode ) ? data.zipcode : '';
+
+    return data.addressLine1 + ' ' + data.addressLine2 + data.city + ', ' + data.state + ' ' + data.zipcode;
+  }.property('addressLine1', 'addressLine2', 'city', 'state', 'zipcode'),
+
   // DTs
   dateOfBirth:                 attribute('date'),
   legacyClientEmploymentDate:  attribute('date'),
