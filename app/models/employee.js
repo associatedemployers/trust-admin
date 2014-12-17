@@ -52,10 +52,11 @@ export default DS.Model.extend({
   company:        DS.belongsTo('company', { async: true }),
 
   // Relational Plans
-  medicalRates:   DS.hasMany('medical-rate'),
-  dentalRates:    DS.hasMany('dental-rate'),
-  visionRates:    DS.hasMany('vision-rate'),
-  lifeRates:      DS.hasMany('life-rate'),
+  medicalPlan:  DS.belongsTo('medical-plan'),
+  medicalRates: DS.hasMany('medical-rate'),
+  dentalRates:  DS.hasMany('dental-rate'),
+  visionRates:  DS.hasMany('vision-rate'),
+  lifeRates:    DS.hasMany('life-rate'),
 
   medicalPlanCovers: attribute('string'),
   dentalPlanCovers:  attribute('string'),

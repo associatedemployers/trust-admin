@@ -37,6 +37,7 @@ export default Ember.ArrayController.extend(ResourcePaginatorMixin, ResourceFilt
     'serializeFilters.hasVision',
     'serializeFilters.hasLife',
     'serializeFilters.company',
+    'serializeFilters.medicalPlan',
     'applyingMeta',
     'applyingPlans'
   ],
@@ -92,6 +93,7 @@ export default Ember.ArrayController.extend(ResourcePaginatorMixin, ResourceFilt
     'serializeFilters.hasVision',
     'serializeFilters.hasLife',
     'serializeFilters.company',
+    'serializeFilters.medicalPlan',
     'applyingMeta',
     'applyingPlans'
   ),

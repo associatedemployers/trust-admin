@@ -36,6 +36,9 @@
       <div class="form-group">
         {{resource-id-selector class="form-control" value=serializeFilters.company resource="Company" valueKey="name.company" placeholder="Company id"}}
       </div>
+      <div class="form-group">
+        {{resource-id-selector class="form-control" value=serializeFilters.medicalPlan resource="Medical-Plan" valueKey="stringified" selectComplete="stringified" placeholder="Medical Plan id"}}
+      </div>
 
       {{! Meta Filters}}
       <h4>
