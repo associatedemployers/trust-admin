@@ -4,14 +4,15 @@ import ResourceFiltersMixin from '../mixins/resource-filters';
 import Employee from '../models/employee';
 
 var filters = {
-  terminated: false,
-  city:       '',
-  state:      null,
-  hasMedical: true,
-  hasDental:  true,
-  hasVision:  true,
-  hasLife:    true,
-  company:    ''
+  terminated:  false,
+  city:        '',
+  state:       null,
+  hasMedical:  true,
+  hasDental:   true,
+  hasVision:   true,
+  hasLife:     true,
+  company:     '',
+  medicalPlan: '',
 };
 
 var hasFirstArrayPlans = function ( value ) {
