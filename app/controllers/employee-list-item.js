@@ -6,21 +6,7 @@ export default Ember.ObjectController.extend({
         html = '';
 
     html += '<p><strong><i class="fa fa-home"></i> Address</strong><br />';
-
-    if( m.get('addressLine1') ) {
-      html += m.get('addressLine1') + '<br />';
-    } else {
-      html += 'N/A';
-    }
-
-    if( m.get('addressLine2') ) {
-      html += m.get('addressLine2') + '<br />';
-    }
-
-    if( m.get('city') && m.get('state') && m.get('zipcode') ) {
-      html += m.get('city') + ', ' + m.get('state') + ' ' + m.get('zipcode') + '<br />';
-    }
-
+    html += ( m.get('hasAddress') ) ? m.get('addressFormatted') : 'N/A';
     html += '</p>';
 
     if( m.get('legacyClientTerminationDate') ) {

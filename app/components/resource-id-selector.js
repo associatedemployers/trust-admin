@@ -32,7 +32,7 @@ export default SearchInput.extend({
     var self = this;
 
     Ember.$.getJSON('/api/' + this.get('pluralizedResource') + '/', { select: this.get('selectComplete') }).then(function ( res ) {
-      var ret = res[ self.get('resource').toLowerCase() ],
+      var ret = res[ Ember.String.camelize( self.get('resource') ) ],
           valueKey = self.get('valueKey'),
           multiLevel = valueKey.indexOf('.') > -1;
 
