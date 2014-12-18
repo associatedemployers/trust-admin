@@ -2,7 +2,18 @@ import Ember from 'ember';
 import GrowlMixin from 'trust-admin/mixins/growl';
 
 export default Ember.ObjectController.extend(GrowlMixin, {
+  selectedLocation: function () {
+    var office   = this.get('selectedOfficeLocation'),
+        location = office || this.get('content');
+
+    return location.get('addressFormatted');
+  }.property('selectedOfficeLocation'),
+
   actions: {
+    selectOffice: function ( office ) {
+      this.set('selectedOfficeLocation', office);
+    },
+
     loadEmployeeHardStats: function () {
       this.setProperties({
         loadingEmployeeHardStats:     true,

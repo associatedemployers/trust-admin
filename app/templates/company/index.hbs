@@ -1,10 +1,23 @@
 <div class="row">
   <div class="col-md-9">
-    Stuff here in the summary
+    {{#if selectedLocation}}
+      {{google-map height="450" location=selectedLocation}}
+      <p class="text-center text-muted">
+        <small>
+          Displaying {{#if selectedOfficeLocation}}Office{{else}}Contact{{/if}} Location @ {{selectedLocation}}
+          {{#if selectedOfficeLocation}}
+            <a href="#" {{action "selectOffice"}}>(Back to Contact)</a>
+          {{/if}}
+        </small>
+      </p>
+    {{else}}
+      <h2 class="text-center">
+        <i class="fa fa-fw fa-exclamation-triangle"></i> No address to show.
+      </h2>
+    {{/if}}
   </div>
   <div class="col-md-3">
     <h2>Stats</h2>
-    <hr />
     <h4>Employees:</h4>
     <p>
       <div>Historical: <span class="pull-right">{{silent-count content "employees"}}</span></div>
@@ -19,11 +32,14 @@
       {{/if}}
     </p>
 
-    <h2>Locations</h2>
     <hr />
+
+    <h2>Locations</h2>
     <ul>
       {{#each location in content.locations}}
-        <li>{{location.addressLine1}}</li>
+        <li>
+          <a href="#" {{action "selectOffice" location}}>{{location.addressFormatted}}</a>
+        </li>
       {{/each}}
     </ul>
   </div>
