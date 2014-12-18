@@ -52,18 +52,10 @@ export default Ember.ObjectController.extend(GrowlMixin, {
               type:  permissionOption.type
             }).save();
           }));
-        })).then(function ( userPermissionGroups ) {
-          userPermissionGroups.forEach(function ( permissionsInGroup ) {
-            userRecord.get('permissions').pushObjects(permissionsInGroup);
-          });
-
-          self.set('loadingStatus', 'Saving user');
-
-          return userRecord.save();
-        }).then(function ( completeRecord ) {
+        })).then(function ( /* perms */ ) {
             self.set('loading', false);
-            self.transitionToRoute('user', completeRecord.id);
-            self.growl( 'success', 'Created User', 'Successfully created user: ' + completeRecord.get('firstName'), 2500, 'fa fa-check');
+            self.transitionToRoute('user', userRecord.id);
+            self.growl( 'success', 'Created User', 'Successfully created user: ' + userRecord.get('firstName'), 2500, 'fa fa-check');
         }).catch(allErrors);
       }).catch(allErrors);
     }

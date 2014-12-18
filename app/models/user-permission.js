@@ -5,6 +5,7 @@ var attribute = DS.attr;
 export default DS.Model.extend({
   user:  DS.belongsTo('user'),
   group: DS.belongsTo('permission-group'),
+  groupName: attribute('string'),
   name:  attribute('string'),
   type:  attribute('string'),
 

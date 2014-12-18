@@ -2,9 +2,11 @@
   <div class="col-md-8">
     <hgroup>
       <h2>
-        {{content.fullName}}<br />
-        <small><a href="mailto:{{unbound content.email}}">{{content.email}}</a></small>
-      </h4>
+        {{title-case content.fullName}}
+        <small>
+          <a href="mailto:{{unbound content.email}}">{{content.email}}</a>
+        </small>
+      </h2>
 
     <div>
       {{#with content}}
@@ -18,9 +20,9 @@
     </hgroup>
   </div>
   <div class="col-md-4 resource-controls">
-    <button class="btn btn-success">
+    {{#link-to 'user.edit' class="btn btn-success"}}
       <i class="fa fa-fw fa-pencil"></i>
-    </button>
+    {{/link-to}}
 
     <div class="dropdown">
       <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
@@ -28,7 +30,6 @@
       </button>
       <ul class="dropdown-menu dropdown-menu-right" role="menu">
         <li><a href="#" {{action "deleteUser"}}><i class="fa fa-fw fa-trash-o"></i> Delete</a></li>
-        <li><a href="#">Some other action</a></li>
       </ul>
     </div>
   </div>

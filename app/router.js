@@ -52,6 +52,7 @@ Router.map(function() {
 
   this.route('login');
   this.route('loading');
+  this.route('user/edit');
 });
 
 export default Router;

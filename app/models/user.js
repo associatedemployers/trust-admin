@@ -11,7 +11,7 @@ export default DS.Model.extend({
   super:         attribute('boolean'),
   receiveEmails: attribute('boolean'),
   apiAccess:     attribute('boolean'),
-  permissions:   DS.hasMany('user-permission'),
+  permissions:   DS.hasMany('user-permission', { async: true }),
 
   fullName: function () {
     return this.get('firstName') + ' ' + this.get('lastName');

@@ -1,7 +1,14 @@
-// import DS from 'ember-data';
+import DS from 'ember-data';
 import ApplicationSerializer from './application';
 
-export default ApplicationSerializer.extend({
+export default ApplicationSerializer.extend(DS.EmbeddedRecordsMixin, {
+  attrs: {
+    permissions: {
+      serialize:   'ids',
+      deserialize: 'ids'
+    }
+  },
+
   normalizeHash: {
     user: function ( hash ) {
       if( hash.name ) {
@@ -11,21 +18,27 @@ export default ApplicationSerializer.extend({
         delete hash.name;
       }
 
+      if( hash.login ) {
+        hash.email = hash.login.email;
+
+        delete hash.login;
+      }
+
       return hash;
     }
   },
 
-  serialize: function ( employee ) {
+  serialize: function ( user ) {
     var json = this._super.apply(this, arguments);
 
     json.name = {
-      first: employee.get('firstName'),
-      last:  employee.get('lastName')
+      first: user.get('firstName'),
+      last:  user.get('lastName')
     };
 
     json.login = {
-      email:    employee.get('email'),
-      password: employee.get('password')
+      email:    user.get('email'),
+      password: user.get('password')
     };
 
     delete json.firstName;
