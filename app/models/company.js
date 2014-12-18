@@ -1,4 +1,5 @@
 import DS from 'ember-data';
+import addressFormatter from 'trust-admin/utils/address-formatter';
 
 var attribute = DS.attr;
 
@@ -53,5 +54,8 @@ export default DS.Model.extend({
     defaultValue: function () {
       return Date();
     }
-  })
+  }),
+
+  // Computed
+  addressFormatted: addressFormatter.property('addressLine1', 'addressLine2', 'city', 'state', 'zipcode')
 });

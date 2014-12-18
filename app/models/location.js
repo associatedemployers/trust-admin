@@ -1,4 +1,5 @@
 import DS from 'ember-data';
+import addressFormatter from 'trust-admin/utils/address-formatter';
 
 var attribute = DS.attr;
 
@@ -23,4 +24,7 @@ export default DS.Model.extend({
 
   legacyEffectiveDate: attribute('date'),
   time_stamp:          attribute('date'),
+
+  // Computed
+  addressFormatted: addressFormatter.property('addressLine1', 'addressLine2', 'city', 'state', 'zipcode')
 });
