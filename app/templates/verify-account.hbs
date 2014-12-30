@@ -1,0 +1,29 @@
+<div class="verify-account-panel popout-panel">
+  <h2>Verify Your Account</h2>
+  <hr />
+  {{#if loadingAccount}}
+    <h3 class="text-center">
+      <i class="fa fa-spinner fa-spin"></i> Please wait...
+    </h3>
+  {{else}}  
+    {{#if validLink}}
+      <form {{action "verify" on="submit"}}>
+        <div class="form-group">
+          <p class="help-block text-center">Password must be at least 5 characters</p>
+          {{input type="password" class="form-control input-lg" value=password placeholder="Enter password"}}
+        </div>
+        <div class="form-group">
+          {{input type="password" class="form-control input-lg" value=passwordRe placeholder="Re-enter password"}}
+        </div>
+
+        <button class="btn btn-success btn-block btn-lg" {{bind-attr disabled=notAllowSubmit}}>
+          <i {{bind-attr class=":fa :fa-fw verifying:fa-spin verifying:fa-spinner:fa-check"}}></i> Finish and verify account
+        </button>
+      </form>
+    {{else}}
+      <h3 class="text-center text-danger">
+        <i class="fa fa-exclamation-triangle"></i> This link is either invalid or already used.
+      </h3>
+    {{/if}}
+  {{/if}}
+</div>

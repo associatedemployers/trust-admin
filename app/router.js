@@ -51,8 +51,9 @@ Router.map(function() {
   this.route('permissions');
 
   this.route('login');
+  this.route('verify-account', { path: 'verify/:id' });
+
   this.route('loading');
-  this.route('user/edit');
 });
 
 export default Router;
