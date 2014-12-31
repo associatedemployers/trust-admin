@@ -31,5 +31,11 @@ export default Ember.ArrayController.extend({
     });
 
     return dataset;
-  }.property('content.@each')
+  }.property('content.@each'),
+
+  actions: {
+    selectEvent: function ( historyEvent ) {
+      this.set('selectedEvent', historyEvent);
+    }
+  }
 });

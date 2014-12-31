@@ -1,0 +1,101 @@
+<div class="popout-panel">
+  <h2 class="text-center">
+    <a href="#" class="pull-right" {{action "selectEvent" null}}><i class="fa fa-fw fa-times"></i></a>
+    Details for event on {{format-moment selectedEvent.eventDate "MM/DD/YYYY hh:mma"}}
+    <br />
+    <small>
+      &Delta;
+      <i class="fa fa-file-text-o"></i> {{object-size selectedEvent.previousDocument 1024 2}}kb
+      <i class="fa fa-long-arrow-right"></i>
+      <i class="fa fa-file-text"></i> {{object-size selectedEvent.updatedDocument 1024 2}}kb
+    </small>
+  </h2>
+  <hr />
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <button class="btn btn-block btn-success">
+          <i class="fa fa-fw fa-download"></i> Show document at this event
+        </button>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <button class="btn btn-block btn-danger">
+          <i class="fa fa-fw fa-rotate-left"></i> Revert document to this event
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="row text-center">
+    <div class="col-md-6">
+      <p>
+        <strong>Created by</strong><br />
+        {{#if selectedEvent.updater}}
+          {{selectedEvent.updater}}
+        {{else}}
+          System
+        {{/if}}
+      </p>
+    </div>
+    <div class="col-md-6">
+      <div>
+        <strong>Delta types</strong><br />
+        {{concat-array selectedEvent.deltaTypes ', '}}
+      </div>
+    </div>
+  </div>
+
+  <p>
+    {{#if selectedEvent.flags}}
+      Event Flags:
+      {{#each flag in selectedEvent.flags}}
+        <span class="label label-default">{{flag}}</span>
+      {{/each}}
+    {{else}}
+      No event flags.
+    {{/if}}
+  </p>
+
+  <hr />
+
+  <h3>
+    <span class="label label-success">{{count-array selectedEvent.delta}}</span> Changes
+  </h3>
+
+  <ul class="reset-list no-list-style change-list">
+    {{#each change in selectedEvent.delta}}
+      <li>
+        <h4>
+          <strong>{{parse-change-code change.kind}}</strong>
+          in
+          <span class="text-muted">{{concat-array change.path '.'}}</span>
+        </h4>
+        <p>
+          <span class="text-muted">
+            {{#if change.lhs}}
+              {{to-string change.lhs}}
+            {{else}}
+              N/A
+            {{/if}}
+          </span>
+          {{! =>}}
+          <i class="fa fa-long-arrow-right"></i>
+          <span class="text-muted">
+            {{#if change.rhs}}
+              {{to-string change.rhs}}
+            {{else}}
+              N/A
+            {{/if}}
+          </span>
+        </p>
+      </li>
+    {{else}}
+      <li class="text-center text-danger">
+        <i class="fa fa-fw fa-exclamation-triangle"></i> No changes recorded.
+      </li>
+    {{/each}}
+  </ul>
+</div>
