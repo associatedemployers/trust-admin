@@ -12,7 +12,7 @@ export default Ember.ObjectController.extend(GrowlMixin, {
           self = this;
 
       user.destroyRecord().then(function () {
-        self.growl( 'danger', 'Deleted', 'Successfully deleted user', 2500, 'fa fa-check');
+        self.growl('danger', 'Deleted', 'Successfully deleted user', 2500, 'fa fa-check');
         self.set('isDeleting', false);
         self.transitionToRoute('users');
       }).catch(function ( err ) {
