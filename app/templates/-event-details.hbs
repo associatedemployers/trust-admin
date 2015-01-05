@@ -15,15 +15,21 @@
   <div class="row">
     <div class="col-md-6">
       <div class="form-group">
-        <button class="btn btn-block btn-success">
-          <i class="fa fa-fw fa-download"></i> Show document at this event
+        <button class="btn btn-block btn-success" {{action "toggleProperty" "showLoadSnapshot"}}>
+          <i class="fa fa-fw fa-download"></i> {{#if showLoadSnapshot}}Cancel load{{else}}Load snapshot{{/if}}
         </button>
+
+        <div {{bind-attr class=":text-center :hide-slide showLoadSnapshot:show"}}>
+          <a href="#" {{action "loadSnapshot" selectedEvent.previousDocument}}><i class="fa fa-file-text-o"></i> Before snapshot</a>
+          |
+          <a href="#" {{action "loadSnapshot" selectedEvent.updatedDocument}}><i class="fa fa-file-text"></i> After snapshot</a>
+        </div>
       </div>
     </div>
     <div class="col-md-6">
       <div class="form-group">
-        <button class="btn btn-block btn-danger">
-          <i class="fa fa-fw fa-rotate-left"></i> Revert document to this event
+        <button class="btn btn-block btn-danger" {{action "revertSnapshot" selectedEvent}}>
+          <i class="fa fa-fw fa-rotate-left"></i> Revert changes
         </button>
       </div>
     </div>

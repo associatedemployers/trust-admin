@@ -36,6 +36,10 @@ export default Ember.ArrayController.extend({
   actions: {
     selectEvent: function ( historyEvent ) {
       this.set('selectedEvent', historyEvent);
+    },
+
+    toggleProperty: function ( prop ) {
+      this.toggleProperty( prop );
     }
   }
 });

@@ -26,6 +26,7 @@
     "d3": "~3.4.13"
   },
   "resolutions": {
-    "ember-data": "~1.0.0-beta.7"
+    "ember-data": "~1.0.0-beta.14",
+    "handlebars": ">= 1.0.0 < 2.0.0"
   }
 }

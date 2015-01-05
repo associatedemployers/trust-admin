@@ -1,8 +1,13 @@
 import Ember from 'ember';
-import LoadableRouteMixin from '../mixins/loadable-route';
+import LoadableRouteMixin from 'trust-admin/mixins/loadable-route';
+import methodProxy from 'trust-admin/utils/proxy-controller-method';
 
 export default Ember.Route.extend(LoadableRouteMixin, {
   model: function ( params ) {
     return this.store.find('employee', params.id);
+  },
+
+  actions: {
+    loadSnapshot: methodProxy('loadSnapshot')
   }
 });
