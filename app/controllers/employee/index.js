@@ -113,8 +113,6 @@ export default Ember.ObjectController.extend(GrowlMixin, TabsMixin, {
 
     encryptSSN: function () {
       this.set('decryptedSSN', null);
-    },
-
-    loadSnapshot: function ( snapshotData ) { console.log('snapshot'); return true; }
+    }
   }
 });

@@ -3,19 +3,25 @@ import GrowlMixin from '../mixins/growl';
 
 export default Ember.ObjectController.extend(GrowlMixin, {
   inSnapshot: false,
-  originalDocument: null,
 
   letterImageColor: function () {
-    var m    = this.get('content'),
-        name = m.getProperties('firstName', 'lastName'),
+    var defaultColor = {
+      r: 255,
+      g: 255,
+      b: 255
+    };
+
+    var m = this.get('content');
+    
+    if ( !m ) {
+      return defaultColor;
+    }
+
+    var name = m.getProperties('firstName', 'lastName'),
         al   = 'abcdefghijklmnopqrstuvwxyz'.split('');
 
-    if( !name.firstName || !name.lastName ) {
-      return {
-        r: 255,
-        g: 255,
-        b: 255
-      };
+    if ( !name.firstName || !name.lastName ) {
+      return defaultColor;
     }
 
     var indices = {
@@ -34,8 +40,13 @@ export default Ember.ObjectController.extend(GrowlMixin, {
   }.property('content.firstName', 'content.lastName'),
 
   letterImageText: function () {
-    var m = this.get('content'),
-        n = m.getProperties('firstName', 'lastName');
+    var m = this.get('content');
+
+    if ( !m ) {
+      return 'NA';
+    }
+
+    var n = m.getProperties('firstName', 'lastName');
 
     if ( !n.firstName || !n.lastName ) {
       return 'NA';
@@ -44,33 +55,44 @@ export default Ember.ObjectController.extend(GrowlMixin, {
     return n.firstName.charAt(0) + n.lastName.charAt(0);
   }.property('content.firstName', 'content.lastName'),
 
-  exitSnapshot: function () {
-    this.set('inSnapshot', false);
-    this.store.pushPayload('employee', {
-      employee: this.get('originalDocument')
+  loadSnapshot: function ( historyEvent, direction ) {
+    this.growl('warning', 'Loading Snapshot', '', 1000);
+    NProgress.start();
+
+    var currentDocument = this.get('content'),
+        self = this;
+
+    if( !this.get('inSnapshot') && currentDocument.get('isDirty') ) {
+      currentDocument.rollback();
+    }
+
+    var query = {
+      snapshot:          historyEvent.get('id'),
+      snapshotDirection: direction
+    };
+
+    this.store.findOneQuery('employee', currentDocument.get('id'), query).then(function ( employee ) {
+      self.setProperties({
+        content:         employee,
+        inSnapshot:      true,
+        snapshotDetails: historyEvent
+      });
+
+      NProgress.done();
+    }).catch(function ( err ) {
+      console.error(err);
     });
   },
 
-  loadSnapshot: function ( snapshotData ) {
-    // TODO: REFACTOR TO USE SNAPSHOT: ID VIA API
-    console.log('loading snapshot');
-    var originalDocument = this.get('content');
-
-
-    if( originalDocument.get('isDirty') ) {
-      originalDocument.rollback();
+  actions: {
+    exitSnapshot: function () {
+      this.setProperties({
+        inSnapshot:      false,
+        snapshotDetails: null
+      });
+      //console.log(this.store);
+      this.get('content').reload();
+      //this.store.fetch('employee', this.get('content').get('id'));
     }
-
-    this.setProperties({
-      inSnapshot:       true,
-      originalDocument: originalDocument
-    });
-    snapshotData.id = snapshotData._id;
-    delete snapshotData._id;
-    console.log(snapshotData);
-
-    this.store.pushPayload('employee', {
-      employee: snapshotData
-    });
   }
 });

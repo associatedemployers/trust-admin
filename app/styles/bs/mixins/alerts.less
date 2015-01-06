@@ -2,6 +2,10 @@
 
 .alert-variant(@background; @border; @text-color) {
   background-color: @background;
+  background:
+    linear-gradient( lighten(@background, 5%), transparent),
+    linear-gradient( 90deg, @background, transparent),
+    @background;
   border-color: @border;
   color: @text-color;
 

@@ -20,9 +20,9 @@
         </button>
 
         <div {{bind-attr class=":text-center :hide-slide showLoadSnapshot:show"}}>
-          <a href="#" {{action "loadSnapshot" selectedEvent.previousDocument}}><i class="fa fa-file-text-o"></i> Before snapshot</a>
+          <a href="#" {{action "loadSnapshot" selectedEvent "previous"}}><i class="fa fa-file-text-o"></i> Before snapshot</a>
           |
-          <a href="#" {{action "loadSnapshot" selectedEvent.updatedDocument}}><i class="fa fa-file-text"></i> After snapshot</a>
+          <a href="#" {{action "loadSnapshot" selectedEvent "updated"}}><i class="fa fa-file-text"></i> After snapshot</a>
         </div>
       </div>
     </div>
