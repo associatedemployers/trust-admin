@@ -42,8 +42,22 @@
 <hr />
 
 <div class="resource-section">
-  <h2 class="text-center">History Event Timeline</h2>
+  <h2 class="text-center">
+    History Event Timeline<br />
+    <small class="text-xs">
+        <a href="#" {{action "toggleProperty" "showVisualization"}}>
+        {{#if showVisualization}}
+          Hide Visualization<i class="fa fa-fw fa-angle-up"></i>
+        {{else}}
+          Show Visualization<i class="fa fa-fw fa-angle-down"></i>
+        {{/if}}
+      </a>
+    </small>
+  </h2>
   {{#if loadedHistoryEvents}}
+    {{#if showVisualization}}
+      {{chart-history-events-pulse historyEvents=content.historyEvents height='200'}}
+    {{/if}}
     {{render "history-timeline" content.historyEvents}}
   {{else}}
     <h4 class="text-center text-warning">One moment while we load the events <i class="fa fa-spin fa-spinner fa-fw"></i></h4>
