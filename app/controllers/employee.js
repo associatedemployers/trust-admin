@@ -90,9 +90,8 @@ export default Ember.ObjectController.extend(GrowlMixin, {
         inSnapshot:      false,
         snapshotDetails: null
       });
-      //console.log(this.store);
+
       this.get('content').reload();
-      //this.store.fetch('employee', this.get('content').get('id'));
     }
   }
 });
