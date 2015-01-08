@@ -1,0 +1,38 @@
+<div class="row">
+  <div class="col-md-6">
+  </div>
+  <div class="col-md-6">
+    
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-6">
+    <h3>Co-insurance <span class="label label-success">{{content.coInsurance}}</span></h3>
+    {{general-chart dataset=coinsuranceDataset chartOptions=coinsuranceChart.chartOptions dataOptions=coinsuranceChart.dataOptions height='300'}}
+  </div>
+  <div class="col-md-6">
+    <h3>Rates</h3>
+    {{general-chart dataset=rateDataset chartOptions=rateChart.chartOptions dataOptions=rateChart.dataOptions height='300'}}
+  </div>
+</div>
+<hr />
+<div>
+  <h3>
+    <a href="#" {{action "toggleProperty" "showLegacyData"}}>
+      <i class="fa fa-fw fa-archive"></i> Legacy Data<i {{bind-attr class=":fa :fa-fw showLegacyData:fa-angle-up:fa-angle-down"}}></i>
+    </a>
+  </h3>
+  <ul {{bind-attr class=":reset-list :no-list-style :hide-slide showLegacyData:show"}}>
+    {{#with content}}
+      <li><strong>Old Employee Rate</strong>: {{legacyOldEmployeeRate}}</li>
+      <li><strong>Old Employee and Spouse Rate</strong>: {{legacyOldEmployeeAndSpouseRate}}</li>
+      <li><strong>Old Employee and Children Rate</strong>: {{legacyOldEmployeeAndChildrenRate}}</li>
+      <li><strong>Old Employee and Family Rate</strong>: {{legacyOldFamilyRate}}</li>
+      <li><strong>Rate Change Employee</strong>: {{legacyRateChangeEmployeeRate}}</li>
+      <li><strong>Rate Change w/ Spouse</strong>: {{legacyRateChangeEmployeeAndSpouseRate}}</li>
+      <li><strong>Rate Change w/ Children</strong>: {{legacyRateChangeEmployeeAndChildrenRate}}</li>
+      <li><strong>Rate Change w/ Family</strong>: {{legacyRateChangeFamilyRate}}</li>
+    {{/with}}
+  </ul>
+</div>
