@@ -1,0 +1,44 @@
+<div class="row">
+  <div class="col-md-12">
+    <h2>
+      <a href="#" {{action "toggleProperty" "showRates"}}>
+        Rates <i {{bind-attr class=":fa showRates:fa-angle-up:fa-angle-down"}}></i>
+      </a>
+    </h2>
+    <div {{bind-attr class=":hide-slide showRates:show"}}>
+      <div class="row">
+        <div class="col-md-7">
+          {{#if ratesDataset}}
+            {{general-chart dataset=ratesDataset chartOptions=ratesChart.chartOptions dataOptions=ratesChart.dataOptions height='250'}}
+          {{/if}}
+        </div>
+        <div class="col-md-5 text-center">
+          {{#link-to 'medical-rates' (query-params plan=content.id)}}
+            Show rates for this plan <span class="label label-success">{{rateCounts.assigned}}</span>
+          {{/link-to}}
+        </div>
+      </div>
+      <hr />
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <h2>
+      <a href="#" {{action "toggleProperty" "showParticipation"}}>
+        Participation <i {{bind-attr class=":fa showParticipation:fa-angle-up:fa-angle-down"}}></i>
+      </a>
+    </h2>
+    <div {{bind-attr class=":hide-slide showParticipation:show"}}>
+      <div class="row">
+        <div class="col-md-7">
+
+        </div>
+        <div class="col-md-5">
+
+        </div>
+      </div>
+      <hr />
+    </div>
+  </div>
+</div>

@@ -1,19 +1,22 @@
 <div class="row popout-panel">
   <div class="col-md-10">
     <hgroup>
-      <h2><i class="fa fa-dollar"></i> {{content.planNumber}} ({{#link-to 'medical-plan' content.plan}}{{content.plan.name}}{{/link-to}}) <small>{{format-currency content.deductible}} Deductible</small></h2>
-      {{#if content.company}}
-        <h4>Rate for {{#link-to 'company' content.company}}{{content.company.name}}{{/link-to}}</h4>
-      {{/if}}
+      <h2><i class="fa fa-medkit"></i> {{content.name}}</h2>
+      <h4>{{content.legacyDescription}}</h4>
     </hgroup>
     <div>
       {{#with content}}
         <ul class="text-muted resource-info-list resource-quick-info">
-          <li><strong>Plan Number:</strong> {{planNumber}}</li>
+          <li><strong>Key:</strong> {{legacyKey}}</li>
           <li><strong>Record ID (new):</strong> {{id}}</li>
-          <li><strong>EBMS #:</strong> {{ebmsNumber}}</li>
-          <li><strong>Legacy Name:</strong> {{name}}</li>
+          <li><strong>Legacy Grouping:</strong> {{legacyGrouping}}</li>
+          <li><strong>Legacy Order:</strong> {{legacyOrder}}</li>
           <li><strong>Creation Date:</strong> {{format-moment time_stamp}} <i>({{time-ago time_stamp}})</i></li>
+        </ul>
+        <ul class="text-muted resource-info-list resource-quick-info">
+          <li><strong>EBMS IBE Code:</strong> {{ebmsIbeCode}}</li>
+          <li><strong>EBMS IBE Code (2):</strong> {{#if ebmsIbeCode2}}{{ebmsIbeCode2}}{{else}}N/A{{/if}}</li>
+          <li><strong>EBMS CLM Code:</strong> {{ebmsClmCode}}</li>
         </ul>
       {{/with}}
     </div>

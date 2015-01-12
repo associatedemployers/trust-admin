@@ -1,15 +1,8 @@
 <div class="resource-view">
-  <h1><i class="fa fa-dollar"></i> Medical Rates</h1>
+  <h1><i class="fa fa-medkit"></i> Medical Plans</h1>
   <hr />
   <div class="row resource-row">
-    <div class="col-md-3">
-      <h2>Filters</h2>
-
-      <hr />
-      <p class="text-center">
-      </p>
-    </div>
-    <div class="col-md-9">
+    <div class="col-md-12">
       <div class="row">
         <div class="col-md-6">
           <div {{bind-attr class=":resource-loading-overlay isLoading:active"}}>
@@ -36,10 +29,10 @@
       </div>
 
       <div class="list-group resource-list-group">
-        {{#each medicalRate in content}}
-          {{render "medical-rate-list-item" medicalRate}}
+        {{#each medicalPlan in content}}
+          {{render "medical-plan-list-item" medicalPlan}}
         {{else}}
-          <h2 class="text-center"><i class="fa fa-exclamation-triangle"></i> No medical rates found.</h2>
+          <h2 class="text-center"><i class="fa fa-exclamation-triangle"></i> No medical plans found.</h2>
         {{/each}}
       </div>
 

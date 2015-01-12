@@ -36,6 +36,12 @@ Router.map(function() {
     this.route('edit');
   });
 
+  this.route('medical-plans');
+  this.resource('medical-plan', { path: 'medical-plan/:id' }, function () {
+    this.route('index', { path: '/summary' });
+    this.route('edit');
+  });
+
   this.route('search');
   this.resource('metrics', {}, function () {
     this.route('index', { path: '/summary' });
