@@ -32,10 +32,18 @@
     <div {{bind-attr class=":hide-slide showParticipation:show"}}>
       <div class="row">
         <div class="col-md-7">
-
+          {{#if participationDataset}}
+            {{general-chart dataset=participationDataset chartOptions=participationChart.chartOptions dataOptions=participationChart.dataOptions height='350'}}
+          {{else}}
+            <h1 class="text-center"><i class="fa fa-spin fa-spinner"></i></h1>
+          {{/if}}
         </div>
         <div class="col-md-5">
-
+          {{#if participationPieDataset}}
+            {{general-chart dataset=participationPieDataset chartOptions=participationPieChart.chartOptions dataOptions=participationPieChart.dataOptions height='350'}}
+          {{else}}
+            <h1 class="text-center"><i class="fa fa-spin fa-spinner"></i></h1>
+          {{/if}}
         </div>
       </div>
       <hr />
