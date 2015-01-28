@@ -1,7 +1,6 @@
 import Ember from 'ember';
 
 export default Ember.Object.extend({
-
   contentDidChange: function () {
     console.debug("Session :: Session did change");
 

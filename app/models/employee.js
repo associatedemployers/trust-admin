@@ -28,6 +28,7 @@ export default DS.Model.extend({
   memberId:            attribute('string'),
   ebmsTerminationCode: attribute('string'),
   waived:              attribute('boolean'),
+  enrolled:            attribute('boolean'),
 
   firstName:     attribute('string'),
   middleInitial: attribute('string'),
