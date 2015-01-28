@@ -22,7 +22,6 @@ export default DS.Model.extend({
   }),
 
   // Computed
-
   link: function () {
     var plain = this.toJSON(),
         id    = ( plain.employee ) ? plain.employee : ( plain.company ) ? plain.company : null;
