@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import Growl from '../mixins/growl';
 
-export default Ember.ArrayController.extend(Growl, {
+export default Ember.Controller.extend(Growl, {
   httpVerbs: [ 'get', 'post', 'put', 'delete' ],
   httpTypes: [ 'resource', 'resource utility' ],
   permissionOption: Ember.Object.create(),

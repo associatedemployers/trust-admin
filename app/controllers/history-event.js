@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-export default Ember.ObjectController.extend({
+export default Ember.Controller.extend({
   user: function () {
     // Populate user information
     var updater = this.get('content.updater');

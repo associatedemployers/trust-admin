@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-export default Ember.ObjectController.extend({
+export default Ember.Controller.extend({
   isPrimary: function () {
     return this.get('content.type') === 'primary';
   }.property('content.type'),

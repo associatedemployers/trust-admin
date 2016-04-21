@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import GrowlMixin from 'trust-admin/mixins/growl';
 
-export default Ember.ObjectController.extend(GrowlMixin, {
+export default Ember.Controller.extend(GrowlMixin, {
   isDoingAction: Ember.computed.or('isDeleting'),
 
   actions: {

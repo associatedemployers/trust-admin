@@ -2,7 +2,7 @@ import Ember from 'ember';
 import GrowlMixin from 'trust-admin/mixins/growl';
 import NavTabsMixin from 'trust-admin/mixins/nav-tabs';
 
-export default Ember.ObjectController.extend(GrowlMixin, NavTabsMixin, {
+export default Ember.Controller.extend(GrowlMixin, NavTabsMixin, {
   tabs: [
     {
       icon: 'fa-newspaper-o',

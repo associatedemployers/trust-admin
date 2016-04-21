@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-export default Ember.View.extend({
+export default Ember.Component.extend({
   tagName: 'canvas',
   classNames: [ 'resource-letter-image' ],
   attributeBindings: [ 'width', 'height' ],
@@ -26,12 +26,15 @@ export default Ember.View.extend({
         colorEn = {};
 
     for ( var key in colorSt ) {
+      if ( !colorSt.hasOwnProperty(key) ) {
+        continue;
+      }
       colorEn[ key ] = Math.abs( colorSt[ key ] - 30 );
     }
 
     colorSt.a = '.80';
     colorEn.a = '.80';
-    
+
     var rgbaSt = this._genRgbaStr( colorSt ),
         rgbaEn = this._genRgbaStr( colorEn ),
         bg     = context.createLinearGradient(0, 0, canvas.height, 0);
@@ -45,7 +48,7 @@ export default Ember.View.extend({
 
     // Draw letters
     context.fillStyle    = 'white';
-    context.font         = '100 ' + ( h - ( w / 2.5 ) ) + 'px roboto';
+    context.font         = '100 ' + ( h -  w / 2.5 ) + 'px roboto';
     context.textAlign    = 'center';
     context.textBaseline = 'middle';
 

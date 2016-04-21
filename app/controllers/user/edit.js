@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import GrowlMixin from 'trust-admin/mixins/growl';
 
-export default Ember.ObjectController.extend(GrowlMixin, {
+export default Ember.Controller.extend(GrowlMixin, {
   notAllowSave: Ember.computed.not('allowSave'),
   notSaving:    Ember.computed.not('saving'),
   allowSave:    Ember.computed.and('content.email', 'content.firstName', 'content.lastName', 'content.isDirty', 'notSaving'),

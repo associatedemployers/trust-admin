@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import { dependent_relationships_context as relationshipContexts } from '../utils/defined-data';
 
-export default Ember.ObjectController.extend({
+export default Ember.Controller.extend({
   contextualRelationship: function () {
     var m       = this.get('content').getProperties('gender', 'relationship'),
         context = relationshipContexts[ m.relationship ];
