@@ -6,15 +6,8 @@
 </hgroup>
 
 <ul class="list-group history-event-item-list">
-  {{#each event in events itemController="history-event"}}
-    <li class="list-group-item history-event-item">
-      <a href="#" class="history-event-link" title="Click to load details" {{action "selectEvent" event}}>
-        {{event.description}}
-      </a>
-      <span class="text-muted pull-right">
-        {{event.user}}
-      </span>
-    </li>
+  {{#each events as |event|}}
+    {{lists/history-event-item event=event selectEvent=(action "selectEvent")}}
   {{/each}}
 </ul>
 <hr />
