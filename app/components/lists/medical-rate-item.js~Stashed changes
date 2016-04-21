@@ -1,6 +1,5 @@
 import Ember from 'ember';
 
-export default Ember.View.extend({
-  templateName: 'medical-plan-list-item',
+export default Ember.Component.extend({
   classNames: [ 'resource-list-item', 'list-group-item' ]
 });

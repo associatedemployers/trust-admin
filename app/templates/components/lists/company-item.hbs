@@ -1,1 +1,8 @@
-{{yield}}
+{{#link-to 'company' company}}{{company.name}}{{/link-to}}
+<div class="data-section text-right">
+  {{#if company.state}}
+    <i class="fa fa-fw fa-map"></i> {{#if company.city}}{{company.city}}, {{/if}}{{company.state}}
+  {{else}}
+    <small class="text-danger">N/A</small>
+  {{/if}}
+</div>

@@ -36,8 +36,8 @@
       </div>
 
       <div class="list-group resource-list-group">
-        {{#each content as |medicalRate|}}
-          {{render "medical-rate-list-item" medicalRate}}
+        {{#each medicalRate as |medicalRate|}}
+          {{lists/medical-rate-item medicalRate=medicalRate}}
         {{else}}
           <h2 class="text-center"><i class="fa fa-exclamation-triangle"></i> No medical rates found.</h2>
         {{/each}}

@@ -74,8 +74,8 @@
       </div>
 
       <div class="list-group resource-list-group">
-        {{#each content as |company|}}
-          {{render "company-list-item" company}}
+        {{#each model as |company|}}
+          {{lists/company-item company=company}}
         {{else}}
           <h2 class="text-center"><i class="fa fa-exclamation-triangle"></i> No companies found.</h2>
         {{/each}}
