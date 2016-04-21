@@ -1,6 +1,6 @@
 <div class="application-wrapper">
   <div class="nav-wrapper">
-    {{render "navigation"}}
+    {{x-navigation session=session logout=(action "logout")}}
   </div>
 
   <div class="view-wrapper {{viewClass}}" style={{style}}>
@@ -8,4 +8,4 @@
   </div>
 </div>
 
-{{render "footer"}}
+{{x-footer}}

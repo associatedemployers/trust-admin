@@ -1,1 +1,21 @@
-{{yield}}
+<div class="row history-timeline-row">
+  <div class="col-md-5 history-event-groups">
+    {{#each coalescedEvents as |eventGroup|}}
+      {{history-event-group eventGroup=eventGroup}}
+    {{else}}
+      <h4 class="text-center text-warning"><i class="fa fa-info-circle"></i> No Events To Display</h4>
+    {{/each}}
+  </div>
+  <div class="col-md-7">
+    {{#if selectedEvent}}
+      {{partial "event-details"}}
+    {{else}}
+      <div class="alert alert-info alert-dismissible alert-pad" role="alert">
+        <button type="button" class="close" data-dismiss="alert">
+          <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+        </button>
+        <h3 class="text-center"><i class="fa fa-info-circle"></i> Select an event to view its details</h3>
+      </div>
+    {{/if}}
+  </div>
+</div>

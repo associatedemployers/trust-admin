@@ -1,1 +1,14 @@
-{{yield}}
+{{#if isEditing}}
+  {{query.type}}
+  <div class="form-group">
+    {{view "select" class="form-control" content=fields value=fieldSelection}}
+  </div>
+  <div class="form-group">
+    {{query.compareType}}
+  </div>
+  <div class="form-group">
+    {{query.value}}
+  </div>
+{{else}}
+  {{query.type}} {{query.field}} {{query.compareType}} {{query.value}}
+{{/if}}

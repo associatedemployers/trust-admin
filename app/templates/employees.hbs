@@ -87,8 +87,8 @@
       </div>
 
       <div class="list-group resource-list-group">
-        {{#each content as |employee|}}
-          {{render "employee-list-item" employee}}
+        {{#each model as |employee|}}
+          {{lists/employee-item employee=employee}}
         {{else}}
           <h2 class="text-center"><i class="fa fa-exclamation-triangle"></i> No employees found.</h2>
         {{/each}}

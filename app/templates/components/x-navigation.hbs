@@ -1,1 +1,63 @@
-{{yield}}
+<div class="container-fluid">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#trust-nav">
+      <span class="sr-only">Toggle navigation</span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </button>
+    {{#link-to 'index' class="navbar-brand" href="#"}}Trust Administration{{/link-to}}
+  </div>
+
+  <div class="collapse navbar-collapse" id="trust-nav">
+    <ul class="nav navbar-nav">
+      <li class="dropdown">
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-archive"></i> Browse/Edit <span class="caret"></span></a>
+        <ul class="dropdown-menu" role="menu">
+          <li class="dropdown-header"><i class="fa fa-fw fa-users"></i> Clients</li>
+          <li>{{#link-to 'employees'}}Employees{{/link-to}}</li>
+          <li>{{#link-to 'companies'}}Companies{{/link-to}}</li>
+          <li class="divider"></li>
+
+          <li class="dropdown-header"><i class="fa fa-fw fa-stethoscope"></i> Plans &amp; Rates</li>
+          <li>{{#link-to 'medical-plans'}}Medical Plans{{/link-to}}</li>
+          <li>{{#link-to 'medical-rates'}}Medical Rates{{/link-to}}</li>
+          <li><a href="#">Dental</a></li>
+          <li><a href="#">Vision</a></li>
+          <li><a href="#">Life</a></li>
+          <li class="divider"></li>
+
+          <li class="dropdown-header"><i class="fa fa-fw fa-gears"></i> Panel</li>
+          <li>{{#link-to 'users'}}Users{{/link-to}}</li>
+        </ul>
+      </li>
+      <li>{{#link-to 'metrics'}}<i class="fa fa-fw fa-bar-chart"></i> Metrics{{/link-to}}</li>
+    </ul>
+
+    <ul class="nav navbar-nav navbar-right">
+      {{#if session.authenticated}}
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-user"></i> {{session.currentUser.fullName}}<span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#">-</a></li>
+            <li><a href="#">-</a></li>
+            <li><a href="#">-</a></li>
+            <li class="divider"></li>
+            <li><a href="#" {{action "logout"}}><i class="fa fa-fw fa-sign-out"></i> Logout</a></li>
+          </ul>
+        </li>
+        <li>{{#link-to "search"}}<i class="fa fa-fw fa-search"></i>{{/link-to}}</li>
+        {{#if session.currentUser.super}}
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-gear"></i><span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu">
+              <li>{{#link-to 'permissions'}}Permissions{{/link-to}}</li>
+            </ul>
+          </li>
+        {{/if}}
+      {{else}}
+        <li>{{#link-to "login"}}<i class="fa fa-fw fa-sign-in"></i> Log in{{/link-to}}</li>
+      {{/if}}
+    </ul>
+  </div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->

@@ -45,7 +45,7 @@
   <h2 class="text-center">
     History Event Timeline<br />
     <small class="text-xs">
-        <a href="#" {{action "toggleProperty" "showVisualization"}}>
+      <a href="#" {{action "toggleProperty" "showVisualization"}}>
         {{#if showVisualization}}
           Hide Visualization<i class="fa fa-fw fa-angle-up"></i>
         {{else}}
@@ -56,9 +56,9 @@
   </h2>
   {{#if loadedHistoryEvents}}
     {{#if showVisualization}}
-      {{chart-history-events-pulse historyEvents=content.historyEvents height='200'}}
+      {{chart-history-events-pulse historyEvents=model.historyEvents height='200'}}
     {{/if}}
-    {{render "history-timeline" content.historyEvents}}
+    {{history-timeline events=model.historyEvents}}
   {{else}}
     <h4 class="text-center text-warning">One moment while we load the events <i class="fa fa-spin fa-spinner fa-fw"></i></h4>
   {{/if}}
