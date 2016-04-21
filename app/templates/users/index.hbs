@@ -46,9 +46,9 @@
       </div>
 
       <ul class="list-group resource-list-group">
-        {{#each user in content itemController="user-list-item"}}
+        {{#each model as |user|}}
           <li class="list-group-item">
-            {{#link-to 'user' user}}{{user.fullName}}{{/link-to}}
+            {{#link-to 'user' user.id}}{{user.fullName}}{{/link-to}}
 
             {{#if user.super}}
               <span class="label label-info">Super User</span>

@@ -36,7 +36,7 @@
   {{/if}}
 
   <ul class="list-group">
-    {{#each result in content itemController="search-result"}}
+    {{#each model as |result|}}
       <li class="list-group-item">
         <span class="label label-danger">{{title-case result.type}}</span> &nbsp;
         {{#link-to result.type result.id}}
