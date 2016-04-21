@@ -32,7 +32,7 @@ export default Ember.Controller.extend({
       return null;
     }
 
-    this.set('loginError', ( typeof e === 'string' ) ? e : ( e.status === 401 ) ? 'Wrong password or no user with that email. Please try again.' : 'Problem communicating with server, please try again. <br /><span class="text-muted">' + e.responseText + '</span>');
+    this.set('loginError', typeof e === 'string' ? e : e.status === 401 ? 'Wrong password or no user with that email. Please try again.' : 'Problem communicating with server, please try again. <br /><span class="text-muted">' + e.responseText + '</span>');
   }.observes('session.loginError'),
 
   authenticationChanged: function () {
@@ -55,8 +55,30 @@ export default Ember.Controller.extend({
     }
   }.observes('session.authenticated'),
 
+  didGetLoginError: function () {
+    if( !this.get('loginError') ) {
+      return;
+    }
+
+    this.animateError();
+  }.observes('loginError'),
+
+  animateError () {
+    var $loginContainer = Ember.$('.login-container');
+
+    $loginContainer
+      .velocity({
+        rotateY: '180deg'
+      }, {
+        duration: 500,
+        easing:   [ 100, 3 ] // Spring [ Tension, Friction ]
+      })
+      .delay(400)
+      .velocity('reverse');
+  },
+
   actions: {
-    login: function () {
+    login () {
       var loginInfo = this.getProperties('email', 'password');
 
       if( loginInfo.email && loginInfo.password ) {

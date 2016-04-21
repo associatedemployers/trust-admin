@@ -1,57 +1,59 @@
-<h1><i class="fa fa-fw fa-search"></i> Finder</h1>
-<hr />
-<form {{action "search" on="submit"}}>
-  <div class="row">
-    <div class="col-sm-10">
-      <div class="form-group finder">
-        {{view "select" class="form-control input-sm model-select" content=models optionValuePath="content.v" optionLabelPath="content.l" value=modelSelection prompt="Search All Types"}}
+<div class="search-view">
+  <h1><i class="fa fa-fw fa-search"></i> Finder</h1>
+  <hr />
+  <form {{action "search" on="submit"}}>
+    <div class="row">
+      <div class="col-sm-10">
+        <div class="form-group finder">
+          {{view "select" class="form-control input-sm model-select" content=models optionValuePath="content.v" optionLabelPath="content.l" value=modelSelection prompt="Search All Types"}}
 
-        {{input type="search" class="typeahead form-control" placeholder="Search" value=query}}
+          {{input type="search" class="typeahead form-control" placeholder="Search" value=query}}
+        </div>
+      </div>
+      <div class="col-sm-2">
+        <div class="form-group">
+          <button type="submit" class="btn btn-default btn-block help-trigger" title="Press enter or click me to search" disabled={{disableInput}}>
+            Find
+            {{#if isSearching}}
+              <i class="fa fa-spin fa-spinner"></i>
+            {{/if}}
+          </button>
+        </div>
       </div>
     </div>
-    <div class="col-sm-2">
-      <div class="form-group">
-        <button type="submit" class="btn btn-default btn-block help-trigger" title="Press enter or click me to search" disabled={{disableInput}}>
-          Find
-          {{#if isSearching}}
-            <i class="fa fa-spin fa-spinner"></i>
-          {{/if}}
-        </button>
-      </div>
-    </div>
-  </div>
-</form>
-{{#if isStale}}
-  <h3>Press enter or click &quot;Find&quot; to search{{#if query}} for {{query}}{{/if}}</h3>
-{{/if}}
-<small class="text-muted text-center">Searching {{#if modelSelection}}in {{pluralize-text modelSelection}}{{else}}in all types{{/if}}{{#if query}} for {{query}}{{/if}}...</small>
-<hr />
+  </form>
+  {{#if isStale}}
+    <h3>Press enter or click &quot;Find&quot; to search{{#if query}} for {{query}}{{/if}}</h3>
+  {{/if}}
+  <small class="text-muted text-center">Searching {{#if modelSelection}}in {{pluralize-text modelSelection}}{{else}}in all types{{/if}}{{#if query}} for {{query}}{{/if}}...</small>
+  <hr />
 
-{{#if content}}
-  <h3>
-    {{count-array content}} results found...
-    <small class="pull-right"><i class="fa fa-fw fa-cloud-download"></i> {{resultTime}}s</small>
-  </h3>
-{{/if}}
+  {{#if content}}
+    <h3>
+      {{count-array content}} results found...
+      <small class="pull-right"><i class="fa fa-fw fa-cloud-download"></i> {{resultTime}}s</small>
+    </h3>
+  {{/if}}
 
-<ul class="list-group">
-  {{#each result in content itemController="search-result"}}
-    <li class="list-group-item">
-      <span class="label label-danger">{{title-case result.type}}</span> &nbsp;
-      {{#link-to result.type result.id}}
-        {{result.title}}
-      {{/link-to}}
-      <span class="pull-right text-muted">
-        {{time-ago result.time_stamp}}
-      </span>
-    </li>
-  {{else}}
-    {{#if isSearching}}
-      <h1 class="text-center">Searching... <i class="fa fa-spin fa-spinner"></i></h1>
+  <ul class="list-group">
+    {{#each result in content itemController="search-result"}}
+      <li class="list-group-item">
+        <span class="label label-danger">{{title-case result.type}}</span> &nbsp;
+        {{#link-to result.type result.id}}
+          {{result.title}}
+        {{/link-to}}
+        <span class="pull-right text-muted">
+          {{time-ago result.time_stamp}}
+        </span>
+      </li>
     {{else}}
-      {{#unless isStale}}
-        <h2>No Results Found</h2>
-      {{/unless}}
-    {{/if}}
-  {{/each}}
-</ul>
+      {{#if isSearching}}
+        <h1 class="text-center">Searching... <i class="fa fa-spin fa-spinner"></i></h1>
+      {{else}}
+        {{#unless isStale}}
+          <h2>No Results Found</h2>
+        {{/unless}}
+      {{/if}}
+    {{/each}}
+  </ul>
+</div>

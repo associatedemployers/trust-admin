@@ -23,7 +23,7 @@ var hasFirstArrayPlans = function ( value ) {
   return value === true || value === 'true' ? 'exists' : value === false || value === 'false' ? 'nexists' : undefined;
 };
 
-export default Ember.ArrayController.extend(ResourcePaginatorMixin, ResourceFiltersMixin, {
+export default Ember.Controller.extend(ResourcePaginatorMixin, ResourceFiltersMixin, {
   needs: [ 'application' ],
   states: Ember.computed.alias('controllers.application.states'),
   queryParams: [
@@ -98,6 +98,15 @@ export default Ember.ArrayController.extend(ResourcePaginatorMixin, ResourceFilt
     'applyingMeta',
     'applyingPlans'
   ),
+
+  renderPopover: function () {
+    Ember.run.scheduleOnce('afterRender', () => {
+      this.$('.trigger-popover').popover({
+        html: true,
+        container: 'body'
+      });
+    });
+  }.observes('model'),
 
   cities: function () {
     var self = this;
