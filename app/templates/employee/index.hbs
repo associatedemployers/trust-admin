@@ -2,7 +2,7 @@
   <div class="col-md-5 draw-sep">
     <ul class="nav nav-tabs" role="tablist">
       {{#each tab in infoTabs}}
-        <li {{bind-attr class="tab.active:active"}}>
+        <li class="{{if tab.active 'active'}}">
           <a href="#" {{action "showInfoTab" tab.order}}>{{{tab.name}}}</a>
         </li>
       {{/each}}
@@ -18,7 +18,7 @@
   <div class="col-md-7 draw-sep">
     <ul class="nav nav-tabs" role="tablist">
       {{#each tab in tabs}}
-        <li {{bind-attr class="tab.active:active"}}>
+        <li class="{{if tab.active 'active'}}">
           <a href="#" {{action "showTab" tab.order}}>{{{tab.name}}}</a>
         </li>
       {{/each}}

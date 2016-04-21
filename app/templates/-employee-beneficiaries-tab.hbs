@@ -1,7 +1,7 @@
 <ul class="list-group">
   {{#each beneficiary in content.beneficiaries itemController='beneficiary-item'}}
     <li class="list-group-item">
-      <span {{bind-attr class=":label beneficiary.isPrimary:label-primary beneficiary.isContingent:label-default"}}>{{title-case beneficiary.type}}</span>&nbsp;
+      <span class="label {{if beneficiary.isPrimary 'label-primary'}} {{if beneficiary.isContingent 'label-default'}}">{{title-case beneficiary.type}}</span>&nbsp;
 
       {{beneficiary.name}} <small class="text-muted">({{title-case beneficiary.relation}})</small>
 

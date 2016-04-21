@@ -19,7 +19,7 @@
           <i class="fa fa-fw fa-download"></i> {{#if showLoadSnapshot}}Cancel load{{else}}Load snapshot{{/if}}
         </button>
 
-        <div {{bind-attr class=":text-center :hide-slide showLoadSnapshot:show"}}>
+        <div class="text-center hide-slide {{if showLoadSnapshot 'show'}}">
           <a href="#" {{action "loadSnapshot" selectedEvent "previous"}}><i class="fa fa-file-text-o"></i> Before snapshot</a>
           |
           <a href="#" {{action "loadSnapshot" selectedEvent "updated"}}><i class="fa fa-file-text"></i> After snapshot</a>

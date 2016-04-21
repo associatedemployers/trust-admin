@@ -1,13 +1,13 @@
 <div class="row">
-  <div {{bind-attr class="selectedFile:col-md-6:col-md-12"}}>
+  <div class="{{if selectedFile 'col-md-6' 'col-md-12'}}">
     <div class="scrolling-list">
       <div class="list-heading">
         <h4>
-          <span class="label label-success">{{numberOfFiles}}</span> Files 
+          <span class="label label-success">{{numberOfFiles}}</span> Files
           <small class="text-muted"><i class="fa fa-info-circle"></i> Click a file name for more information</small>
         </h4>
         <div class="list-controls">
-          <a href="#" {{action "toggleProperty" "sortAscending"}}>Time Created ( {{#if sortAscending}}Newest{{else}}Oldest{{/if}} <i {{bind-attr class=":fa sortAscending:fa-caret-down:fa-caret-up"}}></i> )</a>
+          <a href="#" {{action "toggleProperty" "sortAscending"}}>Time Created ( {{#if sortAscending}}Newest{{else}}Oldest{{/if}} <i class="fa {{if sortAscending 'fa-caret-down' 'fa-caret-up'}}"></i> )</a>
         </div>
       </div>
       <div class="list-container">
@@ -31,7 +31,7 @@
                 </div>
                 <div class="col-md-6 text-right">
                   <small>{{time-ago file.time_stamp}} at {{format-moment file.time_stamp "hh:mm:ssa"}}</small>
-                  <a {{bind-attr href=file.link}} target="_blank"><i class="fa fa-fw fa-external-link"></i></a>
+                  <a href="{{file.link}}" target="_blank"><i class="fa fa-fw fa-external-link"></i></a>
                 </div>
               </div>
             </li>
@@ -42,7 +42,7 @@
       </div>
     </div>
   </div>
-  <div {{bind-attr class="selectedFile:col-md-6:hidden"}}>
+  <div class="{{if selectedFile 'col-md-6' 'hidden'}}">
     {{#if selectedFile}}
       <h3>
         {{~#if selectedFile.name}}
@@ -51,7 +51,7 @@
           Unnamed File
         {{~/if}}.{{selectedFile.extension}}
 
-        <a {{bind-attr href=selectedFile.link}} target="_blank"><i class="fa fa-fw fa-external-link"></i></a>
+        <a href="{{selectedFile.link}}" target="_blank"><i class="fa fa-fw fa-external-link"></i></a>
 
         <a href="#" class="pull-right" {{action "deselectFile"}}><i class="fa fa-fw fa-times"></i></a>
 

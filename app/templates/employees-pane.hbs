@@ -2,15 +2,15 @@
   <i class="fa fa-spin fa-spinner"></i>
 {{else}}
   <ul class="nav nav-tabs" role="tablist">
-    <li {{bind-attr class="showingActive:active"}}>
+    <li class="{{if showingActive 'active'}}">
       <a href="#" {{action "show" "active"}}>Active</a>
     </li>
-    <li {{bind-attr class="showingTerminated:active"}}>
+    <li class="{{if showingTerminated 'active'}}">
       <a href="#" {{action "show" "terminated"}}>Terminated</a>
     </li>
     <div class="pull-right nav-tab-inline">
       <a href="#" {{action "toggleProperty" "sortasc"}}>
-        {{#if showingActive}}Hire{{else}}Termination{{/if}} date <i {{bind-attr class=":fa sortasc:fa-caret-down:fa-caret-up"}}></i>
+        {{#if showingActive}}Hire{{else}}Termination{{/if}} date <i class="fa {{if sortasc 'fa-caret-down' 'fa-caret-up'}}"></i>
       </a>
     </div>
   </ul>

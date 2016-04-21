@@ -42,17 +42,17 @@
 
       {{! Meta Filters}}
       <h4>
-        <a href="#" {{action "toggleProperty" "applyingMeta"}}><i class="fa fa-fw fa-user"></i> Meta <i {{bind-attr class=":fa applyingMeta:fa-angle-up:fa-angle-down"}}></i></a>
+        <a href="#" {{action "toggleProperty" "applyingMeta"}}><i class="fa fa-fw fa-user"></i> Meta <i class="fa {{if applyingMeta 'fa-angle-up' 'fa-angle-down'}}"></i></a>
       </h4>
-      <div {{bind-attr class=":form-group :hide-slide :text-center applyingMeta:show"}}>
+      <div class="form-group hide-slide text-center {{if applyingMeta 'show'}}">
         {{bound-toggle sm=true label="Terminated" theme="squish" value=serializeFilters.terminated}}
       </div>
 
       {{! Plan Filters}}
       <h4>
-        <a href="#" {{action "toggleProperty" "applyingPlans"}}><i class="fa fa-fw fa-folder-open"></i> Plans <i {{bind-attr class=":fa applyingPlans:fa-angle-up:fa-angle-down"}}></i></a>
+        <a href="#" {{action "toggleProperty" "applyingPlans"}}><i class="fa fa-fw fa-folder-open"></i> Plans <i class="fa {{if applyingPlans 'fa-angle-up' 'fa-angle-down'}}"></i></a>
       </h4>
-      <div {{bind-attr class=":form-group :hide-slide :text-center applyingPlans:show"}}>
+      <div class="form-group hide-slide text-center {{if applyingPlans 'show'}}">
         {{bound-toggle sm=true label="Medical" theme="squish" value=serializeFilters.hasMedical}}
         {{bound-toggle sm=true label="Dental" theme="squish" value=serializeFilters.hasDental}}
         {{bound-toggle sm=true label="Vision" theme="squish" value=serializeFilters.hasVision}}
@@ -63,7 +63,7 @@
     <div class="col-md-9">
       <div class="row">
         <div class="col-md-6">
-          <div {{bind-attr class=":resource-loading-overlay isLoading:active"}}>
+          <div class="resource-loading-overlay {{if isLoading 'active'}}">
             <h2><i class="fa fa-fw fa-spin fa-spinner"></i> Loading Resources...</h2>
           </div>
         </div>
@@ -117,7 +117,7 @@
 {{!-- {{#bs-modal id="advanced-query-modal" modal-lg=true dismissible=true title='<h2><i class="fa fa-list-alt"></i> Advanced Report</h2>'}}
   <form>
     <div class="modal-body">
-      
+
     </div>
     <div class="modal-footer">
       <button type="submit" class="btn btn-primary btn-block" data-dismiss="modal" {{action "submitAdvancedQuery"}}>Get Report</button>

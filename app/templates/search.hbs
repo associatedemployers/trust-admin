@@ -11,7 +11,7 @@
     </div>
     <div class="col-sm-2">
       <div class="form-group">
-        <button type="submit" class="btn btn-default btn-block help-trigger" title="Press enter or click me to search" {{bind-attr disabled=disableInput}}>
+        <button type="submit" class="btn btn-default btn-block help-trigger" title="Press enter or click me to search" disabled={{disableInput}}>
           Find
           {{#if isSearching}}
             <i class="fa fa-spin fa-spinner"></i>

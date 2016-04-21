@@ -13,11 +13,11 @@
     <form class="popout-panel login-panel login-panel-animate" {{action "login" on="submit"}}>
       <h2 class="text-center">Login</h2>
       <hr />
-      <div {{bind-attr class=":form-group validEmail:valid loginError:hasError"}}>
+      <div class="form-group {{if validEmail 'valid'}} {{if loginError 'hasError'}}">
         {{input type="email" class="form-control input-lg" value=email placeholder="Email Address"}}
       </div>
 
-      <div {{bind-attr class=":form-group validPassword:valid loginError:hasError"}}>
+      <div class="form-group {{if validPassword 'valid'}} {{if loginError 'hasError'}}">
         {{input type="password" class="form-control input-lg" value=password placeholder="Password"}}
       </div>
 
@@ -26,7 +26,7 @@
       {{/if}}
 
       <div class="form-group">
-        <button type="submit" class="btn btn-success btn-block btn-lg" {{bind-attr disabled=notAllowSubmit}}>
+        <button type="submit" class="btn btn-success btn-block btn-lg" disabled={{notAllowSubmit}}>
           Login{{#if loggingIn}} <i class="fa fa-fw fa-spin fa-spinner"></i>{{/if}}
         </button>
       </div>
@@ -37,7 +37,7 @@
     </form>
 
     <div class="login-panel-back login-panel-animate">
-      
+
     </div>
   </div>
 </div>

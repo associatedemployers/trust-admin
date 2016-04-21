@@ -2,7 +2,7 @@
   <div class="col-md-6">
   </div>
   <div class="col-md-6">
-    
+
   </div>
 </div>
 
@@ -20,10 +20,10 @@
 <div>
   <h3>
     <a href="#" {{action "toggleProperty" "showLegacyData"}}>
-      <i class="fa fa-fw fa-archive"></i> Legacy Data<i {{bind-attr class=":fa :fa-fw showLegacyData:fa-angle-up:fa-angle-down"}}></i>
+      <i class="fa fa-fw fa-archive"></i> Legacy Data<i class="fa fa-fw fa-angle-{{showLegacyData 'up' 'down'}}"></i>
     </a>
   </h3>
-  <ul {{bind-attr class=":reset-list :no-list-style :hide-slide showLegacyData:show"}}>
+  <ul class="reset-list no-list-style hide-slide {{if showLegacyData 'show'}}">
     {{#with content}}
       <li><strong>Old Employee Rate</strong>: {{legacyOldEmployeeRate}}</li>
       <li><strong>Old Employee and Spouse Rate</strong>: {{legacyOldEmployeeAndSpouseRate}}</li>

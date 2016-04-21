@@ -16,13 +16,13 @@
 
       <hr />
       <p class="text-center">
-        
+
       </p>
     </div>
     <div class="col-md-9">
       <div class="row">
         <div class="col-md-6">
-          <div {{bind-attr class=":resource-loading-overlay isLoading:active"}}>
+          <div class="resource-loading-overlay {{if isLoading 'active'}}">
             <h2><i class="fa fa-fw fa-spin fa-spinner"></i> Loading Resources...</h2>
           </div>
         </div>

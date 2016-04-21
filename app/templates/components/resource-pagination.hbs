@@ -1,4 +1,4 @@
-<li {{bind-attr class="onFirstPage:disabled"}}>
+<li class="{{if onFirstPage 'disabled'}}">
   {{#if onFirstPage}}
     <span><i class="fa fa-angle-double-left"></i></span>
   {{else}}
@@ -7,7 +7,7 @@
     </a>
   {{/if}}
 </li>
-<li {{bind-attr class="onFirstPage:disabled"}}>
+<li class="{{if onFirstPage 'disabled'}}">
   {{#if onFirstPage}}
     <span><i class="fa fa-angle-left"></i></span>
   {{else}}
@@ -18,10 +18,10 @@
 </li>
 
 {{#each page in renderList}}
-  <li {{bind-attr class="page.active:active"}}><a href="#" {{action "setPage" page.n}}>{{page.n}}</a></li>
+  <li class="{{if page.active 'active'}}"><a href="#" {{action "setPage" page.n}}>{{page.n}}</a></li>
 {{/each}}
 
-<li {{bind-attr class="onLastPage:disabled"}}>
+<li class="{{if onLastPage 'disabled'}}">
   {{#if onLastPage}}
     <span><i class="fa fa-angle-right"></i></span>
   {{else}}
@@ -30,7 +30,7 @@
     </a>
   {{/if}}
 </li>
-<li {{bind-attr class="onLastPage:disabled"}}>
+<li class="{{if onLastPage 'disabled'}}">
   {{#if onLastPage}}
     <span><i class="fa fa-angle-double-right"></i></span>
   {{else}}

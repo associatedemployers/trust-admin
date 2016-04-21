@@ -4,14 +4,14 @@
       <h1><i class="fa fa-fw fa-minus-circle"></i> Permissions</h1>
     </div>
     <div class="col-md-6 resource-controls with-heading">
-      <button {{bind-attr class=":btn :btn-success showForm:active" disabled=showForm}} {{action "openForm"}}>
+      <button class="btn btn-success {{if showForm 'active'}}" disabled={{showForm}} {{action "openForm"}}>
         <i class="fa fa-fw fa-plus"></i> Add...
       </button>
     </div>
   </div>
   <hr />
   <div class="row resource-row">
-    <div {{bind-attr class="showForm:col-md-4:hidden"}}>
+    <div class="{{if showForm 'col-md-4' 'hidden'}}">
       <form class="popout-panel" {{action "savePermission" on="submit"}}>
         <span class="close">
           <a href="#" {{action "closeForm"}}><i class="fa fa-fw fa-times"></i></a>
@@ -62,11 +62,11 @@
         </ul>
         <hr />
         <div class="form-group">
-          <button type="submit" class="btn btn-success btn-block" {{bind-attr disabled=isSaving}}>Save Permission {{#if isSaving}}<i class="fa fa-spin fa-spinner"></i>{{/if}}</button>
+          <button type="submit" class="btn btn-success btn-block" disabled={{isSaving}}>Save Permission {{#if isSaving}}<i class="fa fa-spin fa-spinner"></i>{{/if}}</button>
         </div>
       </form>
     </div>
-    <div {{bind-attr class="showForm:col-md-8:col-md-12"}}>
+    <div class="{{if showForm 'col-md-8' 'col-md-12'}}">
       <div class="list-group">
         {{#each permission in content}}
           <div class="list-group-item">

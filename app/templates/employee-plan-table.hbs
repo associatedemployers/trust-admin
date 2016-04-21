@@ -1,5 +1,5 @@
 <div class="row">
-  <div {{bind-attr class="selectedCoverages:col-md-4:hidden"}}>
+  <div class="{{if selectedCoverages 'col-md-4' 'hidden'}}">
     <h3>
       {{title-case selectedCoverageType}}
       <span class="pull-right">
@@ -19,7 +19,7 @@
     {{/each}}
   </div>
 
-  <div {{bind-attr class="selectedCoverages:col-md-8:col-md-12"}}>
+  <div class="{{if selectedCoverages 'col-md-8' 'col-md-12'}}">
     <table class="table table-striped text-center legend-text-right">
       <thead>
       <tr>
@@ -46,7 +46,7 @@
         {{/each}}
       </tr>
       {{! Spouse}}
-      <tr {{bind-attr class="content.isMarried::disabled-strike"}}>
+      <tr class="{{unless content.isMarried 'disabled-strike'}}">
         <th>Spouse</th>
         {{#each levels in coverage}}
           <td>
