@@ -5,4 +5,4 @@ export {
   titleCase
 };
 
-export default Ember.Handlebars.makeBoundHelper(titleCase);
+export default Ember.Helper.helper(titleCase);

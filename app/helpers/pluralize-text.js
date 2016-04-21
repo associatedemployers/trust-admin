@@ -8,4 +8,4 @@ export {
   pluralizeText
 };
 
-export default Ember.Handlebars.makeBoundHelper(pluralizeText);
+export default Ember.Helper.helper(pluralizeText);

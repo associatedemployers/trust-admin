@@ -8,4 +8,4 @@ export {
   timeAgo
 };
 
-export default Ember.Handlebars.makeBoundHelper(timeAgo);
+export default Ember.Helper.helper(timeAgo);

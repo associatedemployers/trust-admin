@@ -6,4 +6,4 @@ export {
   ObjectSizeUtility
 };
 
-export default Ember.Handlebars.makeBoundHelper(ObjectSizeUtility);
+export default Ember.Helper.helper(ObjectSizeUtility);

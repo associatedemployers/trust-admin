@@ -1,16 +1,6 @@
 <ul class="list-group">
-  {{#each contact in content.contactMethods itemController='contact-method'}}
-    <li class="list-group-item">
-      <i class="fa fa-fw {{if contact.isEmail 'fa-at'}} {{if contact.isPhone 'fa-phone'}}"></i>
-      <a href="{{contact.link}}">{{contact.decoratedValue}}</a>
-      {{#if contact.ext}}
-        ext. {{contact.ext}}
-      {{/if}}
-
-      <span class="pull-right text-muted">
-        {{title-case contact.type}}
-      </span>
-    </li>
+  {{#each model.contactMethods as |contact|}}
+    {{list/contact-method contact=contact}}
   {{else}}
     <div class="alert alert-info alert-dismissible alert-pad" role="alert">
       <button type="button" class="close" data-dismiss="alert">
