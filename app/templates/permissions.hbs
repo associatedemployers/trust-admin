@@ -34,7 +34,7 @@
           <button type="button" class="btn btn-warning btn-block" {{action "addEndpoint"}}>Add</button>
         </div>
         <ul>
-          {{#each endpoint in permission.endpoints}}
+          {{#each permission.endpoints as |endpoint|}}
             <li><a href="#" {{action "removeEndpoint" endpoint}}><i class="fa fa-fw fa-times-circle"></i></a> {{endpoint}}</li>
           {{/each}}
         </ul>
@@ -56,7 +56,7 @@
           <button type="button" class="btn btn-warning btn-block" {{action "addPermissionOption"}}>Add</button>
         </div>
         <ul>
-          {{#each permissionOption in permission.permissions}}
+          {{#each permission.permissions as |permissionOption|}}
             <li><a href="#" {{action "removePermissionOption" permissionOption}}><i class="fa fa-fw fa-times-circle"></i></a> {{title-case permissionOption.type}} - {{title-case permissionOption.name}}</li>
           {{/each}}
         </ul>
@@ -68,7 +68,7 @@
     </div>
     <div class="{{if showForm 'col-md-8' 'col-md-12'}}">
       <div class="list-group">
-        {{#each permission in content}}
+        {{#each content as |permission|}}
           <div class="list-group-item">
             <span class="label label-info">{{title-case permission.type}}</span> {{permission.name}}
             <span class="pull-right">

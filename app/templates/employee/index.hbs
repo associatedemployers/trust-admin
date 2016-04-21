@@ -1,14 +1,14 @@
 <div class="row row-draw-sep resource-section">
   <div class="col-md-5 draw-sep">
     <ul class="nav nav-tabs" role="tablist">
-      {{#each tab in infoTabs}}
+      {{#each infoTabs as |tab|}}
         <li class="{{if tab.active 'active'}}">
           <a href="#" {{action "showInfoTab" tab.order}}>{{{tab.name}}}</a>
         </li>
       {{/each}}
     </ul>
     <div class="tab-content limited-pane">
-      {{#each tab in infoTabs}}
+      {{#each infoTabs as |tab|}}
         {{#if tab.active}}
           {{partial tab.partial}}
         {{/if}}
@@ -17,14 +17,14 @@
   </div>
   <div class="col-md-7 draw-sep">
     <ul class="nav nav-tabs" role="tablist">
-      {{#each tab in tabs}}
+      {{#each tabs as |tab|}}
         <li class="{{if tab.active 'active'}}">
           <a href="#" {{action "showTab" tab.order}}>{{{tab.name}}}</a>
         </li>
       {{/each}}
     </ul>
     <div class="tab-content limited-pane">
-      {{#each tab in tabs}}
+      {{#each tabs as |tab|}}
         {{#if tab.active}}
           {{partial tab.partial}}
         {{/if}}

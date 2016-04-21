@@ -27,7 +27,7 @@
                 </span>
               {{/if}}
               <span class="help-label">Items per page: </span>
-              {{#each option in itemsPerPageOptions}}
+              {{#each itemsPerPageOptions as |option|}}
                 {{items-per-page-option itemsPerPage=itemsPerPage option=option}}
               {{/each}}
             </div>
@@ -36,7 +36,7 @@
       </div>
 
       <div class="list-group resource-list-group">
-        {{#each medicalRate in content}}
+        {{#each content as |medicalRate|}}
           {{render "medical-rate-list-item" medicalRate}}
         {{else}}
           <h2 class="text-center"><i class="fa fa-exclamation-triangle"></i> No medical rates found.</h2>

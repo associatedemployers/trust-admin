@@ -78,7 +78,7 @@
                 </span>
               {{/if}}
               <span class="help-label">Items per page: </span>
-              {{#each option in itemsPerPageOptions}}
+              {{#each itemsPerPageOptions as |option|}}
                 {{items-per-page-option itemsPerPage=itemsPerPage option=option}}
               {{/each}}
             </div>
@@ -87,7 +87,7 @@
       </div>
 
       <div class="list-group resource-list-group">
-        {{#each employee in content}}
+        {{#each content as |employee|}}
           {{render "employee-list-item" employee}}
         {{else}}
           <h2 class="text-center"><i class="fa fa-exclamation-triangle"></i> No employees found.</h2>

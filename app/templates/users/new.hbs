@@ -55,7 +55,7 @@
 
             <small>
               <ul class="permission-url">
-                {{#each url in permissionGroup.endpoints}}
+                {{#each permissionGroup.endpoints as |url|}}
                   <li>{{url}}</li>
                 {{/each}}
               </ul>

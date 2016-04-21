@@ -36,7 +36,7 @@
 
     <h2>Locations</h2>
     <ul>
-      {{#each location in content.locations}}
+      {{#each content.locations as |location|}}
         <li>
           <a href="#" {{action "selectOffice" location}}>{{location.addressFormatted}}</a>
         </li>

@@ -1,6 +1,6 @@
 <div class="row history-timeline-row">
   <div class="col-md-5 history-event-groups">
-    {{#each eventGroup in coalescedEvents}}
+    {{#each coalescedEvents as |eventGroup|}}
       {{render "history-event-group" eventGroup}}
     {{else}}
       <h4 class="text-center text-warning"><i class="fa fa-info-circle"></i> No Events To Display</h4>

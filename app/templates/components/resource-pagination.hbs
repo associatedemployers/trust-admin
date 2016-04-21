@@ -17,7 +17,7 @@
   {{/if}}
 </li>
 
-{{#each page in renderList}}
+{{#each renderList as |page|}}
   <li class="{{if page.active 'active'}}"><a href="#" {{action "setPage" page.n}}>{{page.n}}</a></li>
 {{/each}}
 

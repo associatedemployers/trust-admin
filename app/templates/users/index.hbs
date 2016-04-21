@@ -37,7 +37,7 @@
                 </span>
               {{/if}}
               <span class="help-label">Items per page: </span>
-              {{#each option in itemsPerPageOptions}}
+              {{#each itemsPerPageOptions as |option|}}
                 {{items-per-page-option itemsPerPage=itemsPerPage option=option}}
               {{/each}}
             </div>
