@@ -73,7 +73,7 @@ var dependent_relationships = [
   'Domestic Partner'
 ];
 
-var dependent_relationships_context = {
+var dependentRelationshipsContext = {
   Spouse: {
     Male:   'Husband',
     Female: 'Wife'
@@ -84,4 +84,4 @@ var dependent_relationships_context = {
   }
 };
 
-export { states, suffixes, genders, marital_statuses, dependent_relationships, dependent_relationships_context };
+export { states, suffixes, genders, marital_statuses, dependent_relationships, dependentRelationshipsContext };
