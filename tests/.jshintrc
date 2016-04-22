@@ -24,6 +24,7 @@
     "moment",
     "currentRouteName"
   ],
+  "qunit": true,
   "node": false,
   "browser": false,
   "boss": true,
@@ -47,7 +48,6 @@
   "sub": true,
   "strict": false,
   "white": false,
-  "esnext": true,
-  "unused": true
-  "esnext": true
+  "unused": true,
+  "esversion": 6
 }

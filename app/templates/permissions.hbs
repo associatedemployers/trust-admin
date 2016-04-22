@@ -23,7 +23,7 @@
           {{input type="text" class="form-control" value=permission.name placeholder="Permission Namespace"}}
         </div>
         <div class="form-group">
-          {{view "select" class="form-control" content=httpTypes value=permission.type prompt="--Select a Permission Type--"}}
+          {{input/x-select content=httpTypes selection=permission.type prompt="--Select a Permission Type--" action=(action (mut permission.type))}}
         </div>
 
         <label>Endpoints</label>
@@ -43,7 +43,7 @@
         <div class="row">
           <div class="col-md-6">
             <div class="form-group">
-              {{view "select" class="form-control" content=httpVerbs value=permissionOption.type prompt="--Verb--"}}
+              {{input/x-select content=httpVerbs selection=permissionOption.type prompt="--Verb--" action=(action (mut permissionOption.type))}}
             </div>
           </div>
           <div class="col-md-6">

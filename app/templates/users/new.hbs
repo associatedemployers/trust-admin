@@ -1,5 +1,5 @@
 <h1>
-  {{#link-to 'users.index' title="Back to users"}}<i class="fa fa-arrow-left">{{/link-to}}
+  {{#link-to 'users.index' title="Back to users"}}<i class="fa fa-arrow-left"></i>{{/link-to}}
   <i class="fa fa-fw fa-user"></i> Create a new user
 </h1>
 <hr />
@@ -50,8 +50,11 @@
         {{#each assignablePermissions as |permissionGroup|}}
           <div class="col-xs-4">
             <h5>
-              {{title-case permissionGroup.name}} <small class="text-muted">[{{title-case permissionGroup.type}}]</small>
-            <h5>
+              {{title-case permissionGroup.name}}
+              <small class="text-muted">
+                [{{title-case permissionGroup.type}}]
+              </small>
+            </h5>
 
             <small>
               <ul class="permission-url">

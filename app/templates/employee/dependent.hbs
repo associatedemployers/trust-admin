@@ -2,7 +2,7 @@
   <div class="row popout-panel">
     <div class="col-md-8">
       <hgroup>
-        {{view "letter-resource-image" class="with-hgroup" width="80px" height="65px" text=letterImageText r=letterImageColor.r g=letterImageColor.g b=letterImageColor.b}}
+        {{letter-image class="with-hgroup" width="80px" height="65px" text=letterImageText r=letterImageColor.r g=letterImageColor.g b=letterImageColor.b}}
         <h2>
           {{content.fullName}}
         </h2>
@@ -11,16 +11,13 @@
           {{content.relationship}} of {{#link-to 'employee' content.employee.id}}{{content.employee.fullName}}{{/link-to}}
         </h4>
 
-      <div>
-        {{#with content}}
+        <div>
           <ul class="text-muted resource-info-list resource-quick-info">
-            <li><strong>Record ID (new):</strong> {{id}}</li>
-            <li><strong>Legacy ID:</strong> {{legacyId}}</li>
-            <li><strong>Creation Date:</strong> {{format-moment time_stamp}} <i>({{time-ago time_stamp}})</i></li>
+            <li><strong>Record ID (new):</strong> {{model.id}}</li>
+            <li><strong>Legacy ID:</strong> {{model.legacyId}}</li>
+            <li><strong>Creation Date:</strong> {{format-moment model.time_stamp}} <i>({{time-ago model.time_stamp}})</i></li>
           </ul>
-        {{/with}}
-      </div>
-
+        </div>
       </hgroup>
     </div>
     <div class="col-md-4 resource-controls">

@@ -28,7 +28,7 @@
         {{search-input class="form-control" searchContent=cities value=serializeFilters.city placeholder="Any City"}}
       </div>
       <div class="form-group">
-        {{view "select" class="form-control" content=states optionValuePath="content.v" optionLabelPath="content.l" value=serializeFilters.state prompt="Any State"}}
+        {{input/x-select content=states optionValuePath="v" optionLabelPath="l" selection=serializeFilters.state prompt="Any State" action=(action (mut serializeFilters.state))}}
       </div>
 
       {{! Employee Filters}}

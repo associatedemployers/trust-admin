@@ -1,7 +1,7 @@
 {{#if isEditing}}
   {{query.type}}
   <div class="form-group">
-    {{view "select" class="form-control" content=fields value=fieldSelection}}
+    {{input/x-select content=fields selection=fieldSelection action=(action (mut fieldSelection))}}
   </div>
   <div class="form-group">
     {{query.compareType}}

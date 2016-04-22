@@ -1,0 +1,11 @@
+<select id="{{selectId}}" class="{{selectClass}}" disabled={{selectDisabled}} {{action 'change' on='change'}}>
+  {{#if prompt}}
+    <option selected={{is-not selection}}>
+      {{prompt}}
+    </option>
+  {{/if}}
+
+  {{#each content key="@identity" as |item|}}
+    {{input/select-option item=item optionValuePath=optionValuePath optionLabelPath=optionLabelPath selection=selection compareWithValue=compareSelectionWithValue}}
+  {{/each}}
+</select>
