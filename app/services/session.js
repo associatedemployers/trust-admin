@@ -59,7 +59,7 @@ export default Ember.Service.extend({
     this.set('didSetHeaders', true);
   },
 
-  currentUser: computed('content.user', 'authenticated', function () {
+  currentUser: computed('content.user', 'authenticated', 'didSetHeaders', function () {
     if ( !this.get('content.user') || !this.get('authenticated') ) {
       return undefined;
     }
