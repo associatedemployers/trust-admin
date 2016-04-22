@@ -1,5 +1,4 @@
 import DS from 'ember-data';
-import Ember from 'ember';
 import addressFormatter from 'trust-admin/utils/address-formatter';
 
 const { attr, hasMany } = DS;
