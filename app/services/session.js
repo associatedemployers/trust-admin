@@ -65,6 +65,6 @@ export default Ember.Service.extend({
     }
 
     Ember.assert('Session must have user id to fetch currentUser', this.get('content.user'));
-    return this.store.find('user', this.get('content.user'));
+    return this.get('store').find('user', this.get('content.user'));
   })
 });

@@ -6,8 +6,8 @@ export const initialize = function ( application ) {
   application.inject('controller', 'session', 'service:session');
   application.inject('route', 'session', 'service:session');
   // Globals Service
-  application.inject('controller', 'session', 'service:globals');
-  application.inject('route', 'session', 'service:globals');
+  application.inject('controller', 'globals', 'service:globals');
+  application.inject('route', 'globals', 'service:globals');
 };
 
 export default {

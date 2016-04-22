@@ -7,51 +7,49 @@ var Router = Ember.Router.extend({
 
 Router.map(function() {
   this.route('employees');
-  this.resource('employee', { path: 'employees/:id' }, function () {
+  this.route('employee', { path: 'employees/:id' }, function () {
     this.route('index', { path: '/summary' });
     this.route('edit');
+    this.route('dependent', { path: '/dependents/:dependentid' }, function () {
+      this.route('index', { path: '/summary' });
+      this.route('edit');
+    });
   });
 
   this.route('companies');
-  this.resource('company', { path: 'companies/:id' }, function () {
+  this.route('company', { path: 'companies/:id' }, function () {
     this.route('index', { path: '/summary' });
-    this.route('edit');  
+    this.route('edit');
     this.route('employees');
     this.route('metrics');
   });
 
-  this.resource('users', function () {
+  this.route('users', function () {
     this.route('index', { path: '/' });
     this.route('new');
   });
 
-  this.resource('user', { path: 'user/:id' }, function () {
+  this.route('user', { path: 'user/:id' }, function () {
     this.route('index', { path: '/summary' });
     this.route('edit', { path: '/edit' });
   });
 
   this.route('medical-rates');
-  this.resource('medical-rate', { path: 'medical-rate/:id' }, function () {
+  this.route('medical-rate', { path: 'medical-rate/:id' }, function () {
     this.route('index', { path: '/summary' });
     this.route('edit');
   });
 
   this.route('medical-plans');
-  this.resource('medical-plan', { path: 'medical-plan/:id' }, function () {
+  this.route('medical-plan', { path: 'medical-plan/:id' }, function () {
     this.route('index', { path: '/summary' });
     this.route('edit');
   });
 
   this.route('search');
-  this.resource('metrics', {}, function () {
+  this.route('metrics', {}, function () {
     this.route('index', { path: '/summary' });
     this.route('charts');
-  });
-
-  // Nested Resources
-  this.resource('employee.dependent', { path: 'employees/:employeeid/dependents/:dependentid' }, function () {
-    this.route('index', { path: '/summary' });
-    this.route('edit');
   });
 
   this.route('permissions');

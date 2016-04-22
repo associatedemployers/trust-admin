@@ -1,3 +1,3 @@
-import DS from 'ember-data';
+import LFSerializer from 'ember-localforage-adapter/serializers/localforage';
 
-export default DS.LSSerializer.extend({});
+export default LFSerializer.extend({});

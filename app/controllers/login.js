@@ -81,9 +81,17 @@ export default Ember.Controller.extend({
     login () {
       var loginInfo = this.getProperties('email', 'password');
 
-      if( loginInfo.email && loginInfo.password ) {
-        this.session.login( loginInfo );
+      if ( !loginInfo.email || !loginInfo.password ) {
+        return;
       }
+
+      Ember.$.post('/api/user/login', loginInfo).then(res => {
+        this.session.createSession(res, 'admin').then(() => {
+          Ember.Logger.log('Logged in');
+        });
+      }).fail(err => {
+        this.set('loginError', err);
+      });
     }
   }
 });
