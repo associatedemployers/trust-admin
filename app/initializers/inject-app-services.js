@@ -1,36 +1,16 @@
-export var initialize = function ( container, application ) {
-  console.debug('Init :: Injecting session');
-  application.deferReadiness();
+import Ember from 'ember';
 
-  var store         = container.lookup('store:main'),
-      sessionModule = container.lookup('modules:session');
-
-  var existingSession;
-
-  store.find('session').then(function ( sessions ) {
-    sessions.forEach(function ( session ) {
-      if( moment( session.get('expires') ).isAfter( moment() ) ) {
-        existingSession = session;
-      } else {
-        session.destroyRecord();
-      }
-    });
-
-    if( existingSession ) {
-      sessionModule.set('content', existingSession);
-    }
-
-    container.typeInjection('controller', 'session', 'modules:session');
-    container.typeInjection('route', 'session', 'modules:session');
-    container.typeInjection('component', 'session', 'modules:session');
-
-    application.advanceReadiness();
-  });
+export const initialize = function ( application ) {
+  Ember.Logger.debug('Init :: Injecting App Services');
+  // Session Service
+  application.inject('controller', 'session', 'service:session');
+  application.inject('route', 'session', 'service:session');
+  // Globals Service
+  application.inject('controller', 'session', 'service:globals');
+  application.inject('route', 'session', 'service:globals');
 };
 
 export default {
-  name: 'inject-session',
-  after: 'register-modules',
-
-  initialize: initialize
+  initialize,
+  name: 'inject-app-services'
 };
