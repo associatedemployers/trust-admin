@@ -1,21 +1,21 @@
 import DS from 'ember-data';
 
-var attribute = DS.attr;
+const { attr } = DS;
 
 export default DS.Model.extend({
-  description: attribute('string'),
+  description: attr('string'),
 
   // Arrays
-  eventFlags:  attribute('array'),
-  delta:       attribute('array'),
-  deltaTypes:  attribute('array'),
+  eventFlags:  attr('array'),
+  delta:       attr('array'),
+  deltaTypes:  attr('array'),
 
-  updatedDocument:  attribute(),
-  previousDocument: attribute(),
+  updatedDocument:  attr(),
+  previousDocument: attr(),
 
-  documentId: attribute('string'),
-  updater:    attribute('string'),
+  documentId: attr('string'),
+  updater:    attr('string'),
 
-  eventDate:  attribute('date'),
-  time_stamp: attribute('date')
+  eventDate:  attr('date'),
+  'time-stamp': attr('date')
 });

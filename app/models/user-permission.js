@@ -1,15 +1,15 @@
 import DS from 'ember-data';
 
-var attribute = DS.attr;
+const { attr, belongsTo } = DS;
 
 export default DS.Model.extend({
-  user:  DS.belongsTo('user'),
-  group: DS.belongsTo('permission-group'),
-  groupName: attribute('string'),
-  name:  attribute('string'),
-  type:  attribute('string'),
+  user:  belongsTo('user'),
+  group: belongsTo('permission-group'),
+  groupName: attr('string'),
+  name:  attr('string'),
+  type:  attr('string'),
 
-  time_stamp: attribute('date', {
+  'time-stamp': attr('date', {
     defaultValue: function () {
       return new Date();
     }

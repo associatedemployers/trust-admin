@@ -1,31 +1,33 @@
 import DS from 'ember-data';
+import Ember from 'ember';
 
-var attribute = DS.attr;
+const { attr, belongsTo, hasMany } = DS,
+      { computed } = Ember;
 
 export default DS.Model.extend({
-  attachments:  DS.hasMany('file', { async: true }),
-  notes:        DS.hasMany('note'),
-  company:      DS.belongsTo('company', { async: true }),
-  employee:     DS.belongsTo('employee', { async: true }),
-  historyEvent: DS.belongsTo('historyEvent', { async: true }),
-  creator:      DS.belongsTo('user', { async: true }),
+  attachments:  hasMany('file', { async: true }),
+  notes:        hasMany('note'),
+  company:      belongsTo('company', { async: true }),
+  employee:     belongsTo('employee', { async: true }),
+  historyEvent: belongsTo('historyEvent', { async: true }),
+  creator:      belongsTo('user', { async: true }),
 
-  name:                attribute('string'),
-  electronicSignature: attribute('string'),
-  extension:           attribute('string'),
-  labels:              attribute('array'),
+  name:                attr('string'),
+  electronicSignature: attr('string'),
+  extension:           attr('string'),
+  labels:              attr('array'),
 
-  time_stamp: attribute('date', {
+  'time-stamp': attr('date', {
     defaultValue: function () {
       return new Date();
     }
   }),
 
   // Computed
-  link: function () {
+  link: computed('extension', 'employee', 'company', function () {
     var plain = this.toJSON(),
-        id    = ( plain.employee ) ? plain.employee : ( plain.company ) ? plain.company : null;
+        id    = plain.employee ? plain.employee : plain.company ? plain.company : null;
 
     return '/api/file/' + id + '-' + this.get('id') + '.' + plain.extension;
-  }.property('extension', 'employee', 'company')
+  })
 });

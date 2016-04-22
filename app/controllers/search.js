@@ -105,8 +105,8 @@ export default Ember.Controller.extend(GrowlMixin, {
     Ember.$.getJSON('/api/' + inflector.pluralize(modelSelection), query)
     .then(data => {
       if ( !data || !data[modelSelection] ) {
-        self.growlError('Search is unable to load data.');
-        return self.set('isLoadingData', false);
+        this.growlError('Search is unable to load data.');
+        return this.set('isLoadingData', false);
       }
 
       let mFn = typeof modelMap.hashMunge === 'function' ? modelMap.hashMunge : Ember.K(),
@@ -118,7 +118,7 @@ export default Ember.Controller.extend(GrowlMixin, {
       });
     })
     .catch(err => {
-      self.growlError(err);
+      this.growlError(err);
       Ember.Logger.error(err);
     });
   },

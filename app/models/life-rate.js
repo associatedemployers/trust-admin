@@ -1,27 +1,27 @@
 import DS from 'ember-data';
 
-var attribute = DS.attr,
-    defaultFalse = {
-      defaultValue: false
-    };
+const { attr, hasMany } = DS,
+      defaultFalse = {
+        defaultValue: false
+      };
 
 export default DS.Model.extend({
-  planNumber:    attribute('string'),
-  name:          attribute('string'),
-  coverage:      attribute('number'),
-  rate:          attribute('number'),
-  ageGroupStart: attribute('number'),
-  ageGroupEnd:   attribute('number'),
+  planNumber:    attr('string'),
+  name:          attr('string'),
+  coverage:      attr('number'),
+  rate:          attr('number'),
+  ageGroupStart: attr('number'),
+  ageGroupEnd:   attr('number'),
 
-  coversSpouse:     attribute('boolean', defaultFalse),
-  coversEmployee:   attribute('boolean', defaultFalse),
-  coversDependents: attribute('boolean', defaultFalse),
+  coversSpouse:     attr('boolean', defaultFalse),
+  coversEmployee:   attr('boolean', defaultFalse),
+  coversDependents: attr('boolean', defaultFalse),
 
   // Relational
-  companies: DS.hasMany('company', { async: true }),
+  companies: hasMany('company', { async: true }),
 
   // System
-  time_stamp: attribute('date', {
+  'time-stamp': attr('date', {
     defaultValue: function () {
       return new Date();
     }

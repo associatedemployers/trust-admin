@@ -1,12 +1,12 @@
 import DS from 'ember-data';
 
-var attribute = DS.attr;
+const { attr } = DS;
 
 export default DS.Model.extend({
-  ebms:   attribute('boolean'),
-  concat: attribute('boolean'),
-  text:   attribute('string'),
-  time_stamp: attribute('date', {
+  ebms:   attr('boolean'),
+  concat: attr('boolean'),
+  text:   attr('string'),
+  'time-stamp': attr('date', {
     defaultValue: function () {
       return new Date();
     }
