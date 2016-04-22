@@ -40,10 +40,17 @@ export default Ember.TextField.extend({
         prefixData   = this.controller.get('prefixData'),
         searchObject = this.controller.get('searchObject');
 
-    var data = ( this.content ) ? this.content.filter(function ( s ) {
-      var subject = ( searchObject ) ? JSON.stringify(s) : ( displayKey ) ? s[ displayKey ] : s;
-
-      return substrRegex.test( subject );
+    var data = this.content ? this.content.filter(( s ) => {
+      var subject = function () {
+        if ( searchObject ) {
+          return JSON.stringify(s);
+        } else if (displayKey) {
+          return s[ displayKey ];
+        } else {
+          return s;
+        }
+      };
+      return substrRegex.test( subject() );
     }).map(function ( datum ) {
       if( prefixData ) {
         var o = {};
@@ -56,10 +63,10 @@ export default Ember.TextField.extend({
 
         return o;
       } else {
-        return datum;  
+        return datum;
       }
     }) : [];
 
     callback( data );
-  },
+  }
 });
