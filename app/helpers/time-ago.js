@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-function timeAgo ( timestamp ) {
+function timeAgo ( [timestamp] ) {
   return moment( timestamp ).fromNow();
 }
 

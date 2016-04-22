@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-function countArray ( arr ) {
+function countArray ([arr]) {
   return arr && arr.length ? arr.length : 0;
 }
 

@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-function pluralizeText ( value ) {
+function pluralizeText ( [value] ) {
   return Ember.Inflector.inflector.pluralize( value );
 }
 
