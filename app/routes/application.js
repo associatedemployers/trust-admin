@@ -3,12 +3,12 @@ import Ember from 'ember';
 export default Ember.Route.extend({
   // Define Global Action Handlers
   actions: {
-    error: function ( err, transition ) {
-      console.error( err );
+    error ( err, transition ) {
+      Ember.Logger.error( err );
 
       var session       = this.session,
           authenticated = session.get('authenticated'),
-          isExpired     = ( authenticated ) ? moment( session.get('content.expires') ).isBefore( moment() ) : undefined;
+          isExpired     = authenticated ? moment( session.get('content.expires') ).isBefore( moment() ) : undefined;
 
       if( err.status === 401 ) {
         if( authenticated && !isExpired ) {
@@ -28,9 +28,9 @@ export default Ember.Route.extend({
       }
     },
 
-    showModal: function ( id, staticModal, forceAppend ) {
+    showModal ( id, staticModal, forceAppend ) {
       // Assign the modal element to a variable
-      var el            = $("#" + id),
+      var el            = $('#' + id),
           self          = this,
           previousModal = this.get('previousModal');
       // If the forceAppend variable exists, we will append it to that identifer; useful for nested view modals
@@ -61,7 +61,7 @@ export default Ember.Route.extend({
       showTheModal();
     },
 
-    hideModal: function ( id ) {
+    hideModal ( id ) {
       var self = this;
 
       $('#' + id).modal('hide').one('hidden.bs.modal', function () {
