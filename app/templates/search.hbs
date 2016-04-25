@@ -6,10 +6,10 @@
       <div class="col-sm-10">
         <div class="form-group finder">
           {{input/x-select
-            class="form-control input-sm model-select"
+            selectClass="form-control input-sm model-select"
             content=models
             optionValuePath="v"
-            optionLabelPath="content.l"
+            optionLabelPath="l"
             selection=modelSelection
             prompt="Search All Types"
             action=(action (mut modelSelection))}}

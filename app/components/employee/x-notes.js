@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import GrowlMixin from '../mixins/growl';
+import GrowlMixin from '../../mixins/growl';
 
 const { computed } = Ember;
 

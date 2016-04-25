@@ -58,6 +58,10 @@ Router.map(function() {
   this.route('verify-account', { path: 'verify/:id' });
 
   this.route('loading');
+  this.route('error');
+  this.route('not-found');
+  this.route('unauthorized');
+  this.route('catchall', {path: '/*wildcard'});
 });
 
 export default Router;

@@ -10,7 +10,7 @@ export default Ember.Component.extend({
     const asc = this.get('sortAscending'),
           files = this.get('files');
 
-    return files.sort((a, b) => {
+    return files && files.get('length') > 0 ? files.toArray().sort((a, b) => {
       let at = a.get('time_stamp'),
           bt = b.get('time_stamp');
 
@@ -21,7 +21,7 @@ export default Ember.Component.extend({
       } else {
         return 0;
       }
-    });
+    }) : files;
   }),
 
   actions: {

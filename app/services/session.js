@@ -42,13 +42,12 @@ export default Ember.Service.extend({
       });
 
       this.get('currentUser');
-      this._setupHeaders(data.token);
       return record;
     });
   },
 
-  _setupHeaders ( token ) {
-    Ember.assert('Session must have token to setup headers', !!token);
+  didSetHeaders: computed('content.token', function () {
+    const token = this.get('content.token');
 
     Ember.$.ajaxSetup({
       headers: {
@@ -56,11 +55,11 @@ export default Ember.Service.extend({
       }
     });
 
-    this.set('didSetHeaders', true);
-  },
+    return !!token;
+  }),
 
-  currentUser: computed('content.user', 'authenticated', 'didSetHeaders', function () {
-    if ( !this.get('content.user') || !this.get('authenticated') ) {
+  currentUser: computed('content.user.id', 'authenticated', 'didSetHeaders', function () {
+    if ( !this.get('content.user') || !this.get('authenticated') || !this.get('didSetHeaders') ) {
       return undefined;
     }
 

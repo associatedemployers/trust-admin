@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import { dependentRelationshipsContext as relationshipContexts } from '../utils/defined-data';
+import { dependentRelationshipsContext as relationshipContexts } from '../../utils/defined-data';
 
 const { computed } = Ember;
 

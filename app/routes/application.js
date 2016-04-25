@@ -1,6 +1,25 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
+  beforeModel () {
+    return this.store.findAll('session').then(sessions => {
+      var existingSession;
+
+      sessions.forEach(session => {
+        if ( moment(session.get('expires')).isAfter(moment()) ) {
+          existingSession = session;
+        } else {
+          session.destroyRecord();
+        }
+      });
+
+      if ( existingSession ) {
+        console.log(existingSession);
+        this.session.set('content', existingSession);
+      }
+    });
+  },
+
   // Define Global Action Handlers
   actions: {
     error ( err, transition ) {
