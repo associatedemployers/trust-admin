@@ -1,15 +1,17 @@
-<hgroup class="company-header">
-  <h2>{{content.name}}</h2>
-</hgroup>
+<div class="company-view">
+  <hgroup class="company-header">
+    <h2>{{content.name}}</h2>
+  </hgroup>
 
-<ul class="nav nav-tabs company-tabs" role="tablist">
-  {{#each tab in tabs}}
-    <li {{bind-attr class="tab.active:active"}}>
-      {{~#link-to tab.link role="tab" data-toggle="tab"}}
-        {{#if tab.icon}}<i {{bind-attr class=":fa :fa-fw tab.icon"}}></i>{{/if}} {{tab.name}}
-      {{~/link-to}}
-    </li>
-  {{/each}}
-</ul>
+  <ul class="nav nav-tabs company-tabs" role="tablist">
+    {{#each tabs as |tab|}}
+      <li class="{{if tab.active 'active'}}">
+        {{~#link-to tab.link role="tab" data-toggle="tab"}}
+          {{#if tab.icon}}<i class="fa fa-fw {{tab.icon}}"></i>{{/if}} {{tab.name}}
+        {{~/link-to}}
+      </li>
+    {{/each}}
+  </ul>
 
-{{outlet}}
+  {{outlet}}
+</div>

@@ -1,0 +1,19 @@
+<div class="row">
+  <div class="col-md-6">
+    <a href="#" {{action "selectFile" file}}>
+      {{~#if file.name}}
+        {{file.name}}
+      {{else}}
+        Unnamed File
+      {{~/if}}.{{file.extension}}
+    </a>
+
+    {{#each file.labels as |label|}}
+      <span class="label label-default">{{title-case label}}</span>
+    {{/each}}
+  </div>
+  <div class="col-md-6 text-right">
+    <small>{{time-ago file.time_stamp}} at {{format-moment file.time_stamp "hh:mm:ssa"}}</small>
+    <a href="{{file.link}}" target="_blank"><i class="fa fa-fw fa-external-link"></i></a>
+  </div>
+</div>

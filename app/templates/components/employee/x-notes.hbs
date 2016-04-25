@@ -1,0 +1,49 @@
+<ul class="list-group">
+  {{#each notes as |note|}}
+    {{lists/note-item note=note}}
+  {{else}}
+    <div class="alert alert-info alert-dismissible alert-pad" role="alert">
+      <button type="button" class="close" data-dismiss="alert">
+        <span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+      </button>
+      <i class="fa fa-fw fa-info-circle"></i> No Notes Found.
+    </div>
+  {{/each}}
+  <li>
+    <button class="btn btn-success btn-block" {{action "newNote"}}><i class="fa fa-fw fa-plus"></i> New Note</button>
+  </li>
+</ul>
+
+{{#bs-modal id="add-edit-note" dismissible=false title=modalTitle}}
+  <form {{action "saveNote" on="submit"}}>
+    <div class="modal-body">
+      <div class="form-group">
+        <label>Note text</label>
+        {{textarea class="form-control" value=focusNote.text rows="9"}}
+      </div>
+
+      <hr />
+
+      <div class="row">
+        <div class="col-xs-6">
+          {{bound-toggle label="Upload to EBMS" theme="squish" value=focusNote.ebms}}
+        </div>
+        <div class="col-xs-6">
+          {{#if focusNote.ebms}}
+            <p class="text-center text-muted">Enabling EBMS upload automatically pushes/concatenates this note for legacy use</p>
+          {{else}}
+            {{bound-toggle label="Concatenate for legacy" theme="squish" value=focusNote.concat}}
+          {{/if}}
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <div class="form-group">
+        <button type="submit" class="btn btn-success btn-block" disabled={{loading}}>Save Note{{#if loading}} <i class="fa fa-spin fa-spinner"></i>{{/if}}</button>
+      </div>
+      <div class="form-group">
+        <button type="button" class="btn btn-default btn-sm btn-block" data-dismiss="modal" {{action "cancelChanges"}}>Cancel</button>
+      </div>
+    </div>
+  </form>
+{{/bs-modal}}

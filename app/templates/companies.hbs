@@ -28,7 +28,7 @@
         {{search-input class="form-control" searchContent=cities value=serializeFilters.city placeholder="Any City"}}
       </div>
       <div class="form-group">
-        {{view "select" class="form-control" content=states optionValuePath="content.v" optionLabelPath="content.l" value=serializeFilters.state prompt="Any State"}}
+        {{input/x-select content=states optionValuePath="v" optionLabelPath="l" selection=serializeFilters.state prompt="Any State" action=(action (mut serializeFilters.state))}}
       </div>
 
       {{! Employee Filters}}
@@ -50,7 +50,7 @@
     <div class="col-md-9">
       <div class="row">
         <div class="col-md-6">
-          <div {{bind-attr class=":resource-loading-overlay isLoading:active"}}>
+          <div class="resource-loading-overlay {{if isLoading 'active'}}">
             <h2><i class="fa fa-fw fa-spin fa-spinner"></i> Loading Resources...</h2>
           </div>
         </div>
@@ -65,7 +65,7 @@
                 </span>
               {{/if}}
               <span class="help-label">Items per page: </span>
-              {{#each option in itemsPerPageOptions}}
+              {{#each itemsPerPageOptions as |option|}}
                 {{items-per-page-option itemsPerPage=itemsPerPage option=option}}
               {{/each}}
             </div>
@@ -74,8 +74,8 @@
       </div>
 
       <div class="list-group resource-list-group">
-        {{#each company in content}}
-          {{render "company-list-item" company}}
+        {{#each model as |company|}}
+          {{lists/company-item company=company}}
         {{else}}
           <h2 class="text-center"><i class="fa fa-exclamation-triangle"></i> No companies found.</h2>
         {{/each}}

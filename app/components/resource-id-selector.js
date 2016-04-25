@@ -24,7 +24,7 @@ export default SearchInput.extend({
 
   ttTemplates: function () {
     return {
-      suggestion: Handlebars.compile('<p><strong>{{value}}</strong> <small class="text-muted">{{id}}</small></p>')
+      suggestion: Ember.Handlebars.compile('<p><strong>{{value}}</strong> <small class="text-muted">{{id}}</small></p>')
     };
   }.property('searchKey'),
 

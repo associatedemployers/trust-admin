@@ -21,11 +21,11 @@
 </ul>
 <p class="text-center">
   <a href="#" {{action "toggleProperty" "showingSystemInformation"}}>
-    {{#if showingRecordInformation}}Hide{{else}}Show{{/if}} system information <i {{bind-attr class=":fa showingSystemInformation:fa-caret-up:fa-caret-down"}}></i>
+    {{#if showingRecordInformation}}Hide{{else}}Show{{/if}} system information <i class="fa {{if showingSystemInformation 'fa-caret-up' 'fa-caret-down'}}"></i>
   </a>
 </p>
 
-<div {{bind-attr class=":hide-slide showingSystemInformation:show"}}>
+<div class="hide-slide {{if showingSystemInformation 'show'}}">
   <ul class="resource-info-list resource-system-info">
     <li><strong>Time Stamp:</strong> {{format-moment content.time_stamp "YYYY/MM/DD HH:mm:ss:SS"}}</li>
     <li><strong>Database ID:</strong> {{content.id}}</li>

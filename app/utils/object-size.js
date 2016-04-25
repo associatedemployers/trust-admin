@@ -17,12 +17,15 @@ export default function objectSize ( object, multiplier, fixed ) {
       objectList.push( value );
 
       for ( var i in value ) {
+        if ( !value.hasOwnProperty(i) ) {
+          continue;
+        }
+
         stack.push( value[ i ] );
       }
     }
   }
 
-  var result = ( multiplier ) ? bytes / multiplier : bytes;
-
-  return ( typeof fixed === 'number' ) ? ( fixed === 0 ) ? Math.round( result ) : result.toFixed( fixed ) : result;
+  var result = multiplier ? bytes / multiplier : bytes;
+  return typeof fixed === 'number' ? fixed === 0 ? Math.round(result) : result.toFixed(fixed) : result;
 }

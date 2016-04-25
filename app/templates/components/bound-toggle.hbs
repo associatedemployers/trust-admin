@@ -5,4 +5,4 @@
 {{/if}}
 
 {{input type="checkbox" id=inputId class=toggleClass checked=value}}
-<label {{bind-attr class=":toggle-btn sm:toggle-sm"}} {{bind-attr for=inputId}}></label>
+<label class="toggle-btn {{if sm 'toggle-sm'}}" for={{inputId}}></label>

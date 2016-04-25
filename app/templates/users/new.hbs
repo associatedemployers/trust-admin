@@ -1,5 +1,5 @@
 <h1>
-  {{#link-to 'users.index' title="Back to users"}}<i class="fa fa-arrow-left">{{/link-to}}
+  {{#link-to 'users.index' title="Back to users"}}<i class="fa fa-arrow-left"></i>{{/link-to}}
   <i class="fa fa-fw fa-user"></i> Create a new user
 </h1>
 <hr />
@@ -7,8 +7,8 @@
 <div class="row">
   <div class="col-md-6">
     <div class="popout-panel">
-      <h3 {{bind-attr class=":popout-title informationIsComplete:text-success"}}>
-        <i {{bind-attr class=":fa :fa-fw informationIsComplete:fa-check:fa-archive"}}></i> Information
+      <h3 class="popout-title {{if informationIsComplete 'text-success'}}">
+        <i class="fa fa-fw fa-{{if informationIsComplete 'check' 'archive'}}"></i> Information
       </h3>
 
       <div class="row">
@@ -46,23 +46,26 @@
           </a>
         </small></h3>
 
-      <div {{bind-attr class=":row expandPermissions::contract"}}>
-        {{#each permissionGroup in assignablePermissions itemController="permissionGroup"}}
+      <div class="row {{unless expandPermissions 'contract'}}">
+        {{#each assignablePermissions as |permissionGroup|}}
           <div class="col-xs-4">
             <h5>
-              {{title-case permissionGroup.name}} <small class="text-muted">[{{title-case permissionGroup.type}}]</small>
-            <h5>
+              {{title-case permissionGroup.name}}
+              <small class="text-muted">
+                [{{title-case permissionGroup.type}}]
+              </small>
+            </h5>
 
             <small>
               <ul class="permission-url">
-                {{#each url in permissionGroup.endpoints}}
+                {{#each permissionGroup.endpoints as |url|}}
                   <li>{{url}}</li>
                 {{/each}}
               </ul>
             </small>
           </div>
           <div class="col-xs-8 text-right">
-          {{#each permission in permissionGroup.permissions itemController="permissionOption"}}
+          {{#each permissionGroup.permissions as |permission|}}
             {{bound-toggle sm=true label=permission.name theme="squish" value=permission.on}}
           {{else}}
             No Permissions Available
@@ -88,7 +91,7 @@
 
 <hr />
 
-<button class="btn btn-lg btn-success btn-block" {{bind-attr disabled=disableSubmit}} {{action "saveUser"}}>
+<button class="btn btn-lg btn-success btn-block" disabled={{disableSubmit}} {{action "saveUser"}}>
   <i class="fa fa-fw fa-save"></i>
 
   {{#if loading}}

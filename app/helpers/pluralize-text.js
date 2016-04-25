@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-function pluralizeText ( value ) {
+function pluralizeText ( [value] ) {
   return Ember.Inflector.inflector.pluralize( value );
 }
 
@@ -8,4 +8,4 @@ export {
   pluralizeText
 };
 
-export default Ember.Handlebars.makeBoundHelper(pluralizeText);
+export default Ember.Helper.helper(pluralizeText);

@@ -4,14 +4,14 @@
       <h1><i class="fa fa-fw fa-minus-circle"></i> Permissions</h1>
     </div>
     <div class="col-md-6 resource-controls with-heading">
-      <button {{bind-attr class=":btn :btn-success showForm:active" disabled=showForm}} {{action "openForm"}}>
+      <button class="btn btn-success {{if showForm 'active'}}" disabled={{showForm}} {{action "openForm"}}>
         <i class="fa fa-fw fa-plus"></i> Add...
       </button>
     </div>
   </div>
   <hr />
   <div class="row resource-row">
-    <div {{bind-attr class="showForm:col-md-4:hidden"}}>
+    <div class="{{if showForm 'col-md-4' 'hidden'}}">
       <form class="popout-panel" {{action "savePermission" on="submit"}}>
         <span class="close">
           <a href="#" {{action "closeForm"}}><i class="fa fa-fw fa-times"></i></a>
@@ -23,7 +23,7 @@
           {{input type="text" class="form-control" value=permission.name placeholder="Permission Namespace"}}
         </div>
         <div class="form-group">
-          {{view "select" class="form-control" content=httpTypes value=permission.type prompt="--Select a Permission Type--"}}
+          {{input/x-select content=httpTypes selection=permission.type prompt="--Select a Permission Type--" action=(action (mut permission.type))}}
         </div>
 
         <label>Endpoints</label>
@@ -34,7 +34,7 @@
           <button type="button" class="btn btn-warning btn-block" {{action "addEndpoint"}}>Add</button>
         </div>
         <ul>
-          {{#each endpoint in permission.endpoints}}
+          {{#each permission.endpoints as |endpoint|}}
             <li><a href="#" {{action "removeEndpoint" endpoint}}><i class="fa fa-fw fa-times-circle"></i></a> {{endpoint}}</li>
           {{/each}}
         </ul>
@@ -43,7 +43,7 @@
         <div class="row">
           <div class="col-md-6">
             <div class="form-group">
-              {{view "select" class="form-control" content=httpVerbs value=permissionOption.type prompt="--Verb--"}}
+              {{input/x-select content=httpVerbs selection=permissionOption.type prompt="--Verb--" action=(action (mut permissionOption.type))}}
             </div>
           </div>
           <div class="col-md-6">
@@ -56,19 +56,19 @@
           <button type="button" class="btn btn-warning btn-block" {{action "addPermissionOption"}}>Add</button>
         </div>
         <ul>
-          {{#each permissionOption in permission.permissions}}
+          {{#each permission.permissions as |permissionOption|}}
             <li><a href="#" {{action "removePermissionOption" permissionOption}}><i class="fa fa-fw fa-times-circle"></i></a> {{title-case permissionOption.type}} - {{title-case permissionOption.name}}</li>
           {{/each}}
         </ul>
         <hr />
         <div class="form-group">
-          <button type="submit" class="btn btn-success btn-block" {{bind-attr disabled=isSaving}}>Save Permission {{#if isSaving}}<i class="fa fa-spin fa-spinner"></i>{{/if}}</button>
+          <button type="submit" class="btn btn-success btn-block" disabled={{isSaving}}>Save Permission {{#if isSaving}}<i class="fa fa-spin fa-spinner"></i>{{/if}}</button>
         </div>
       </form>
     </div>
-    <div {{bind-attr class="showForm:col-md-8:col-md-12"}}>
+    <div class="{{if showForm 'col-md-8' 'col-md-12'}}">
       <div class="list-group">
-        {{#each permission in content}}
+        {{#each content as |permission|}}
           <div class="list-group-item">
             <span class="label label-info">{{title-case permission.type}}</span> {{permission.name}}
             <span class="pull-right">

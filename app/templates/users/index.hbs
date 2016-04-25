@@ -16,13 +16,13 @@
 
       <hr />
       <p class="text-center">
-        
+
       </p>
     </div>
     <div class="col-md-9">
       <div class="row">
         <div class="col-md-6">
-          <div {{bind-attr class=":resource-loading-overlay isLoading:active"}}>
+          <div class="resource-loading-overlay {{if isLoading 'active'}}">
             <h2><i class="fa fa-fw fa-spin fa-spinner"></i> Loading Resources...</h2>
           </div>
         </div>
@@ -37,7 +37,7 @@
                 </span>
               {{/if}}
               <span class="help-label">Items per page: </span>
-              {{#each option in itemsPerPageOptions}}
+              {{#each itemsPerPageOptions as |option|}}
                 {{items-per-page-option itemsPerPage=itemsPerPage option=option}}
               {{/each}}
             </div>
@@ -46,9 +46,9 @@
       </div>
 
       <ul class="list-group resource-list-group">
-        {{#each user in content itemController="user-list-item"}}
+        {{#each model as |user|}}
           <li class="list-group-item">
-            {{#link-to 'user' user}}{{user.fullName}}{{/link-to}}
+            {{#link-to 'user' user.id}}{{user.fullName}}{{/link-to}}
 
             {{#if user.super}}
               <span class="label label-info">Super User</span>

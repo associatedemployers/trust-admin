@@ -2,7 +2,7 @@ import Ember from 'ember';
 import ResourcePaginatorMixin from '../mixins/resource-paginator';
 import MedicalRate from '../models/medical-rate';
 
-export default Ember.ArrayController.extend(ResourcePaginatorMixin, {
+export default Ember.Controller.extend(ResourcePaginatorMixin, {
   queryParams: [ 'filters', 'sort', 'page', 'itemsPerPage' ],
 
   // Defaults

@@ -1,106 +1,109 @@
 import DS from 'ember-data';
 import addressFormatter from 'trust-admin/utils/address-formatter';
+import Ember from 'ember';
 
-var attribute = DS.attr;
+const { attr, hasMany, belongsTo } = DS,
+      { computed } = Ember;
+
 
 export default DS.Model.extend({
   // Legacy
-  legacyRecordNumber:                  attribute('string'),
-  legacyCobraTermChoice:               attribute('string'),
-  legacyPreExistingCondition:          attribute('string'),
-  legacyCreditableCoverage:            attribute('string'),
-  legacyRetireeFlag:                   attribute('string'),
-  legacyAflacFlag:                     attribute('string'),
-  legacyChangingCompany:               attribute('string'),
-  legacyChangingLocationInCompany:     attribute('string'),
-  legacyMarriage:                      attribute('string'),
-  legacyXNonVolWaivingSpouse:          attribute('string'),
-  legacyXNonVolWaivingDependents:      attribute('string'),
-  legacyXNonVolWaiving:                attribute('string'),
-  legacyXNonVolWaivedSpouseName:       attribute('string'),
-  legacyXNonVolWaivedDependentName:    attribute('string'),
-  legacyXVolDentalWaivedSpouseName:    attribute('string'),
-  legacyXVolDentalWaivedDependentName: attribute('string'),
-  legacyXVolVisionWaivedSpouseName:    attribute('string'),
-  legacyXVolVisionWaivedDependentName: attribute('string'),
+  legacyRecordNumber:                  attr('string'),
+  legacyCobraTermChoice:               attr('string'),
+  legacyPreExistingCondition:          attr('string'),
+  legacyCreditableCoverage:            attr('string'),
+  legacyRetireeFlag:                   attr('string'),
+  legacyAflacFlag:                     attr('string'),
+  legacyChangingCompany:               attr('string'),
+  legacyChangingLocationInCompany:     attr('string'),
+  legacyMarriage:                      attr('string'),
+  legacyXNonVolWaivingSpouse:          attr('string'),
+  legacyXNonVolWaivingDependents:      attr('string'),
+  legacyXNonVolWaiving:                attr('string'),
+  legacyXNonVolWaivedSpouseName:       attr('string'),
+  legacyXNonVolWaivedDependentName:    attr('string'),
+  legacyXVolDentalWaivedSpouseName:    attr('string'),
+  legacyXVolDentalWaivedDependentName: attr('string'),
+  legacyXVolVisionWaivedSpouseName:    attr('string'),
+  legacyXVolVisionWaivedDependentName: attr('string'),
 
-  ebmsNumber:          attribute('string'),
-  memberId:            attribute('string'),
-  ebmsTerminationCode: attribute('string'),
-  waived:              attribute('boolean'),
-  enrolled:            attribute('boolean'),
+  ebmsNumber:          attr('string'),
+  memberId:            attr('string'),
+  ebmsTerminationCode: attr('string'),
+  waived:              attr('boolean'),
+  enrolled:            attr('boolean'),
 
-  firstName:     attribute('string'),
-  middleInitial: attribute('string'),
-  lastName:      attribute('string'),
-  suffix:        attribute('string'),
+  firstName:     attr('string'),
+  middleInitial: attr('string'),
+  lastName:      attr('string'),
+  suffix:        attr('string'),
 
-  addressLine1:  attribute('string'),
-  addressLine2:  attribute('string'),
-  city:          attribute('string'),
-  state:         attribute('string'),
-  zipcode:       attribute('string'),
-  ssn:           attribute('string'),
-  gender:        attribute('string'),
-  maritalStatus: attribute('string'),
+  addressLine1:  attr('string'),
+  addressLine2:  attr('string'),
+  city:          attr('string'),
+  state:         attr('string'),
+  zipcode:       attr('string'),
+  ssn:           attr('string'),
+  gender:        attr('string'),
+  maritalStatus: attr('string'),
 
   // Relational
-  dependents:     DS.hasMany('dependent', { async: true }),
-  contactMethods: DS.hasMany('contact-method'),
-  beneficiaries:  DS.hasMany('beneficiary'),
-  notes:          DS.hasMany('note'),
-  files:          DS.hasMany('file', { async: true }),
-  historyEvents:  DS.hasMany('history-event', { async: true }),
-  company:        DS.belongsTo('company', { async: true }),
+  dependents:     hasMany('dependent', { async: true }),
+  contactMethods: hasMany('contact-method'),
+  beneficiaries:  hasMany('beneficiary'),
+  notes:          hasMany('note'),
+  files:          hasMany('file', { async: true }),
+  historyEvents:  hasMany('history-event', { async: true }),
+  company:        belongsTo('company', { async: true }),
 
   // Relational Plans
-  medicalPlan:  DS.belongsTo('medical-plan', { async: true }),
-  medicalRates: DS.hasMany('medical-rate', { async: true }),
-  dentalRates:  DS.hasMany('dental-rate', { async: true }),
-  visionRates:  DS.hasMany('vision-rate', { async: true }),
-  lifeRates:    DS.hasMany('life-rate', { async: true }),
+  medicalPlan:  belongsTo('medical-plan', { async: true }),
+  medicalRates: hasMany('medical-rate', { async: true }),
+  dentalRates:  hasMany('dental-rate', { async: true }),
+  visionRates:  hasMany('vision-rate', { async: true }),
+  lifeRates:    hasMany('life-rate', { async: true }),
 
-  medicalPlanCovers: attribute('string'),
-  dentalPlanCovers:  attribute('string'),
-  visionPlanCovers:  attribute('string'),
-  lifePlanCovers:    attribute('string'),
+  medicalPlanCovers: attr('string'),
+  dentalPlanCovers:  attr('string'),
+  visionPlanCovers:  attr('string'),
+  lifePlanCovers:    attr('string'),
 
   // Computed
-  fullName: function () {
+  fullName: computed('firstName', 'lastName', 'middleInitial', 'suffix', function () {
     var n = this.getProperties('firstName', 'lastName', 'middleInitial', 'suffix');
 
-    n.middleInitial = ( n.middleInitial ) ? n.middleInitial + '. ' : '';
-    n.suffix        = ( n.suffix ) ? ' ' + n.suffix : '';
+    n.middleInitial =  n.middleInitial  ? n.middleInitial + '. ' : '';
+    n.suffix        =  n.suffix  ? ' ' + n.suffix : '';
 
     return n.firstName + ' ' + n.middleInitial + n.lastName + n.suffix;
-  }.property('firstName', 'lastName', 'middleInitial', 'suffix'),
+  }),
 
-  isActive: function () {
+  isActive: computed('legacyClientTerminationDate', function () {
     return moment(this.get('legacyClientTerminationDate')).isBefore( moment() );
-  }.property('legacyClientTerminationDate'),
+  }),
 
-  isMarried: function () {
+  isMarried: computed('maritalStatus', function () {
     return this.get('maritalStatus') === 'married';
-  }.property('maritalStatus'),
+  }),
 
-  hasAddress: function () {
+  hasAddress: computed('addressLine1', 'city', 'state', function () {
     return this.get('addressLine1') && this.get('city') && this.get('state');
-  }.property('addressLine1', 'city', 'state'),
+  }),
 
   addressFormatted: addressFormatter.property('addressLine1', 'addressLine2', 'city', 'state', 'zipcode'),
 
   // DTs
-  dateOfBirth:                 attribute('date'),
-  legacyClientEmploymentDate:  attribute('date'),
-  legacyClientTerminationDate: attribute('date'),
-  legacyInitialDateSent:       attribute('date'),
-  legacyChangeSent:            attribute('date'),
-  legacyTerminationSent:       attribute('date'),
-  legacyTrapTermination:       attribute('date'),
-  legacyCobraStartDate:        attribute('date'),
-  legacyCobraTerminationDate:  attribute('date'),
+  dateOfBirth:                 attr('date'),
+  legacyClientEmploymentDate:  attr('date'),
+  legacyClientTerminationDate: attr('date'),
+  legacyInitialDateSent:       attr('date'),
+  legacyChangeSent:            attr('date'),
+  legacyTerminationSent:       attr('date'),
+  legacyTrapTermination:       attr('date'),
+  legacyCobraStartDate:        attr('date'),
+  legacyCobraTerminationDate:  attr('date'),
 
-  time_stamp: attribute('date', {
+  'time-stamp': attr('date', {
     defaultValue: function () {
       return new Date();
     }

@@ -16,4 +16,4 @@ export {
   parseChangeCode
 };
 
-export default Ember.Handlebars.makeBoundHelper(parseChangeCode);
+export default Ember.Helper.helper(parseChangeCode);

@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import GrowlMixin from 'trust-admin/mixins/growl';
 
-export default Ember.ObjectController.extend(GrowlMixin, {
+export default Ember.Controller.extend(GrowlMixin, {
   selectedLocation: function () {
     var office   = this.get('selectedOfficeLocation'),
         location = office || this.get('content');

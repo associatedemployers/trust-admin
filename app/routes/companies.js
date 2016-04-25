@@ -2,7 +2,7 @@ import Ember from 'ember';
 import LoadableRouteMixin from 'trust-admin/mixins/loadable-route';
 
 export default Ember.Route.extend(LoadableRouteMixin, {
-  model: function ( params ) {
+  model ( params ) {
     var query = {
       limit: params.itemsPerPage, page: params.page - 1
     };
@@ -11,6 +11,6 @@ export default Ember.Route.extend(LoadableRouteMixin, {
       $.extend( query, this.get('controller.filters') );
     }
 
-    return this.store.find('company', query);
+    return this.store.query('company', query);
   }
 });

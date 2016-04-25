@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-export default Ember.ObjectController.extend({
+export default Ember.Controller.extend({
   isPhone: function () {
     var v = this.get('content.value'),
         t = this.get('content.type'),

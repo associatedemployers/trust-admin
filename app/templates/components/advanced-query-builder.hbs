@@ -1,7 +1,7 @@
 <div class="query">
   <span class="query-head">Find <strong>{{modelName}}</strong></span> <i class="fa fa-angle-right"></i>
-  {{#each q in queryArray}}
-    {{render "query-item" q}}
+  {{#each queryArray as |q|}}
+    {{lists/query-item query=q fields=fields isEditing=isEditing fieldSelection=fieldSelection}}
   {{/each}}
 </div>
 

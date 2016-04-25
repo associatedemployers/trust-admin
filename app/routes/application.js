@@ -1,36 +1,56 @@
 import Ember from 'ember';
 
+const errorRouteMap = {
+  401: 'unauthorized',
+  404: 'not-found',
+  500: 'error',
+  400: 'error'
+};
+
 export default Ember.Route.extend({
+  beforeModel () {
+    return this.store.findAll('session').then(sessions => {
+      var existingSession;
+
+      sessions.forEach(session => {
+        if ( moment(session.get('expires')).isAfter(moment()) ) {
+          existingSession = session;
+        } else {
+          session.destroyRecord();
+        }
+      });
+
+      if ( existingSession ) {
+        this.session.set('content', existingSession);
+      }
+    });
+  },
+
   // Define Global Action Handlers
   actions: {
-    error: function ( err, transition ) {
-      console.error( err );
+    error( error ) {
+      Ember.Logger.error(error);
 
-      var session       = this.session,
-          authenticated = session.get('authenticated'),
-          isExpired     = ( authenticated ) ? moment( session.get('content.expires') ).isBefore( moment() ) : undefined;
+      var route = 'error',
+          err = error.errors ? error.errors[0] : error;
 
-      if( err.status === 401 ) {
-        if( authenticated && !isExpired ) {
-          return this.transitionTo('error', err);
+      if ( err && err.status ) {
+        var routeInMap = errorRouteMap[ err.status ];
+
+        if ( routeInMap ) {
+          route = routeInMap;
         }
-
-        this.controllerFor('login').setProperties({
-          savedTransition: transition,
-          expiredSession:  isExpired
-        });
-
-        this.session.logout();
-
-        this.transitionTo('login');
-      } else {
-        this.transitionTo('error', err);
       }
+
+      Ember.Logger.log('Routing to', route, 'to handle UX error...');
+
+      this.controllerFor(route).set('fromError', err);
+      this.transitionTo('/' + route);
     },
 
-    showModal: function ( id, staticModal, forceAppend ) {
+    showModal ( id, staticModal, forceAppend ) {
       // Assign the modal element to a variable
-      var el            = $("#" + id),
+      var el            = $('#' + id),
           self          = this,
           previousModal = this.get('previousModal');
       // If the forceAppend variable exists, we will append it to that identifer; useful for nested view modals
@@ -61,7 +81,7 @@ export default Ember.Route.extend({
       showTheModal();
     },
 
-    hideModal: function ( id ) {
+    hideModal ( id ) {
       var self = this;
 
       $('#' + id).modal('hide').one('hidden.bs.modal', function () {

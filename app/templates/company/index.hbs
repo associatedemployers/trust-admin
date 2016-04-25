@@ -28,7 +28,7 @@
         <div>Active &amp; Participating: <span class="pull-right">{{activeParticipatingEmployees}}</span></div>
         <div>Active &amp; Waived: <span class="pull-right">{{activeWaivedEmployees}}</span></div>
       {{else}}
-        <a href="#" {{action "loadEmployeeHardStats"}}>Load Employee Hard Stats <i {{bind-attr class=":fa :fa-fw loadingEmployeeHardStats:fa-spin loadingEmployeeHardStats:fa-spinner:fa-cloud-download"}}></i></a>
+        <a href="#" {{action "loadEmployeeHardStats"}}>Load Employee Hard Stats <i class="fa fa-fw {{if loadingEmployeeHardStats 'fa-spin'}} {{if loadingEmployeeHardStats 'fa-spinner' 'fa-cloud-download'}}"></i></a>
       {{/if}}
     </p>
 
@@ -36,7 +36,7 @@
 
     <h2>Locations</h2>
     <ul>
-      {{#each location in content.locations}}
+      {{#each content.locations as |location|}}
         <li>
           <a href="#" {{action "selectOffice" location}}>{{location.addressFormatted}}</a>
         </li>

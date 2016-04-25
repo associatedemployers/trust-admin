@@ -1,23 +1,25 @@
 import DS from 'ember-data';
+import Ember from 'ember';
 
-var attribute = DS.attr;
+const { attr, hasMany } = DS,
+      { computed } = Ember;
 
 export default DS.Model.extend({
-  firstName:     attribute('string'),
-  lastName:      attribute('string'),
-  email:         attribute('string'),
-  password:      attribute('string'),
-  type:          attribute('string'),
-  super:         attribute('boolean'),
-  receiveEmails: attribute('boolean'),
-  apiAccess:     attribute('boolean'),
-  permissions:   DS.hasMany('user-permission', { async: true }),
+  firstName:     attr('string'),
+  lastName:      attr('string'),
+  email:         attr('string'),
+  password:      attr('string'),
+  type:          attr('string'),
+  super:         attr('boolean'),
+  receiveEmails: attr('boolean'),
+  apiAccess:     attr('boolean'),
+  permissions:   hasMany('user-permission', { async: true }),
 
-  fullName: function () {
+  fullName: computed('firstName', 'lastName', function () {
     return this.get('firstName') + ' ' + this.get('lastName');
-  }.property('firstName', 'lastName'),
+  }),
 
-  time_stamp: attribute('date', {
+  'time-stamp': attr('date', {
     defaultValue: function () {
       return new Date();
     }

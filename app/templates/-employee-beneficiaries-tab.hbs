@@ -1,12 +1,6 @@
 <ul class="list-group">
-  {{#each beneficiary in content.beneficiaries itemController='beneficiary-item'}}
-    <li class="list-group-item">
-      <span {{bind-attr class=":label beneficiary.isPrimary:label-primary beneficiary.isContingent:label-default"}}>{{title-case beneficiary.type}}</span>&nbsp;
-
-      {{beneficiary.name}} <small class="text-muted">({{title-case beneficiary.relation}})</small>
-
-      <span class="label label-danger pull-right">{{beneficiary.split}}% Split</span>
-    </li>
+  {{#each content.beneficiaries as |beneficiary|}}
+    {{lists/beneficiary-item beneficiary=beneficiary}}
   {{else}}
     <div class="alert alert-info alert-dismissible alert-pad" role="alert">
       <button type="button" class="close" data-dismiss="alert">

@@ -2,7 +2,7 @@
   <div class="col-md-6">
   </div>
   <div class="col-md-6">
-    
+
   </div>
 </div>
 
@@ -20,19 +20,17 @@
 <div>
   <h3>
     <a href="#" {{action "toggleProperty" "showLegacyData"}}>
-      <i class="fa fa-fw fa-archive"></i> Legacy Data<i {{bind-attr class=":fa :fa-fw showLegacyData:fa-angle-up:fa-angle-down"}}></i>
+      <i class="fa fa-fw fa-archive"></i> Legacy Data<i class="fa fa-fw fa-angle-{{if showLegacyData 'up' 'down'}}"></i>
     </a>
   </h3>
-  <ul {{bind-attr class=":reset-list :no-list-style :hide-slide showLegacyData:show"}}>
-    {{#with content}}
-      <li><strong>Old Employee Rate</strong>: {{legacyOldEmployeeRate}}</li>
-      <li><strong>Old Employee and Spouse Rate</strong>: {{legacyOldEmployeeAndSpouseRate}}</li>
-      <li><strong>Old Employee and Children Rate</strong>: {{legacyOldEmployeeAndChildrenRate}}</li>
-      <li><strong>Old Employee and Family Rate</strong>: {{legacyOldFamilyRate}}</li>
-      <li><strong>Rate Change Employee</strong>: {{legacyRateChangeEmployeeRate}}</li>
-      <li><strong>Rate Change w/ Spouse</strong>: {{legacyRateChangeEmployeeAndSpouseRate}}</li>
-      <li><strong>Rate Change w/ Children</strong>: {{legacyRateChangeEmployeeAndChildrenRate}}</li>
-      <li><strong>Rate Change w/ Family</strong>: {{legacyRateChangeFamilyRate}}</li>
-    {{/with}}
+  <ul class="reset-list no-list-style hide-slide {{if showLegacyData 'show'}}">
+    <li><strong>Old Employee Rate</strong>: {{content.legacyOldEmployeeRate}}</li>
+    <li><strong>Old Employee and Spouse Rate</strong>: {{content.legacyOldEmployeeAndSpouseRate}}</li>
+    <li><strong>Old Employee and Children Rate</strong>: {{content.legacyOldEmployeeAndChildrenRate}}</li>
+    <li><strong>Old Employee and Family Rate</strong>: {{content.legacyOldFamilyRate}}</li>
+    <li><strong>Rate Change Employee</strong>: {{content.legacyRateChangeEmployeeRate}}</li>
+    <li><strong>Rate Change w/ Spouse</strong>: {{content.legacyRateChangeEmployeeAndSpouseRate}}</li>
+    <li><strong>Rate Change w/ Children</strong>: {{content.legacyRateChangeEmployeeAndChildrenRate}}</li>
+    <li><strong>Rate Change w/ Family</strong>: {{content.legacyRateChangeFamilyRate}}</li>
   </ul>
 </div>

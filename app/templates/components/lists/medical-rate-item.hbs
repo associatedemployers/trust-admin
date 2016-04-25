@@ -1,0 +1,9 @@
+{{#link-to 'medical-rate' medicalRate}}
+  {{medicalRate.planNumber}} <small>{{medicalRate.plan.name}}</small>
+{{/link-to}}
+
+<span class="label label-success">{{medicalRate.coInsurance}}</span>
+
+{{#link-to 'company' medicalRate.company class="pull-right text-muted"}}
+  {{medicalRate.company.name}}
+{{/link-to}}

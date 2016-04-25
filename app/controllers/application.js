@@ -8,14 +8,14 @@ export default Ember.Controller.extend({
   viewClass: function () {
     var routeName = this.get('currentRouteName');
 
-    return ( routeName ) ? routeName.replace(/\./g, '-') + '-view' : 'no-view';
+    return routeName ? routeName.replace(/\./g, '-') + '-view' : 'no-view';
   }.property('currentRouteName'),
 
-  calcStyle: function () {
-    Ember.run.scheduleOnce('afterRender', this, function () {
-      this.set('style', 'min-height: ' + ( window.innerHeight - ( $('.footer-view').height() + $('nav.navbar').height() + 30 ) ) + 'px');
-    });
-  }.on('init'),
+  // calcStyle: function () {
+  //   Ember.run.scheduleOnce('afterRender', this, function () {
+  //     this.set('style', 'min-height: ' + ( window.innerHeight - ( $('.footer-view').height() + $('nav.navbar').height() + 30 ) ) + 'px');
+  //   });
+  // }.on('init'),
 
   actions: {
     logout: function () {

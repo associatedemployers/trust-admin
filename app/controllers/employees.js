@@ -12,18 +12,18 @@ var filters = {
   hasVision:   true,
   hasLife:     true,
   company:     '',
-  medicalPlan: '',
+  medicalPlan: ''
 };
 
 var hasFirstArrayPlans = function ( value ) {
   if( !this.get('applyingPlans') ) {
-    return;
+    return undefined;
   }
 
-  return ( value === true || value === 'true' ) ? 'exists' : ( value === false || value === 'false' ) ? 'nexists' : undefined;
+  return value === true || value === 'true' ? 'exists' : value === false || value === 'false' ? 'nexists' : undefined;
 };
 
-export default Ember.ArrayController.extend(ResourcePaginatorMixin, ResourceFiltersMixin, {
+export default Ember.Controller.extend(ResourcePaginatorMixin, ResourceFiltersMixin, {
   needs: [ 'application' ],
   states: Ember.computed.alias('controllers.application.states'),
   queryParams: [
@@ -56,10 +56,10 @@ export default Ember.ArrayController.extend(ResourcePaginatorMixin, ResourceFilt
   filterValueNormalization: {
     terminated: function ( value ) {
       if( !this.get('applyingMeta') ) {
-        return;
+        return undefined;
       }
 
-      return ( value === true || value === 'true' ) ? 'exists' : ( value === false || value === 'false' ) ? 'nexists' : undefined;
+      return value === true || value === 'true' ? 'exists' : value === false || value === 'false' ? 'nexists' : undefined;
     },
     hasMedical: hasFirstArrayPlans,
     hasDental:  hasFirstArrayPlans,
@@ -99,6 +99,15 @@ export default Ember.ArrayController.extend(ResourcePaginatorMixin, ResourceFilt
     'applyingPlans'
   ),
 
+  renderPopover: function () {
+    Ember.run.scheduleOnce('afterRender', () => {
+      this.$('.trigger-popover').popover({
+        html: true,
+        container: 'body'
+      });
+    });
+  }.observes('model'),
+
   cities: function () {
     var self = this;
 
@@ -110,9 +119,72 @@ export default Ember.ArrayController.extend(ResourcePaginatorMixin, ResourceFilt
     });
   }.property(),
 
+  showingActive: true,
+  sortasc: true,
+
+  employees: function () {
+    var employees = this.get('content'),
+        o = {
+          active:     [],
+          terminated: []
+        },
+        sortasc = this.get('sortasc');
+
+    if( !employees ) {
+      return o;
+    }
+
+    employees.forEach(employee => {
+      if( employee.get('legacyClientTerminationDate') ) {
+        o.terminated.push( employee );
+      } else {
+        o.active.push( employee );
+      }
+    });
+
+    o.active.sort(function ( a, b ) {
+      var at = new Date( a.get('legacyClientEmploymentDate') ),
+          bt = new Date( b.get('legacyClientEmploymentDate') );
+
+      return sortasc ? bt - at : at - bt;
+    });
+
+    o.terminated.sort(function ( a, b ) {
+      var at = new Date( a.get('legacyClientTerminationDate') ),
+          bt = new Date( b.get('legacyClientTerminationDate') );
+
+      return sortasc ? bt - at : at - bt;
+    });
+
+    return o;
+  }.property('content.@each', 'sortasc'),
+
   actions: {
-    toggleProperty: function ( prop ) {
+    toggleProperty ( prop ) {
       this.toggleProperty( prop );
+    },
+
+    show ( c ) {
+      var map = {
+        active: 'showingActive',
+        terminated: 'showingTerminated'
+      };
+
+      for ( var key in map ) {
+        if ( !map.hasOwnProperty(key) ) {
+          continue;
+        }
+
+        var s;
+
+        if( c === key ) {
+          s = true;
+        } else {
+          s = false;
+        }
+
+        this.set( map[ key ], s );
+      }
     }
   }
 });

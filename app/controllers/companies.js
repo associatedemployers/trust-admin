@@ -10,7 +10,7 @@ var filters = {
   maxEmployees: null
 };
 
-export default Ember.ArrayController.extend(ResourcePaginatorMixin, ResourceFiltersMixin, {
+export default Ember.Controller.extend(ResourcePaginatorMixin, ResourceFiltersMixin, {
   needs: [ 'application' ],
   states: Ember.computed.alias('controllers.application.states'),
   queryParams: [

@@ -1,8 +1,10 @@
 import Ember from 'ember';
 import GrowlMixin from 'trust-admin/mixins/growl';
 import TabsMixin from 'trust-admin/mixins/tabs';
+import TooltipsMixin from 'trust-admin/mixins/tooltips';
 
-export default Ember.ObjectController.extend(GrowlMixin, TabsMixin, {
+
+export default Ember.Controller.extend(GrowlMixin, TabsMixin, TooltipsMixin, {
   isLoadingHistoryEvents: true,
   queryParams: [ 'infoTab' ],
   infoTab: 0,

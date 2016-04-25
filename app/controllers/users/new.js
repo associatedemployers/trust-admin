@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import GrowlMixin from '../../mixins/growl';
 
-export default Ember.ObjectController.extend(GrowlMixin, {
+export default Ember.Controller.extend(GrowlMixin, {
   disableSubmit:            Ember.computed.any('informationIsNotComplete', 'loading'),
   informationIsNotComplete: Ember.computed.not('informationIsComplete'),
   informationIsComplete:    Ember.computed.and('content.firstName', 'content.lastName', 'content.email'),
@@ -12,7 +12,7 @@ export default Ember.ObjectController.extend(GrowlMixin, {
   setPermissionGroups: function () {
     var self = this;
 
-    this.store.find('permission-group').then(function ( permissionGroups ) {
+    this.store.findAll('permission-group').then(function ( permissionGroups ) {
       self.set('assignablePermissions', permissionGroups);
     });
   }.observes('permissions', 'content'),

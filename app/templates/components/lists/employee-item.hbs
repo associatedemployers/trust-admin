@@ -1,0 +1,9 @@
+<i class="trigger-popover fa fa-fw fa-plus text-muted" data-employee="{{popoverEmployee}}" title="{{employee.fullName}}" data-toggle="popover" data-placement="right" data-trigger="hover"></i>
+
+{{#link-to 'employee' employee.id}}{{employee.fullName}}{{/link-to}}
+
+<div class="data-section text-right">
+  {{#if employee.company}}
+    {{#link-to "company" employee.company class="mute"}}{{employee.company.name}}{{/link-to}}
+  {{/if}}
+</div>

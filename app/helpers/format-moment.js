@@ -1,13 +1,13 @@
 import Ember from 'ember';
 
-function formatMoment ( timestamp, pattern ) {
-  pattern = ( typeof pattern === 'string') ? pattern : "MM/DD/YYYY";
+function formatMoment ([timestamp, pattern]) {
+  let _pattern = typeof pattern === 'string' ? pattern : 'MM/DD/YYYY';
   // Expect Date-Constructed String
-  return  moment( timestamp ).format( pattern );
+  return  moment( timestamp ).format( _pattern );
 }
 
 export {
   formatMoment
 };
 
-export default Ember.Handlebars.makeBoundHelper(formatMoment);
+export default Ember.Helper.helper(formatMoment);

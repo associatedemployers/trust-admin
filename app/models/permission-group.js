@@ -1,19 +1,19 @@
 import Ember from 'ember';
 import DS from 'ember-data';
 
-var attribute = DS.attr;
+const { attr } = DS;
 
 export default DS.Model.extend({
-  name:        attribute('string'),
-  endpoints:   attribute('array', {
+  name:        attr('string'),
+  endpoints:   attr('array', {
     defaultValue: Ember.A()
   }),
-  type:        attribute('string'),
-  permissions: attribute('array', {
+  type:        attr('string'),
+  permissions: attr('array', {
     defaultValue: Ember.A()
   }),
 
-  time_stamp: attribute('date', {
+  'time-stamp': attr('date', {
     defaultValue: function () {
       return new Date();
     }

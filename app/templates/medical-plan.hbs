@@ -5,20 +5,18 @@
       <h4>{{content.legacyDescription}}</h4>
     </hgroup>
     <div>
-      {{#with content}}
-        <ul class="text-muted resource-info-list resource-quick-info">
-          <li><strong>Key:</strong> {{legacyKey}}</li>
-          <li><strong>Record ID (new):</strong> {{id}}</li>
-          <li><strong>Legacy Grouping:</strong> {{legacyGrouping}}</li>
-          <li><strong>Legacy Order:</strong> {{legacyOrder}}</li>
-          <li><strong>Creation Date:</strong> {{format-moment time_stamp}} <i>({{time-ago time_stamp}})</i></li>
-        </ul>
-        <ul class="text-muted resource-info-list resource-quick-info">
-          <li><strong>EBMS IBE Code:</strong> {{ebmsIbeCode}}</li>
-          <li><strong>EBMS IBE Code (2):</strong> {{#if ebmsIbeCode2}}{{ebmsIbeCode2}}{{else}}N/A{{/if}}</li>
-          <li><strong>EBMS CLM Code:</strong> {{ebmsClmCode}}</li>
-        </ul>
-      {{/with}}
+      <ul class="text-muted resource-info-list resource-quick-info">
+        <li><strong>Key:</strong> {{content.legacyKey}}</li>
+        <li><strong>Record ID (new):</strong> {{content.id}}</li>
+        <li><strong>Legacy Grouping:</strong> {{content.legacyGrouping}}</li>
+        <li><strong>Legacy Order:</strong> {{content.legacyOrder}}</li>
+        <li><strong>Creation Date:</strong> {{format-moment content.time_stamp}} <i>({{time-ago content.time_stamp}})</i></li>
+      </ul>
+      <ul class="text-muted resource-info-list resource-quick-info">
+        <li><strong>EBMS IBE Code:</strong> {{content.ebmsIbeCode}}</li>
+        <li><strong>EBMS IBE Code (2):</strong> {{#if content.ebmsIbeCode2}}{{content.ebmsIbeCode2}}{{else}}N/A{{/if}}</li>
+        <li><strong>EBMS CLM Code:</strong> {{content.ebmsClmCode}}</li>
+      </ul>
     </div>
   </div>
   <div class="col-md-2 resource-controls">

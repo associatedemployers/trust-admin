@@ -1,29 +1,29 @@
 import DS from 'ember-data';
 import addressFormatter from 'trust-admin/utils/address-formatter';
 
-var attribute = DS.attr;
+const { attr, hasMany, belongsTo } = DS;
 
 export default DS.Model.extend({
-  ebmsNumber:          attribute('string'),
-  legacyCompanyNumber: attribute('string'),
-  soleProprietorship:  attribute('boolean'),
-  embeddedDeductible:  attribute('boolean'),
-  legacyInactive:      attribute('boolean'),
+  ebmsNumber:          attr('string'),
+  legacyCompanyNumber: attr('string'),
+  soleProprietorship:  attr('boolean'),
+  embeddedDeductible:  attr('boolean'),
+  legacyInactive:      attr('boolean'),
 
-  addressLine1: attribute('string'),
-  addressLine2: attribute('string'),
-  city:         attribute('string'),
-  state:        attribute('string'),
-  zipcode:      attribute('string'),
-  
-  phone: attribute('string'),
-  fax:   attribute('string'),
+  addressLine1: attr('string'),
+  addressLine2: attr('string'),
+  city:         attr('string'),
+  state:        attr('string'),
+  zipcode:      attr('string'),
 
-  company:   DS.belongsTo('company'),
-  employees: DS.hasMany('employee'),
+  phone: attr('string'),
+  fax:   attr('string'),
 
-  legacyEffectiveDate: attribute('date'),
-  time_stamp:          attribute('date'),
+  company:   belongsTo('company'),
+  employees: hasMany('employee'),
+
+  legacyEffectiveDate: attr('date'),
+  'time-stamp':          attr('date'),
 
   // Computed
   addressFormatted: addressFormatter.property('addressLine1', 'addressLine2', 'city', 'state', 'zipcode')

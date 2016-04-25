@@ -1,69 +1,69 @@
-<div class="row popout-panel">
-  <div class="col-md-8">
-    <hgroup>
-      {{view "letter-resource-image" class="with-hgroup" width="80px" height="65px" text=letterImageText r=letterImageColor.r g=letterImageColor.g b=letterImageColor.b}}
+<div class="employee-view">
+  <div class="row popout-panel">
+    <div class="col-md-8">
+      <hgroup>
+        {{letter-image class="with-hgroup" width="80px" height="65px" text=letterImageText r=letterImageColor.r g=letterImageColor.g b=letterImageColor.b}}
 
-      <h2>{{content.fullName}}</h2>
+        <h2>{{content.fullName}}</h2>
 
-      <h4>
-        {{#if content.legacyClientTerminationDate}}
-          Terminated from 
-          {{#if content.company}}
-            {{#link-to 'company.index' content.company}}{{content.company.name}}{{/link-to}}
+        <h4>
+          {{#if content.legacyClientTerminationDate}}
+            Terminated from
+            {{#if content.company}}
+              {{#link-to 'company.index' content.company}}{{content.company.name}}{{/link-to}}
+            {{else}}
+              <i class="text-muted">company not found</i>
+            {{/if}}
+             on {{format-moment content.legacyClientTerminationDate}}
           {{else}}
-            <i class="text-muted">company not found</i>
+            {{#if content.legacyClientEmploymentDate}}
+              Works for {{#link-to 'company.index' content.company}}{{content.company.name}}{{/link-to}} since {{format-moment content.legacyClientEmploymentDate}}
+            {{else}}
+              No employment or termination date - {{content.company.name}}
+            {{/if}}
           {{/if}}
-           on {{format-moment content.legacyClientTerminationDate}}
-        {{else}}
-          {{#if content.legacyClientEmploymentDate}}
-            Works for {{#link-to 'company.index' content.company}}{{content.company.name}}{{/link-to}} since {{format-moment content.legacyClientEmploymentDate}}
-          {{else}}
-            No employment or termination date - {{content.company.name}}
-          {{/if}}
-        {{/if}}
-      </h4>
-    </hgroup>
-    <div>
-      {{#with content}}
+        </h4>
+      </hgroup>
+      <div>
         <ul class="text-muted resource-info-list resource-quick-info">
-          <li><strong>Member ID:</strong> {{memberId}}</li>
-          <li><strong>Record ID (new):</strong> {{id}}</li>
-          <li><strong>EBMS #:</strong> {{ebmsNumber}}</li>
-          <li><strong>Legacy Record #:</strong> {{legacyRecordNumber}}</li>
-          <li><strong>Creation Date:</strong> {{format-moment time_stamp}} <i>({{time-ago time_stamp}})</i></li>
+          <li><strong>Member ID:</strong> {{content.memberId}}</li>
+          <li><strong>Record ID (new):</strong> {{content.id}}</li>
+          <li><strong>EBMS #:</strong> {{content.ebmsNumber}}</li>
+          <li><strong>Legacy Record #:</strong> {{content.legacyRecordNumber}}</li>
+          <li><strong>Creation Date:</strong> {{format-moment content.time_stamp}} <i>({{time-ago content.time_stamp}})</i></li>
         </ul>
-      {{/with}}
+      </div>
     </div>
-  </div>
-  <div class="col-md-4 resource-controls">
-    <button class="btn btn-success">
-      <i class="fa fa-fw fa-pencil"></i>
-    </button>
-
-    <div class="dropdown">
-      <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
-        <i class="fa fa-fw fa-gear"></i> <span class="caret"></span>
+    <div class="col-md-4 resource-controls">
+      <button class="btn btn-success">
+        <i class="fa fa-fw fa-pencil"></i>
       </button>
-      <ul class="dropdown-menu dropdown-menu-right" role="menu">
-        <li><a href="#">Delete</a></li>
-        <li><a href="#">Some other action</a></li>
-      </ul>
+
+      <div class="dropdown">
+        <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+          <i class="fa fa-fw fa-gear"></i> <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu dropdown-menu-right" role="menu">
+          <li><a href="#">Delete</a></li>
+          <li><a href="#">Some other action</a></li>
+        </ul>
+      </div>
     </div>
   </div>
-</div>
 
-{{#if inSnapshot}}
-<div class="alert alert-warning pin-alert" role="alert">
-  <p class="text-center">
-    <i class="fa fa-rotate-left"></i> Currently showing snapshot on {{format-moment snapshotDetails.time_stamp}} by
-    {{#if snapshotDetails.updater}}
-      {{snapshotDetails.updater}}
-    {{else}}
-      System
-    {{/if}}
-    <a href="#" class="alert-link" {{action "exitSnapshot"}}>Back to original</a>
-  </p>
-</div>
-{{/if}}
+  {{#if inSnapshot}}
+  <div class="alert alert-warning pin-alert" role="alert">
+    <p class="text-center">
+      <i class="fa fa-rotate-left"></i> Currently showing snapshot on {{format-moment snapshotDetails.time_stamp}} by
+      {{#if snapshotDetails.updater}}
+        {{snapshotDetails.updater}}
+      {{else}}
+        System
+      {{/if}}
+      <a href="#" class="alert-link" {{action "exitSnapshot"}}>Back to original</a>
+    </p>
+  </div>
+  {{/if}}
 
-{{outlet}}
+  {{outlet}}
+</div>

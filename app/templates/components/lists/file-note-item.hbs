@@ -1,0 +1,31 @@
+<div class="row">
+  <div class="col-xs-8">
+    {{#if note.longerThanLimit}}
+      {{#if note.showMore}}
+        {{note.text}}
+      {{else}}
+        {{shorten-text note.text note.limit}}
+      {{/if}}
+    {{else}}
+      {{note.text}}
+    {{/if}}
+
+    {{#if note.longerThanLimit}}
+      <a href="#" {{action "toggleProperty" "showMore"}}>
+        {{#if note.showMore}}Less{{else}}More{{/if}}
+      </a>
+    {{/if}}
+  </div>
+
+  <div class="col-xs-4 text-right">
+    <small class="text-muted">
+      {{#if note.time_stamp}}
+        {{time-ago note.time_stamp}}
+      {{else}}
+        From legacy
+      {{/if}}
+    </small>
+    <a href="#" title="Edit Note" {{action "editNote" note}}><i class="fa fa-fw fa-pencil"></i></a>
+    <a href="#" title="Delete Note" class="text-danger" {{action "removeNote" note}}><i class="fa fa-fw fa-trash-o"></i></a>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+<i class="fa fa-fw {{if isEmail 'fa-at'}} {{if isPhone 'fa-phone'}}"></i>
+<a href="{{link}}">{{decoratedValue}}</a>
+{{#if contact.ext}}
+  ext. {{contact.ext}}
+{{/if}}
+
+<span class="pull-right text-muted">
+  {{title-case contact.type}}
+</span>

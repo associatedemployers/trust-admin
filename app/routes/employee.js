@@ -3,7 +3,7 @@ import LoadableRouteMixin from 'trust-admin/mixins/loadable-route';
 import methodProxy from 'trust-admin/utils/proxy-controller-method';
 
 export default Ember.Route.extend(LoadableRouteMixin, {
-  model: function ( params ) {
+  model ( params ) {
     return this.store.find('employee', params.id);
   },
 

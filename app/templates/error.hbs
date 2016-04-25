@@ -1,19 +1,19 @@
-<h1 class="text-center text-danger"><i class="fa fa-fw fa-exclamation-triangle"></i> Something bad happened.</h1>
+<h1 class="text-center text-danger">{{#if fromError.status}}{{fromError.status}}{{/if}} Uh oh.</h1>
 <hr />
+<p class="text-danger text-center">
+  {{#if clientError}}You did something bad.{{else}}Something is broken.{{/if}}<br />
+  {{#if fromError.responseText}}
+    <small>
+      <code>{{fromError.responseText}}</code> That's all we know.
+    </small>
+  {{/if}}
+  {{#if fromError.message}}
+    <small>
+      <code>{{fromError.message}}</code> That's all we know.
+    </small>
+  {{/if}}
+</p>
 
-{{log content}}
-
-<p class="text-center">
-  <span class="text-muted">What we received: 
-    {{#if content.statusText}}
-      {{content.statusText}}
-    {{else}}
-      {{#if content.message}}
-        {{content.message}}
-      {{else}}
-        :( Nothing.
-      {{/if}}
-    {{/if}}
-  </span><br />
-  That's all we know.
+<p class="text-center text-sm">
+  {{#link-to 'index'}}Back to index{{/link-to}}
 </p>

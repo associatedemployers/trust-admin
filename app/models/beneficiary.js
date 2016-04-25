@@ -1,10 +1,10 @@
 import DS from 'ember-data';
 
-var attribute = DS.attr;
+const { attr } = DS;
 
 export default DS.Model.extend({
-  type:     attribute('string'),
-  name:     attribute('string'),
-  relation: attribute('string'),
-  split:    attribute('number')
+  type:     attr('string'),
+  name:     attr('string'),
+  relation: attr('string'),
+  split:    attr('number')
 });

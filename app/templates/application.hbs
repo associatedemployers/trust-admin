@@ -1,11 +1,13 @@
-<div class="application-wrapper">
-  <div class="nav-wrapper">
-    {{render "navigation"}}
+<div class="application-view">
+  <div class="application-wrapper">
+    <div class="nav-wrapper">
+      {{x-navigation session=session logout=(action "logout")}}
+    </div>
+
+    <div class="view-wrapper" style={{style}}>
+      {{outlet}}
+    </div>
   </div>
 
-  <div {{bind-attr class=":view-wrapper viewClass" style=style}}>
-    {{outlet}}
-  </div>
+  {{x-footer}}
 </div>
-
-{{render "footer"}}

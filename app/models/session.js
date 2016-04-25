@@ -1,9 +1,9 @@
 import DS from 'ember-data';
 
-var attribute = DS.attr;
+const { attr } = DS;
 
 export default DS.Model.extend({
-  token:   attribute('string'),
-  expires: attribute('string'), // date support broken in LocalStorage Adapter
-  user:    attribute('string')
+  token:   attr('string'),
+  expires: attr('string'), // date support broken in LocalStorage Adapter
+  user:    attr('string')
 });

@@ -1,6 +1,6 @@
 import Ember from 'ember';
 
-export default Ember.ObjectController.extend({
+export default Ember.Controller.extend({
   letterImageColor: function () {
     var m    = this.get('content'),
         name = m.getProperties('firstName', 'lastName'),

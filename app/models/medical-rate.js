@@ -1,46 +1,48 @@
 import DS from 'ember-data';
 import RateModel from './rate';
+import Ember from 'ember';
 
-var attribute = DS.attr;
+const { attr, belongsTo } = DS,
+      { computed } = Ember;
 
 export default RateModel.extend({
-  ebmsNumber:    attribute('string'),
-  planNumber:    attribute('string'),
-  legacyNetwork: attribute('string'),
-  coInsurance:   attribute('string'),
-  deductible:    attribute('number'),
-  name:          attribute('string'),
+  ebmsNumber:    attr('string'),
+  planNumber:    attr('string'),
+  legacyNetwork: attr('string'),
+  coInsurance:   attr('string'),
+  deductible:    attr('number'),
+  name:          attr('string'),
 
-  employee:            attribute('number'),
-  employeeAndSpouse:   attribute('number'),
-  employeeAndChildren: attribute('number'),
-  family:              attribute('number'),
+  employee:            attr('number'),
+  employeeAndSpouse:   attr('number'),
+  employeeAndChildren: attr('number'),
+  family:              attr('number'),
 
-  legacyOldEmployeeRate:                   attribute('string'),
-  legacyOldEmployeeAndSpouseRate:          attribute('string'),
-  legacyOldEmployeeAndChildrenRate:        attribute('string'),
-  legacyOldFamilyRate:                     attribute('string'),
-  legacyRateChangeEmployeeRate:            attribute('string'),
-  legacyRateChangeEmployeeAndSpouseRate:   attribute('string'),
-  legacyRateChangeEmployeeAndChildrenRate: attribute('string'),
-  legacyRateChangeFamilyRate:              attribute('string'),
+  legacyOldEmployeeRate:                   attr('string'),
+  legacyOldEmployeeAndSpouseRate:          attr('string'),
+  legacyOldEmployeeAndChildrenRate:        attr('string'),
+  legacyOldFamilyRate:                     attr('string'),
+  legacyRateChangeEmployeeRate:            attr('string'),
+  legacyRateChangeEmployeeAndSpouseRate:   attr('string'),
+  legacyRateChangeEmployeeAndChildrenRate: attr('string'),
+  legacyRateChangeFamilyRate:              attr('string'),
 
-  plan:    DS.belongsTo('medical-plan', { async: true }),
-  company: DS.belongsTo('company', { async: true }),
+  plan:    belongsTo('medical-plan', { async: true }),
+  company: belongsTo('company', { async: true }),
 
-  time_stamp: attribute('date', {
+  'time-stamp': attr('date', {
     defaultValue: function () {
       return new Date();
     }
   }),
 
   // Computed
-  coInsuranceSplit: function () {
+  coInsuranceSplit: computed('coInsurance', function () {
     var a = this.get('coInsurance').split('/');
 
     return {
       insurance: a[ 0 ],
       employee:  a[ 1 ]
     };
-  }.property('coInsurance')
+  })
 });

@@ -1,0 +1,5 @@
+<span class="label {{if isPrimary 'label-primary'}} {{if isContingent 'label-default'}}">{{title-case beneficiary.type}}</span>&nbsp;
+
+{{beneficiary.name}} <small class="text-muted">({{title-case beneficiary.relation}})</small>
+
+<span class="label label-danger pull-right">{{beneficiary.split}}% Split</span>

@@ -1,14 +1,14 @@
 <div class="row row-draw-sep resource-section">
   <div class="col-md-5 draw-sep">
     <ul class="nav nav-tabs" role="tablist">
-      {{#each tab in infoTabs}}
-        <li {{bind-attr class="tab.active:active"}}>
+      {{#each infoTabs as |tab|}}
+        <li class="{{if tab.active 'active'}}">
           <a href="#" {{action "showInfoTab" tab.order}}>{{{tab.name}}}</a>
         </li>
       {{/each}}
     </ul>
     <div class="tab-content limited-pane">
-      {{#each tab in infoTabs}}
+      {{#each infoTabs as |tab|}}
         {{#if tab.active}}
           {{partial tab.partial}}
         {{/if}}
@@ -17,14 +17,14 @@
   </div>
   <div class="col-md-7 draw-sep">
     <ul class="nav nav-tabs" role="tablist">
-      {{#each tab in tabs}}
-        <li {{bind-attr class="tab.active:active"}}>
+      {{#each tabs as |tab|}}
+        <li class="{{if tab.active 'active'}}">
           <a href="#" {{action "showTab" tab.order}}>{{{tab.name}}}</a>
         </li>
       {{/each}}
     </ul>
     <div class="tab-content limited-pane">
-      {{#each tab in tabs}}
+      {{#each tabs as |tab|}}
         {{#if tab.active}}
           {{partial tab.partial}}
         {{/if}}
@@ -36,7 +36,7 @@
 <hr/>
 
 <div class="resource-section">
-  {{render "file-handler" content.files}}
+  {{file-handler files=model.files}}
 </div>
 
 <hr />
@@ -45,7 +45,7 @@
   <h2 class="text-center">
     History Event Timeline<br />
     <small class="text-xs">
-        <a href="#" {{action "toggleProperty" "showVisualization"}}>
+      <a href="#" {{action "toggleProperty" "showVisualization"}}>
         {{#if showVisualization}}
           Hide Visualization<i class="fa fa-fw fa-angle-up"></i>
         {{else}}
@@ -56,9 +56,9 @@
   </h2>
   {{#if loadedHistoryEvents}}
     {{#if showVisualization}}
-      {{chart-history-events-pulse historyEvents=content.historyEvents height='200'}}
+      {{chart-history-events-pulse historyEvents=model.historyEvents height='200'}}
     {{/if}}
-    {{render "history-timeline" content.historyEvents}}
+    {{history-timeline events=model.historyEvents}}
   {{else}}
     <h4 class="text-center text-warning">One moment while we load the events <i class="fa fa-spin fa-spinner fa-fw"></i></h4>
   {{/if}}

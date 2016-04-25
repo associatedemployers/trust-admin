@@ -46,7 +46,7 @@ export default Ember.Mixin.create(GrowlMixin, {
 
     console.log(query);
 
-    this.store.find(resource, query).then(function ( data ) {
+    this.store.query(resource, query).then(function ( data ) {
       self.setProperties({
         content: data,
         maxItems: data.get('meta.totalRecords'),

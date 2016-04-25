@@ -2,10 +2,10 @@
   <div class="col-md-12">
     <h2>
       <a href="#" {{action "toggleProperty" "showRates"}}>
-        Rates <i {{bind-attr class=":fa showRates:fa-angle-up:fa-angle-down"}}></i>
+        Rates <i class="fa fa-angle-{{if showRates 'up' 'down'}}"></i>
       </a>
     </h2>
-    <div {{bind-attr class=":hide-slide showRates:show"}}>
+    <div class="hide-slide {{if showRates 'show'}}">
       <div class="row">
         <div class="col-md-7">
           {{#if ratesDataset}}
@@ -26,10 +26,10 @@
   <div class="col-md-12">
     <h2>
       <a href="#" {{action "toggleProperty" "showParticipation"}}>
-        Participation <i {{bind-attr class=":fa showParticipation:fa-angle-up:fa-angle-down"}}></i>
+        Participation <i class="fa fa-angle-{{if showParticipation 'up' 'down'}}"></i>
       </a>
     </h2>
-    <div {{bind-attr class=":hide-slide showParticipation:show"}}>
+    <div class="hide-slide {{if showParticipation 'show'}}">
       <div class="row">
         <div class="col-md-7">
           {{#if participationDataset}}
