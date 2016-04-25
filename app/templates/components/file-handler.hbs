@@ -36,8 +36,8 @@
 
         <br />
         <small>
-          {{#each selectedFile.labels}}
-            <span class="label label-default">{{title-case this}}</span>
+          {{#each selectedFile.labels as |label|}}
+            <span class="label label-default">{{title-case label}}</span>
           {{/each}}
         </small>
       </h3>
