@@ -2,8 +2,12 @@
 import Ember from 'ember';
 import ObjectSizeUtility from 'trust-admin/utils/object-size';
 
+function objectSize ( args ) {
+  return ObjectSizeUtility.apply(this, args);
+}
+
 export {
-  ObjectSizeUtility
+  objectSize
 };
 
-export default Ember.Helper.helper(ObjectSizeUtility);
+export default Ember.Helper.helper(objectSize);

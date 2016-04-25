@@ -7,6 +7,11 @@
       <code>{{fromError.responseText}}</code> That's all we know.
     </small>
   {{/if}}
+  {{#if fromError.message}}
+    <small>
+      <code>{{fromError.message}}</code> That's all we know.
+    </small>
+  {{/if}}
 </p>
 
 <p class="text-center text-sm">

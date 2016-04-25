@@ -1,12 +1,11 @@
 <hgroup class="history-event-group-head">
   <h3 class="text-center">
-    {{format-moment date "MM/DD/YYYY"}}<br />
-    <small><i>{{count-array events}} events</i> created {{time-ago date}}</small>
+    {{format-moment eventGroup.date "MM/DD/YYYY"}}<br />
+    <small><i>{{count-array eventGroup.events}} events</i> created {{time-ago eventGroup.date}}</small>
   </h3>
 </hgroup>
-
 <ul class="list-group history-event-item-list">
-  {{#each events as |event|}}
+  {{#each eventGroup.events as |event|}}
     {{lists/history-event-item event=event selectEvent=(action "selectEvent")}}
   {{/each}}
 </ul>
