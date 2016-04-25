@@ -1,6 +1,6 @@
 {
   "name": "trust-admin",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Small description for trust-admin goes here",
   "private": true,
   "directories": {
