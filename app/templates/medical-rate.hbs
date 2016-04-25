@@ -7,15 +7,13 @@
       {{/if}}
     </hgroup>
     <div>
-      {{#with content}}
-        <ul class="text-muted resource-info-list resource-quick-info">
-          <li><strong>Plan Number:</strong> {{planNumber}}</li>
-          <li><strong>Record ID (new):</strong> {{id}}</li>
-          <li><strong>EBMS #:</strong> {{ebmsNumber}}</li>
-          <li><strong>Legacy Name:</strong> {{name}}</li>
-          <li><strong>Creation Date:</strong> {{format-moment time_stamp}} <i>({{time-ago time_stamp}})</i></li>
-        </ul>
-      {{/with}}
+      <ul class="text-muted resource-info-list resource-quick-info">
+        <li><strong>Plan Number:</strong> {{content.planNumber}}</li>
+        <li><strong>Record ID (new):</strong> {{content.id}}</li>
+        <li><strong>EBMS #:</strong> {{content.ebmsNumber}}</li>
+        <li><strong>Legacy Name:</strong> {{content.name}}</li>
+        <li><strong>Creation Date:</strong> {{format-moment content.time_stamp}} <i>({{time-ago content.time_stamp}})</i></li>
+      </ul>
     </div>
   </div>
   <div class="col-md-2 resource-controls">

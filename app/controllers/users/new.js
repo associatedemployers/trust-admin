@@ -12,7 +12,7 @@ export default Ember.Controller.extend(GrowlMixin, {
   setPermissionGroups: function () {
     var self = this;
 
-    this.store.find('permission-group').then(function ( permissionGroups ) {
+    this.store.findAll('permission-group').then(function ( permissionGroups ) {
       self.set('assignablePermissions', permissionGroups);
     });
   }.observes('permissions', 'content'),

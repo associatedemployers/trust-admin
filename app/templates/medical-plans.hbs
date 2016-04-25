@@ -29,7 +29,7 @@
       </div>
 
       <div class="list-group resource-list-group">
-        {{#each medicalPlan as |medicalPlan|}}
+        {{#each content as |medicalPlan|}}
           {{lists/medical-plan-item medicalPlan=medicalPlan}}
         {{else}}
           <h2 class="text-center"><i class="fa fa-exclamation-triangle"></i> No medical plans found.</h2>

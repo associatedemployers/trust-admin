@@ -9,12 +9,10 @@
       </h2>
 
     <div>
-      {{#with content}}
-        <ul class="text-muted resource-info-list resource-quick-info">
-          <li><strong>ID:</strong> {{id}}</li>
-          <li><strong>Creation Date:</strong> {{format-moment time_stamp}} <i>({{time-ago time_stamp}})</i></li>
-        </ul>
-      {{/with}}
+      <ul class="text-muted resource-info-list resource-quick-info">
+        <li><strong>ID:</strong> {{content.id}}</li>
+        <li><strong>Creation Date:</strong> {{format-moment content.time_stamp}} <i>({{time-ago content.time_stamp}})</i></li>
+      </ul>
     </div>
 
     </hgroup>
